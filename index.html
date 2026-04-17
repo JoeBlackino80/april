@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pikazard.eu — Pokémon TCG a zberateľské karty</title>
+<meta name="description" content="Pikazard — obchod s Pokémon kartami, boostermi, plyšákmi a doplnkami pre fanúšikov TCG. Bratislava, Slovensko." />
+<link rel="stylesheet" href="styles.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+<header class="topbar">
+  <div class="container topbar-inner">
+    <span>Doprava zdarma nad 80 €</span>
+    <span class="divider">•</span>
+    <span>Skladom • expedícia do 24 h</span>
+    <span class="divider">•</span>
+    <span>Pokémon liga každý týždeň</span>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo" aria-label="Pikazard domov">
+      <span class="logo-mark">⚡</span>
+      <span class="logo-text">Pikazard<span class="logo-dot">.eu</span></span>
+    </a>
+
+    <div class="search">
+      <input type="search" placeholder="Hľadaj karty, boostery, značky…" aria-label="Vyhľadávanie" />
+      <button type="button" aria-label="Hľadať">🔍</button>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#categories">Kategórie</a></li>
+      <li><a href="#featured">Novinky</a></li>
+      <li><a href="#league">Liga</a></li>
+      <li><a href="#about">O nás</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="#" aria-label="Účet" class="icon-btn">👤</a>
+      <a href="#" aria-label="Obľúbené" class="icon-btn">♥</a>
+      <a href="#cart" aria-label="Košík" class="icon-btn cart-btn">
+        🛒 <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+    </div>
+
+    <button class="burger" id="burger" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <p class="eyebrow">Nové prírastky • Scarlet &amp; Violet</p>
+      <h1>Uloviť ich <span class="hl">všetkých</span> začína tu.</h1>
+      <p class="lead">
+        Autentické Pokémon booster boxy, ETB, singly aj doplnky pre
+        zberateľov a hráčov. Všetko skladom v Bratislave.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#featured">Pozrieť novinky</a>
+        <a class="btn btn-ghost" href="#league">Pokémon Liga →</a>
+      </div>
+      <ul class="hero-meta">
+        <li>★ 4.9 / 5 z 1 200+ recenzií</li>
+        <li>Oficiálny distribútor</li>
+        <li>Vernostný program</li>
+      </ul>
+    </div>
+
+    <div class="hero-card" aria-hidden="true">
+      <div class="card-stack">
+        <div class="card card-back"></div>
+        <div class="card card-mid"></div>
+        <div class="card card-front">
+          <div class="card-header">
+            <span class="card-name">Pikazard ⚡</span>
+            <span class="card-hp">HP 220</span>
+          </div>
+          <div class="card-art">⚡</div>
+          <div class="card-footer">
+            <span>Zbieraj. Hraj. Vyhrávaj.</span>
+            <span class="rarity">★★★</span>
+          </div>
+        </div>
+      </div>
+      <div class="sparkle s1"></div>
+      <div class="sparkle s2"></div>
+      <div class="sparkle s3"></div>
+    </div>
+  </div>
+</section>
+
+<section class="strip">
+  <div class="container strip-inner">
+    <div><strong>Pokémon TCG</strong><span>Oficiálne produkty</span></div>
+    <div><strong>Lorcana</strong><span>Disney TCG</span></div>
+    <div><strong>Star Wars: Unlimited</strong><span>Nové turnaje</span></div>
+    <div><strong>One Piece TCG</strong><span>Boostery skladom</span></div>
+    <div><strong>Magic: The Gathering</strong><span>Singly aj boxy</span></div>
+  </div>
+</section>
+
+<section id="categories" class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Kategórie</h2>
+      <p>Všetko pre zberateľov, hráčov aj darčekové balenia.</p>
+    </div>
+    <div class="cat-grid">
+      <a class="cat-card c1" href="#">
+        <span class="cat-emoji">🎴</span>
+        <h3>Pokémon produkty</h3>
+        <p>Boostery, ETB, kolekcie</p>
+      </a>
+      <a class="cat-card c2" href="#">
+        <span class="cat-emoji">📦</span>
+        <h3>Booster Boxy</h3>
+        <p>36 balíčkov, plné série</p>
+      </a>
+      <a class="cat-card c3" href="#">
+        <span class="cat-emoji">📘</span>
+        <h3>S albumom</h3>
+        <p>Binder edície, portfóliá</p>
+      </a>
+      <a class="cat-card c4" href="#">
+        <span class="cat-emoji">🧩</span>
+        <h3>Puzzle</h3>
+        <p>Pokémon témy, 500–1500 dielikov</p>
+      </a>
+      <a class="cat-card c5" href="#">
+        <span class="cat-emoji">🧸</span>
+        <h3>Plyšáky &amp; figúrky</h3>
+        <p>Originál merch</p>
+      </a>
+      <a class="cat-card c6" href="#">
+        <span class="cat-emoji">🐾</span>
+        <h3>Pet Simulator</h3>
+        <p>Roblox kolekcia</p>
+      </a>
+      <a class="cat-card c7" href="#">
+        <span class="cat-emoji">🛡️</span>
+        <h3>Sleeves &amp; obaly</h3>
+        <p>Ochrana kariet</p>
+      </a>
+      <a class="cat-card c8" href="#">
+        <span class="cat-emoji">🏷️</span>
+        <h3>Značky</h3>
+        <p>Pokémon, Lorcana, MTG…</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="featured" class="section alt">
+  <div class="container">
+    <div class="section-head row">
+      <div>
+        <h2>Novinky &amp; bestsellery</h2>
+        <p>Najžiadanejšie produkty tento týždeň.</p>
+      </div>
+      <div class="filters" id="filters">
+        <button class="chip active" data-filter="all">Všetko</button>
+        <button class="chip" data-filter="booster">Boostery</button>
+        <button class="chip" data-filter="etb">ETB</button>
+        <button class="chip" data-filter="single">Singly</button>
+        <button class="chip" data-filter="merch">Merch</button>
+      </div>
+    </div>
+
+    <div class="products" id="products">
+      <!-- Product cards injected by JS -->
+    </div>
+  </div>
+</section>
+
+<section id="league" class="section league">
+  <div class="container league-inner">
+    <div class="league-text">
+      <p class="eyebrow">Každý štvrtok 18:00</p>
+      <h2>Pokémon Liga v Bratislave</h2>
+      <p>
+        Oficiálne herné večery pre začiatočníkov aj skúsených hráčov.
+        Lorcana, Star Wars: Unlimited a Pokémon TCG — vstup zdarma,
+        odmeny za účasť, priateľská komunita.
+      </p>
+      <ul class="league-list">
+        <li>✓ Štartovacie balíčky k dispozícii</li>
+        <li>✓ Turnajové odmeny (promo karty)</li>
+        <li>✓ Priestor pre drafty a cube</li>
+      </ul>
+      <a class="btn btn-primary" href="#contact">Zapísať sa na ligu</a>
+    </div>
+    <div class="league-visual" aria-hidden="true">
+      <div class="trophy">🏆</div>
+      <div class="ring"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section usp">
+  <div class="container usp-grid">
+    <div class="usp-item"><span>🚚</span><h4>Doprava zdarma</h4><p>Pri nákupe nad 80 €</p></div>
+    <div class="usp-item"><span>🔒</span><h4>Bezpečné platby</h4><p>Karta, Apple Pay, prevod</p></div>
+    <div class="usp-item"><span>♻️</span><h4>30 dní na vrátenie</h4><p>Bez udania dôvodu</p></div>
+    <div class="usp-item"><span>🎁</span><h4>Darček k objednávke</h4><p>Nad 50 €</p></div>
+  </div>
+</section>
+
+<section id="about" class="section about">
+  <div class="container about-inner">
+    <div>
+      <h2>O Pikazarde</h2>
+      <p>
+        Sme malá slovenská predajňa s veľkou vášňou pre zberateľské
+        kartové hry. Od roku 2021 dovážame originálne produkty priamo
+        od distribútorov a budujeme komunitu hráčov v Bratislave.
+      </p>
+      <p>
+        Našim cieľom je, aby sa u nás cítil doma každý fanúšik TCG —
+        či už zbieraš Charizardy, alebo si prišiel postaviť prvý deck.
+      </p>
+    </div>
+    <div class="about-cards">
+      <div><strong>15 000+</strong><span>Spokojných zákazníkov</span></div>
+      <div><strong>3 000+</strong><span>Produktov skladom</span></div>
+      <div><strong>200+</strong><span>Turnajov ročne</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="container newsletter-inner">
+    <div>
+      <h3>Buď prvý pri nových release</h3>
+      <p>Pošleme ti upozornenie, keď bude nová séria skladom.</p>
+    </div>
+    <form id="newsletter" class="newsletter-form">
+      <input type="email" required placeholder="tvoj@email.sk" aria-label="Email" />
+      <button class="btn btn-primary" type="submit">Prihlásiť</button>
+    </form>
+  </div>
+</section>
+
+<footer id="contact" class="footer">
+  <div class="container footer-inner">
+    <div>
+      <div class="logo">
+        <span class="logo-mark">⚡</span>
+        <span class="logo-text">Pikazard<span class="logo-dot">.eu</span></span>
+      </div>
+      <p class="muted">Zberateľské karty a TCG merch. Doprava po celom Slovensku aj do ČR.</p>
+    </div>
+    <div>
+      <h4>Obchod</h4>
+      <ul>
+        <li><a href="#">Pokémon</a></li>
+        <li><a href="#">Lorcana</a></li>
+        <li><a href="#">Star Wars: Unlimited</a></li>
+        <li><a href="#">Doplnky</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Zákazník</h4>
+      <ul>
+        <li><a href="#">Doprava a platba</a></li>
+        <li><a href="#">Reklamácie</a></li>
+        <li><a href="#">Obchodné podmienky</a></li>
+        <li><a href="#">GDPR</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Kontakt</h4>
+      <ul>
+        <li>Gessayova 14, Bratislava</li>
+        <li>info@pikazard.eu</li>
+        <li>+421 900 000 000</li>
+        <li>Po–Pi 10:00–18:00</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container copyright">
+    © <span id="year"></span> Pikazard.eu — Pokémon a ostatné ochranné známky patria ich vlastníkom.
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
