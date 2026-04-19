@@ -431,10 +431,12 @@ p { margin: 0 0 0.8em; color: var(--muted); }
 .hero-bubble strong { display: block; font-size: 0.88rem; line-height: 1.2; }
 .hero-bubble span { display: block; font-size: 0.76rem; color: var(--muted); }
 
-@media (max-width: 960px) {
+@media (max-width: 1100px) {
   .hero-inner { grid-template-columns: 1fr; gap: 40px; }
   .hero-visual { order: -1; min-height: 440px; }
   .hero-cards { transform: scale(0.85); }
+  .hero-bubble.top { right: max(0px, calc(50% - 260px)); }
+  .hero-bubble.bottom { left: max(0px, calc(50% - 260px)); }
 }
 
 /* Trust */
