@@ -94,7 +94,7 @@ const products = [
     catLabel: 'Single',
     meta: 'Obsidian Flames · Full Art',
     price: 89.90,
-    img: 'https://images.pokemontcg.io/sv03/223_hires.png',
+    img: 'https://images.pokemontcg.io/sv3/223_hires.png',
   },
   {
     id: 11,
