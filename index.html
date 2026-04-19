@@ -3,232 +3,296 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pikazard.eu — Pokémon TCG a zberateľské karty</title>
-<meta name="description" content="Pikazard — obchod s Pokémon kartami, boostermi, plyšákmi a doplnkami pre fanúšikov TCG. Bratislava, Slovensko." />
+<title>HoloDex — Prémiové Pokémon TCG karty</title>
+<meta name="description" content="HoloDex je prémiový obchod pre zberateľov Pokémon TCG — raw karty, PSA grading, booster boxy a doplnky. Zaručená autenticita." />
 <link rel="stylesheet" href="styles.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+<div class="bg-orbs" aria-hidden="true">
+  <span class="orb orb-1"></span>
+  <span class="orb orb-2"></span>
+  <span class="orb orb-3"></span>
+</div>
+
 <header class="topbar">
   <div class="container topbar-inner">
-    <span>Doprava zdarma nad 80 €</span>
-    <span class="divider">•</span>
-    <span>Skladom • expedícia do 24 h</span>
-    <span class="divider">•</span>
-    <span>Pokémon liga každý týždeň</span>
+    <span>⚡ Doprava zdarma nad 80 €</span>
+    <span>🔒 100% autenticita + PSA grading</span>
+    <span>🇸🇰 Skladom v Bratislave — expedícia do 24 h</span>
   </div>
 </header>
 
 <nav class="nav">
   <div class="container nav-inner">
-    <a href="#" class="logo" aria-label="Pikazard domov">
-      <span class="logo-mark">⚡</span>
-      <span class="logo-text">Pikazard<span class="logo-dot">.eu</span></span>
+    <a href="#" class="logo" aria-label="HoloDex domov">
+      <span class="logo-mark">
+        <span class="logo-shine"></span>
+        <span class="logo-letter">H</span>
+      </span>
+      <span class="logo-text">Holo<span class="logo-accent">Dex</span></span>
     </a>
 
-    <div class="search">
-      <input type="search" placeholder="Hľadaj karty, boostery, značky…" aria-label="Vyhľadávanie" />
-      <button type="button" aria-label="Hľadať">🔍</button>
-    </div>
-
     <ul class="nav-links">
-      <li><a href="#categories">Kategórie</a></li>
-      <li><a href="#featured">Novinky</a></li>
-      <li><a href="#league">Liga</a></li>
+      <li><a href="#collections">Kolekcie</a></li>
+      <li><a href="#trending">Trending</a></li>
+      <li><a href="#services">Služby</a></li>
+      <li><a href="#community">Komunita</a></li>
       <li><a href="#about">O nás</a></li>
     </ul>
 
-    <div class="nav-actions">
-      <a href="#" aria-label="Účet" class="icon-btn">👤</a>
-      <a href="#" aria-label="Obľúbené" class="icon-btn">♥</a>
-      <a href="#cart" aria-label="Košík" class="icon-btn cart-btn">
-        🛒 <span class="cart-badge" id="cartBadge">0</span>
-      </a>
+    <div class="search">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M10 2a8 8 0 1 1-5.3 13.9l-3.4 3.4-1.4-1.4 3.4-3.4A8 8 0 0 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg>
+      <input type="search" placeholder="Hľadaj karty, sety, hráčov…" aria-label="Vyhľadávanie" />
+      <kbd>⌘K</kbd>
     </div>
 
-    <button class="burger" id="burger" aria-label="Menu">☰</button>
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Účet" title="Účet">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 12c5 0 9 2.7 9 6v2H3v-2c0-3.3 4-6 9-6z"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Obľúbené" title="Obľúbené">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 5.5 5.5 5.5 0 0 1 21.5 12c-2.5 4.5-9.5 9-9.5 9z"/></svg>
+      </button>
+      <button class="icon-btn cart-btn" aria-label="Košík" title="Košík">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M7 4h-2l-2 4v2h2l3 9h12l3-11h-16z"/></svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+    </div>
   </div>
 </nav>
 
 <section class="hero">
   <div class="container hero-inner">
     <div class="hero-text">
-      <p class="eyebrow">Nové prírastky • Scarlet &amp; Violet</p>
-      <h1>Uloviť ich <span class="hl">všetkých</span> začína tu.</h1>
+      <span class="eyebrow"><span class="dot"></span> Nová kolekcia — Surging Sparks</span>
+      <h1>Tvoj ďalší <span class="hl">holo</span> je o klik ďalej.</h1>
       <p class="lead">
-        Autentické Pokémon booster boxy, ETB, singly aj doplnky pre
-        zberateľov a hráčov. Všetko skladom v Bratislave.
+        HoloDex je prémiový obchod pre zberateľov Pokémon TCG.
+        Raw karty s ochranou, PSA graded, booster boxy a ETB —
+        všetko s garanciou pravosti.
       </p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="#featured">Pozrieť novinky</a>
-        <a class="btn btn-ghost" href="#league">Pokémon Liga →</a>
+        <a class="btn btn-primary" href="#trending">
+          Pozrieť trending
+          <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M5 12h13l-5-5 1.4-1.4L21 12l-6.6 6.4L13 17l5-5H5z"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#services">Grading & consignment</a>
       </div>
-      <ul class="hero-meta">
-        <li>★ 4.9 / 5 z 1 200+ recenzií</li>
-        <li>Oficiálny distribútor</li>
-        <li>Vernostný program</li>
-      </ul>
+      <div class="hero-stats">
+        <div><strong>12k+</strong><span>kariet v katalógu</span></div>
+        <div><strong>4.9<span class="sub">/5</span></strong><span>1 200+ recenzií</span></div>
+        <div><strong>24h</strong><span>expedícia</span></div>
+      </div>
     </div>
 
-    <div class="hero-card" aria-hidden="true">
-      <div class="card-stack">
-        <div class="card card-back"></div>
-        <div class="card card-mid"></div>
-        <div class="card card-front">
-          <div class="card-header">
-            <span class="card-name">Pikazard ⚡</span>
-            <span class="card-hp">HP 220</span>
-          </div>
-          <div class="card-art">⚡</div>
-          <div class="card-footer">
-            <span>Zbieraj. Hraj. Vyhrávaj.</span>
-            <span class="rarity">★★★</span>
-          </div>
-        </div>
+    <div class="hero-cards" aria-hidden="true">
+      <div class="card-fan">
+        <img class="fan-card f1" alt="" src="https://images.pokemontcg.io/swsh45/18_hires.png" loading="eager" />
+        <img class="fan-card f2" alt="" src="https://images.pokemontcg.io/swsh4/188_hires.png" loading="eager" />
+        <img class="fan-card f3" alt="" src="https://images.pokemontcg.io/swsh12pt5/160_hires.png" loading="eager" />
       </div>
-      <div class="sparkle s1"></div>
-      <div class="sparkle s2"></div>
-      <div class="sparkle s3"></div>
+      <div class="glow"></div>
     </div>
   </div>
 </section>
 
-<section class="strip">
-  <div class="container strip-inner">
-    <div><strong>Pokémon TCG</strong><span>Oficiálne produkty</span></div>
-    <div><strong>Lorcana</strong><span>Disney TCG</span></div>
-    <div><strong>Star Wars: Unlimited</strong><span>Nové turnaje</span></div>
-    <div><strong>One Piece TCG</strong><span>Boostery skladom</span></div>
-    <div><strong>Magic: The Gathering</strong><span>Singly aj boxy</span></div>
+<section class="marquee" aria-label="Populárne sety">
+  <div class="marquee-track">
+    <span>Scarlet & Violet 151</span><span>✦</span>
+    <span>Paldea Evolved</span><span>✦</span>
+    <span>Obsidian Flames</span><span>✦</span>
+    <span>Paradox Rift</span><span>✦</span>
+    <span>Temporal Forces</span><span>✦</span>
+    <span>Twilight Masquerade</span><span>✦</span>
+    <span>Shrouded Fable</span><span>✦</span>
+    <span>Stellar Crown</span><span>✦</span>
+    <span>Surging Sparks</span><span>✦</span>
+    <!-- duplicate for seamless loop -->
+    <span>Scarlet & Violet 151</span><span>✦</span>
+    <span>Paldea Evolved</span><span>✦</span>
+    <span>Obsidian Flames</span><span>✦</span>
+    <span>Paradox Rift</span><span>✦</span>
+    <span>Temporal Forces</span><span>✦</span>
+    <span>Twilight Masquerade</span><span>✦</span>
+    <span>Shrouded Fable</span><span>✦</span>
+    <span>Stellar Crown</span><span>✦</span>
+    <span>Surging Sparks</span><span>✦</span>
   </div>
 </section>
 
-<section id="categories" class="section">
+<section id="collections" class="section">
   <div class="container">
     <div class="section-head">
-      <h2>Kategórie</h2>
-      <p>Všetko pre zberateľov, hráčov aj darčekové balenia.</p>
+      <span class="kicker">01 — Kolekcie</span>
+      <h2>Nájdi svoju kolekciu</h2>
+      <p>Od klasických Base Set až po najnovšie Scarlet & Violet série.</p>
     </div>
-    <div class="cat-grid">
-      <a class="cat-card c1" href="#">
-        <span class="cat-emoji">🎴</span>
-        <h3>Pokémon produkty</h3>
-        <p>Boostery, ETB, kolekcie</p>
+    <div class="collections">
+      <a class="coll-card" href="#" style="--img:url('https://images.pokemontcg.io/base1/4_hires.png')">
+        <div class="coll-overlay">
+          <h3>Vintage Base Set</h3>
+          <p>1999 — 2000 · raritná klasika</p>
+          <span class="coll-count">128 kariet</span>
+        </div>
       </a>
-      <a class="cat-card c2" href="#">
-        <span class="cat-emoji">📦</span>
-        <h3>Booster Boxy</h3>
-        <p>36 balíčkov, plné série</p>
+      <a class="coll-card" href="#" style="--img:url('https://images.pokemontcg.io/swsh4/188_hires.png')">
+        <div class="coll-overlay">
+          <h3>Sword & Shield</h3>
+          <p>VMAX éra · alt art hunting</p>
+          <span class="coll-count">342 kariet</span>
+        </div>
       </a>
-      <a class="cat-card c3" href="#">
-        <span class="cat-emoji">📘</span>
-        <h3>S albumom</h3>
-        <p>Binder edície, portfóliá</p>
+      <a class="coll-card" href="#" style="--img:url('https://images.pokemontcg.io/sv4pt5/199_hires.png')">
+        <div class="coll-overlay">
+          <h3>SV 151</h3>
+          <p>Návrat ku Kantu</p>
+          <span class="coll-count">207 kariet</span>
+        </div>
       </a>
-      <a class="cat-card c4" href="#">
-        <span class="cat-emoji">🧩</span>
-        <h3>Puzzle</h3>
-        <p>Pokémon témy, 500–1500 dielikov</p>
-      </a>
-      <a class="cat-card c5" href="#">
-        <span class="cat-emoji">🧸</span>
-        <h3>Plyšáky &amp; figúrky</h3>
-        <p>Originál merch</p>
-      </a>
-      <a class="cat-card c6" href="#">
-        <span class="cat-emoji">🐾</span>
-        <h3>Pet Simulator</h3>
-        <p>Roblox kolekcia</p>
-      </a>
-      <a class="cat-card c7" href="#">
-        <span class="cat-emoji">🛡️</span>
-        <h3>Sleeves &amp; obaly</h3>
-        <p>Ochrana kariet</p>
-      </a>
-      <a class="cat-card c8" href="#">
-        <span class="cat-emoji">🏷️</span>
-        <h3>Značky</h3>
-        <p>Pokémon, Lorcana, MTG…</p>
+      <a class="coll-card" href="#" style="--img:url('https://images.pokemontcg.io/sv3pt5/183_hires.png')">
+        <div class="coll-overlay">
+          <h3>Modern SV</h3>
+          <p>Najnovšie release</p>
+          <span class="coll-count">480 kariet</span>
+        </div>
       </a>
     </div>
   </div>
 </section>
 
-<section id="featured" class="section alt">
+<section id="trending" class="section trending">
   <div class="container">
     <div class="section-head row">
       <div>
-        <h2>Novinky &amp; bestsellery</h2>
-        <p>Najžiadanejšie produkty tento týždeň.</p>
+        <span class="kicker">02 — Trending tento týždeň</span>
+        <h2>Najžiadanejšie karty</h2>
       </div>
       <div class="filters" id="filters">
         <button class="chip active" data-filter="all">Všetko</button>
-        <button class="chip" data-filter="booster">Boostery</button>
-        <button class="chip" data-filter="etb">ETB</button>
-        <button class="chip" data-filter="single">Singly</button>
-        <button class="chip" data-filter="merch">Merch</button>
+        <button class="chip" data-filter="vintage">Vintage</button>
+        <button class="chip" data-filter="modern">Modern</button>
+        <button class="chip" data-filter="graded">PSA</button>
+        <button class="chip" data-filter="sealed">Sealed</button>
       </div>
     </div>
 
-    <div class="products" id="products">
-      <!-- Product cards injected by JS -->
+    <div class="products" id="products"></div>
+  </div>
+</section>
+
+<section id="services" class="section services">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">03 — Čo robíme inak</span>
+      <h2>Nie sme len e-shop</h2>
+      <p>Kompletný servis pre zberateľa od A po Z.</p>
+    </div>
+    <div class="services-grid">
+      <article class="service">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <h3>PSA Grading</h3>
+        <p>Pošleme tvoje karty priamo do USA, vyzdvihneme a doručíme. Zľava 15% pre členov.</p>
+        <a href="#" class="service-link">Zistiť viac →</a>
+      </article>
+      <article class="service">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm1-13h-2v5l4.3 2.6.7-1.2L13 11.3V7z"/></svg>
+        </div>
+        <h3>24h expedícia</h3>
+        <p>Každý deň posielame balíky po celom Slovensku, ČR, Rakúsku a Maďarsku.</p>
+        <a href="#" class="service-link">Doprava →</a>
+      </article>
+      <article class="service">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 1l9 4v6c0 5-3.8 9.7-9 11-5.2-1.3-9-6-9-11V5l9-4z"/></svg>
+        </div>
+        <h3>Garancia pravosti</h3>
+        <p>Každá karta overená 2 expertmi. Ak nájdeš fake, vrátime dvojnásobok.</p>
+        <a href="#" class="service-link">Naša záruka →</a>
+      </article>
+      <article class="service">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 20l-8-8 1.4-1.4L11 16.2V4h2v12.2l5.6-5.6L20 12z"/></svg>
+        </div>
+        <h3>Consignment</h3>
+        <p>Nechaj nám svoju kolekciu na predaj. Profesionálne foto, listing a odber.</p>
+        <a href="#" class="service-link">Pre zberateľov →</a>
+      </article>
     </div>
   </div>
 </section>
 
-<section id="league" class="section league">
-  <div class="container league-inner">
-    <div class="league-text">
-      <p class="eyebrow">Každý štvrtok 18:00</p>
-      <h2>Pokémon Liga v Bratislave</h2>
+<section id="community" class="section community">
+  <div class="container community-inner">
+    <div class="community-visual" aria-hidden="true">
+      <div class="c-card c-card-1"></div>
+      <div class="c-card c-card-2"></div>
+      <div class="c-card c-card-3"></div>
+      <div class="c-pulse"></div>
+    </div>
+    <div>
+      <span class="kicker">04 — Komunita</span>
+      <h2>HoloDex Club — stretnutia, turnaje, opening party</h2>
       <p>
-        Oficiálne herné večery pre začiatočníkov aj skúsených hráčov.
-        Lorcana, Star Wars: Unlimited a Pokémon TCG — vstup zdarma,
-        odmeny za účasť, priateľská komunita.
+        Každý štvrtok od 18:00 otvárame klubovňu v Bratislave.
+        Pokémon Liga, drafty zo Sword & Shield cube, Lorcana turnaje
+        a live box breaks na našom Discorde.
       </p>
-      <ul class="league-list">
-        <li>✓ Štartovacie balíčky k dispozícii</li>
-        <li>✓ Turnajové odmeny (promo karty)</li>
-        <li>✓ Priestor pre drafty a cube</li>
+      <ul class="community-list">
+        <li>✦ Pokémon Liga — každý štvrtok</li>
+        <li>✦ Live box break každú sobotu (YouTube)</li>
+        <li>✦ Discord s 3 800+ členmi</li>
+        <li>✦ Mesačné meet-upy pre zberateľov</li>
       </ul>
-      <a class="btn btn-primary" href="#contact">Zapísať sa na ligu</a>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#">Pridať sa na Discord</a>
+        <a class="btn btn-ghost" href="#">Kalendár podujatí</a>
+      </div>
     </div>
-    <div class="league-visual" aria-hidden="true">
-      <div class="trophy">🏆</div>
-      <div class="ring"></div>
-    </div>
-  </div>
-</section>
-
-<section class="section usp">
-  <div class="container usp-grid">
-    <div class="usp-item"><span>🚚</span><h4>Doprava zdarma</h4><p>Pri nákupe nad 80 €</p></div>
-    <div class="usp-item"><span>🔒</span><h4>Bezpečné platby</h4><p>Karta, Apple Pay, prevod</p></div>
-    <div class="usp-item"><span>♻️</span><h4>30 dní na vrátenie</h4><p>Bez udania dôvodu</p></div>
-    <div class="usp-item"><span>🎁</span><h4>Darček k objednávke</h4><p>Nad 50 €</p></div>
   </div>
 </section>
 
 <section id="about" class="section about">
-  <div class="container about-inner">
-    <div>
-      <h2>O Pikazarde</h2>
-      <p>
-        Sme malá slovenská predajňa s veľkou vášňou pre zberateľské
-        kartové hry. Od roku 2021 dovážame originálne produkty priamo
-        od distribútorov a budujeme komunitu hráčov v Bratislave.
-      </p>
-      <p>
-        Našim cieľom je, aby sa u nás cítil doma každý fanúšik TCG —
-        či už zbieraš Charizardy, alebo si prišiel postaviť prvý deck.
-      </p>
-    </div>
-    <div class="about-cards">
-      <div><strong>15 000+</strong><span>Spokojných zákazníkov</span></div>
-      <div><strong>3 000+</strong><span>Produktov skladom</span></div>
-      <div><strong>200+</strong><span>Turnajov ročne</span></div>
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <span class="kicker">05 — O HoloDexe</span>
+        <h2>Postavené zberateľmi, pre zberateľov.</h2>
+        <p>
+          Začali sme v roku 2021 na bratislavskej Gessayovej ako dvaja
+          kamaráti s obsesiou pre holo Charizardov. Dnes zásobujeme
+          viac ako 15 000 zákazníkov v strednej Európe a pomáhame im
+          budovať kolekcie, ktoré budú rásť na hodnote roky dopredu.
+        </p>
+        <p>
+          Náš tím prešiel desaťtisícami kariet. Vieme rozpoznať
+          reprinty, vybledky, authenticate staré japonské singly.
+          A hlavne — tomu, čo robíme, stále veríme.
+        </p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat">
+          <strong>15 000+</strong>
+          <span>spokojných zberateľov</span>
+        </div>
+        <div class="stat">
+          <strong>€2.4M</strong>
+          <span>obchodovaných kariet</span>
+        </div>
+        <div class="stat">
+          <strong>98%</strong>
+          <span>pozitívnych recenzií</span>
+        </div>
+        <div class="stat">
+          <strong>72</strong>
+          <span>PSA 10 graded v 2025</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -236,55 +300,69 @@
 <section class="newsletter">
   <div class="container newsletter-inner">
     <div>
-      <h3>Buď prvý pri nových release</h3>
-      <p>Pošleme ti upozornenie, keď bude nová séria skladom.</p>
+      <span class="kicker">Drop alerts</span>
+      <h3>Dostaň notifikáciu pri každom novom reléase.</h3>
+      <p>Žiadny spam. Len drops, restocky a vzácne finds.</p>
     </div>
     <form id="newsletter" class="newsletter-form">
       <input type="email" required placeholder="tvoj@email.sk" aria-label="Email" />
-      <button class="btn btn-primary" type="submit">Prihlásiť</button>
+      <button class="btn btn-primary" type="submit">
+        Prihlásiť
+        <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M5 12h13l-5-5 1.4-1.4L21 12l-6.6 6.4L13 17l5-5H5z"/></svg>
+      </button>
     </form>
   </div>
 </section>
 
 <footer id="contact" class="footer">
   <div class="container footer-inner">
-    <div>
+    <div class="footer-brand">
       <div class="logo">
-        <span class="logo-mark">⚡</span>
-        <span class="logo-text">Pikazard<span class="logo-dot">.eu</span></span>
+        <span class="logo-mark">
+          <span class="logo-shine"></span>
+          <span class="logo-letter">H</span>
+        </span>
+        <span class="logo-text">Holo<span class="logo-accent">Dex</span></span>
       </div>
-      <p class="muted">Zberateľské karty a TCG merch. Doprava po celom Slovensku aj do ČR.</p>
+      <p class="muted">Prémiové zberateľské karty. Garantovaná autenticita. Bratislava, Slovensko.</p>
+      <div class="socials">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Discord">DC</a>
+        <a href="#" aria-label="YouTube">YT</a>
+        <a href="#" aria-label="TikTok">TT</a>
+      </div>
     </div>
     <div>
       <h4>Obchod</h4>
       <ul>
-        <li><a href="#">Pokémon</a></li>
-        <li><a href="#">Lorcana</a></li>
-        <li><a href="#">Star Wars: Unlimited</a></li>
+        <li><a href="#">Single karty</a></li>
+        <li><a href="#">Booster boxy</a></li>
+        <li><a href="#">ETB & kolekcie</a></li>
+        <li><a href="#">PSA Graded</a></li>
         <li><a href="#">Doplnky</a></li>
       </ul>
     </div>
     <div>
-      <h4>Zákazník</h4>
+      <h4>Služby</h4>
       <ul>
-        <li><a href="#">Doprava a platba</a></li>
-        <li><a href="#">Reklamácie</a></li>
-        <li><a href="#">Obchodné podmienky</a></li>
-        <li><a href="#">GDPR</a></li>
+        <li><a href="#">Grading</a></li>
+        <li><a href="#">Consignment</a></li>
+        <li><a href="#">Appraisal</a></li>
+        <li><a href="#">Buyback</a></li>
       </ul>
     </div>
     <div>
       <h4>Kontakt</h4>
       <ul>
-        <li>Gessayova 14, Bratislava</li>
-        <li>info@pikazard.eu</li>
+        <li>Gessayova 14, 851 03 Bratislava</li>
+        <li>hello@holodex.sk</li>
         <li>+421 900 000 000</li>
-        <li>Po–Pi 10:00–18:00</li>
+        <li>Po–Pi 10:00–19:00</li>
       </ul>
     </div>
   </div>
   <div class="container copyright">
-    © <span id="year"></span> Pikazard.eu — Pokémon a ostatné ochranné známky patria ich vlastníkom.
+    © <span id="year"></span> HoloDex s.r.o. — Pokémon a všetky súvisiace značky sú majetkom ich vlastníkov. Nie sme prepojení s The Pokémon Company.
   </div>
 </footer>
 

@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HoloDex — Prémiové Pokémon TCG karty</title>
+<meta name="description" content="HoloDex je prémiový obchod pre zberateľov Pokémon TCG — raw karty, PSA grading, booster boxy a doplnky. Zaručená autenticita." />
+<style>
 :root {
   --bg: #0a0b14;
   --bg-2: #111326;
@@ -921,3 +929,616 @@ p { margin: 0 0 0.8em; color: var(--muted); }
 @keyframes reveal {
   from { opacity: 0; transform: translateY(20px); }
 }
+
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+<div class="bg-orbs" aria-hidden="true">
+  <span class="orb orb-1"></span>
+  <span class="orb orb-2"></span>
+  <span class="orb orb-3"></span>
+</div>
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <span>⚡ Doprava zdarma nad 80 €</span>
+    <span>🔒 100% autenticita + PSA grading</span>
+    <span>🇸🇰 Skladom v Bratislave — expedícia do 24 h</span>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo" aria-label="HoloDex domov">
+      <span class="logo-mark">
+        <span class="logo-shine"></span>
+        <span class="logo-letter">H</span>
+      </span>
+      <span class="logo-text">Holo<span class="logo-accent">Dex</span></span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#collections">Kolekcie</a></li>
+      <li><a href="#trending">Trending</a></li>
+      <li><a href="#services">Služby</a></li>
+      <li><a href="#community">Komunita</a></li>
+      <li><a href="#about">O nás</a></li>
+    </ul>
+
+    <div class="search">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M10 2a8 8 0 1 1-5.3 13.9l-3.4 3.4-1.4-1.4 3.4-3.4A8 8 0 0 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/></svg>
+      <input type="search" placeholder="Hľadaj karty, sety, hráčov…" aria-label="Vyhľadávanie" />
+      <kbd>⌘K</kbd>
+    </div>
+
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Účet" title="Účet">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 12c5 0 9 2.7 9 6v2H3v-2c0-3.3 4-6 9-6z"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Obľúbené" title="Obľúbené">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 5.5 5.5 5.5 0 0 1 21.5 12c-2.5 4.5-9.5 9-9.5 9z"/></svg>
+      </button>
+      <button class="icon-btn cart-btn" aria-label="Košík" title="Košík">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M7 4h-2l-2 4v2h2l3 9h12l3-11h-16z"/></svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <span class="eyebrow"><span class="dot"></span> Nová kolekcia — Surging Sparks</span>
+      <h1>Tvoj ďalší <span class="hl">holo</span> je o klik ďalej.</h1>
+      <p class="lead">
+        HoloDex je prémiový obchod pre zberateľov Pokémon TCG.
+        Raw karty s ochranou, PSA graded, booster boxy a ETB —
+        všetko s garanciou pravosti.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#trending">
+          Pozrieť trending
+          <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M5 12h13l-5-5 1.4-1.4L21 12l-6.6 6.4L13 17l5-5H5z"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#services">Grading & consignment</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>12k+</strong><span>kariet v katalógu</span></div>
+        <div><strong>4.9<span class="sub">/5</span></strong><span>1 200+ recenzií</span></div>
+        <div><strong>24h</strong><span>expedícia</span></div>
+      </div>
+    </div>
+
+    <div class="hero-cards" aria-hidden="true">
+      <div class="card-fan">
+        <img class="fan-card f1" alt="" src="https://images.pokemontcg.io/swsh45/18_hires.png" loading="eager" />
+        <img class="fan-card f2" alt="" src="https://images.pokemontcg.io/swsh4/188_hires.png" loading="eager" />
+        <img class="fan-card f3" alt="" src="https://images.pokemontcg.io/swsh12pt5/160_hires.png" loading="eager" />
+      </div>
+      <div class="glow"></div>
+    </div>
+  </div>
+</section>
+
+<section class="marquee" aria-label="Populárne sety">
+  <div class="marquee-track">
+    <span>Scarlet & Violet 151</span><span>✦</span>
+    <span>Paldea Evolved</span><span>✦</span>
+    <span>Obsidian Flames</span><span>✦</span>
+    <span>Paradox Rift</span><span>✦</span>
+    <span>Temporal Forces</span><span>✦</span>
+    <span>Twilight Masquerade</span><span>✦</span>
+    <span>Shrouded Fable</span><span>✦</span>
+    <span>Stellar Crown</span><span>✦</span>
+    <span>Surging Sparks</span><span>✦</span>
+    <!-- duplicate for seamless loop -->
+    <span>Scarlet & Violet 151</span><span>✦</span>
+    <span>Paldea Evolved</span><span>✦</span>
+    <span>Obsidian Flames</span><span>✦</span>
+    <span>Paradox Rift</span><span>✦</span>
+    <span>Temporal Forces</span><span>✦</span>
+    <span>Twilight Masquerade</span><span>✦</span>
+    <span>Shrouded Fable</span><span>✦</span>
+    <span>Stellar Crown</span><span>✦</span>
+    <span>Surging Sparks</span><span>✦</span>
+  </div>
+</section>
+
+<section id="collections" class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">01 — Kolekcie</span>
+      <h2>Nájdi svoju kolekciu</h2>
+      <p>Od klasických Base Set až po najnovšie Scarlet & Violet série.</p>
+    </div>
+    <div class="collections">
+      <a class="coll-card" href="#" style="--img:url('https://images.pokemontcg.io/base1/4_hires.png')">
+        <div class="coll-overlay">
+          <h3>Vintage Base Set</h3>
+          <p>1999 — 2000 · raritná klasika</p>
+          <span class="coll-count">128 kariet</span>
+        </div>
+      </a>
+      <a class="coll-card" href="#" style="--img:url('https://images.pokemontcg.io/swsh4/188_hires.png')">
+        <div class="coll-overlay">
+          <h3>Sword & Shield</h3>
+          <p>VMAX éra · alt art hunting</p>
+          <span class="coll-count">342 kariet</span>
+        </div>
+      </a>
+      <a class="coll-card" href="#" style="--img:url('https://images.pokemontcg.io/sv4pt5/199_hires.png')">
+        <div class="coll-overlay">
+          <h3>SV 151</h3>
+          <p>Návrat ku Kantu</p>
+          <span class="coll-count">207 kariet</span>
+        </div>
+      </a>
+      <a class="coll-card" href="#" style="--img:url('https://images.pokemontcg.io/sv3pt5/183_hires.png')">
+        <div class="coll-overlay">
+          <h3>Modern SV</h3>
+          <p>Najnovšie release</p>
+          <span class="coll-count">480 kariet</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="trending" class="section trending">
+  <div class="container">
+    <div class="section-head row">
+      <div>
+        <span class="kicker">02 — Trending tento týždeň</span>
+        <h2>Najžiadanejšie karty</h2>
+      </div>
+      <div class="filters" id="filters">
+        <button class="chip active" data-filter="all">Všetko</button>
+        <button class="chip" data-filter="vintage">Vintage</button>
+        <button class="chip" data-filter="modern">Modern</button>
+        <button class="chip" data-filter="graded">PSA</button>
+        <button class="chip" data-filter="sealed">Sealed</button>
+      </div>
+    </div>
+
+    <div class="products" id="products"></div>
+  </div>
+</section>
+
+<section id="services" class="section services">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">03 — Čo robíme inak</span>
+      <h2>Nie sme len e-shop</h2>
+      <p>Kompletný servis pre zberateľa od A po Z.</p>
+    </div>
+    <div class="services-grid">
+      <article class="service">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <h3>PSA Grading</h3>
+        <p>Pošleme tvoje karty priamo do USA, vyzdvihneme a doručíme. Zľava 15% pre členov.</p>
+        <a href="#" class="service-link">Zistiť viac →</a>
+      </article>
+      <article class="service">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm1-13h-2v5l4.3 2.6.7-1.2L13 11.3V7z"/></svg>
+        </div>
+        <h3>24h expedícia</h3>
+        <p>Každý deň posielame balíky po celom Slovensku, ČR, Rakúsku a Maďarsku.</p>
+        <a href="#" class="service-link">Doprava →</a>
+      </article>
+      <article class="service">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 1l9 4v6c0 5-3.8 9.7-9 11-5.2-1.3-9-6-9-11V5l9-4z"/></svg>
+        </div>
+        <h3>Garancia pravosti</h3>
+        <p>Každá karta overená 2 expertmi. Ak nájdeš fake, vrátime dvojnásobok.</p>
+        <a href="#" class="service-link">Naša záruka →</a>
+      </article>
+      <article class="service">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 20l-8-8 1.4-1.4L11 16.2V4h2v12.2l5.6-5.6L20 12z"/></svg>
+        </div>
+        <h3>Consignment</h3>
+        <p>Nechaj nám svoju kolekciu na predaj. Profesionálne foto, listing a odber.</p>
+        <a href="#" class="service-link">Pre zberateľov →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="community" class="section community">
+  <div class="container community-inner">
+    <div class="community-visual" aria-hidden="true">
+      <div class="c-card c-card-1"></div>
+      <div class="c-card c-card-2"></div>
+      <div class="c-card c-card-3"></div>
+      <div class="c-pulse"></div>
+    </div>
+    <div>
+      <span class="kicker">04 — Komunita</span>
+      <h2>HoloDex Club — stretnutia, turnaje, opening party</h2>
+      <p>
+        Každý štvrtok od 18:00 otvárame klubovňu v Bratislave.
+        Pokémon Liga, drafty zo Sword & Shield cube, Lorcana turnaje
+        a live box breaks na našom Discorde.
+      </p>
+      <ul class="community-list">
+        <li>✦ Pokémon Liga — každý štvrtok</li>
+        <li>✦ Live box break každú sobotu (YouTube)</li>
+        <li>✦ Discord s 3 800+ členmi</li>
+        <li>✦ Mesačné meet-upy pre zberateľov</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#">Pridať sa na Discord</a>
+        <a class="btn btn-ghost" href="#">Kalendár podujatí</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <span class="kicker">05 — O HoloDexe</span>
+        <h2>Postavené zberateľmi, pre zberateľov.</h2>
+        <p>
+          Začali sme v roku 2021 na bratislavskej Gessayovej ako dvaja
+          kamaráti s obsesiou pre holo Charizardov. Dnes zásobujeme
+          viac ako 15 000 zákazníkov v strednej Európe a pomáhame im
+          budovať kolekcie, ktoré budú rásť na hodnote roky dopredu.
+        </p>
+        <p>
+          Náš tím prešiel desaťtisícami kariet. Vieme rozpoznať
+          reprinty, vybledky, authenticate staré japonské singly.
+          A hlavne — tomu, čo robíme, stále veríme.
+        </p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat">
+          <strong>15 000+</strong>
+          <span>spokojných zberateľov</span>
+        </div>
+        <div class="stat">
+          <strong>€2.4M</strong>
+          <span>obchodovaných kariet</span>
+        </div>
+        <div class="stat">
+          <strong>98%</strong>
+          <span>pozitívnych recenzií</span>
+        </div>
+        <div class="stat">
+          <strong>72</strong>
+          <span>PSA 10 graded v 2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="container newsletter-inner">
+    <div>
+      <span class="kicker">Drop alerts</span>
+      <h3>Dostaň notifikáciu pri každom novom reléase.</h3>
+      <p>Žiadny spam. Len drops, restocky a vzácne finds.</p>
+    </div>
+    <form id="newsletter" class="newsletter-form">
+      <input type="email" required placeholder="tvoj@email.sk" aria-label="Email" />
+      <button class="btn btn-primary" type="submit">
+        Prihlásiť
+        <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M5 12h13l-5-5 1.4-1.4L21 12l-6.6 6.4L13 17l5-5H5z"/></svg>
+      </button>
+    </form>
+  </div>
+</section>
+
+<footer id="contact" class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="logo-mark">
+          <span class="logo-shine"></span>
+          <span class="logo-letter">H</span>
+        </span>
+        <span class="logo-text">Holo<span class="logo-accent">Dex</span></span>
+      </div>
+      <p class="muted">Prémiové zberateľské karty. Garantovaná autenticita. Bratislava, Slovensko.</p>
+      <div class="socials">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Discord">DC</a>
+        <a href="#" aria-label="YouTube">YT</a>
+        <a href="#" aria-label="TikTok">TT</a>
+      </div>
+    </div>
+    <div>
+      <h4>Obchod</h4>
+      <ul>
+        <li><a href="#">Single karty</a></li>
+        <li><a href="#">Booster boxy</a></li>
+        <li><a href="#">ETB & kolekcie</a></li>
+        <li><a href="#">PSA Graded</a></li>
+        <li><a href="#">Doplnky</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Služby</h4>
+      <ul>
+        <li><a href="#">Grading</a></li>
+        <li><a href="#">Consignment</a></li>
+        <li><a href="#">Appraisal</a></li>
+        <li><a href="#">Buyback</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Kontakt</h4>
+      <ul>
+        <li>Gessayova 14, 851 03 Bratislava</li>
+        <li>hello@holodex.sk</li>
+        <li>+421 900 000 000</li>
+        <li>Po–Pi 10:00–19:00</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container copyright">
+    © <span id="year"></span> HoloDex s.r.o. — Pokémon a všetky súvisiace značky sú majetkom ich vlastníkov. Nie sme prepojení s The Pokémon Company.
+  </div>
+</footer>
+
+<script>
+const products = [
+  {
+    id: 1,
+    name: 'Charizard — Base Set',
+    cat: 'vintage',
+    catLabel: 'Single · PSA 9',
+    meta: '1999 · Base Set · Holo',
+    price: 2499.00,
+    img: 'https://images.pokemontcg.io/base1/4_hires.png',
+    badge: { text: 'PSA 9', cls: 'psa' },
+  },
+  {
+    id: 2,
+    name: 'Charizard VMAX — Rainbow',
+    cat: 'modern',
+    catLabel: 'Single · Alt Art',
+    meta: 'Darkness Ablaze · Secret Rare',
+    price: 389.00,
+    old: 449.00,
+    img: 'https://images.pokemontcg.io/swsh3/74_hires.png',
+    badge: { text: 'Hot', cls: 'hot' },
+  },
+  {
+    id: 3,
+    name: 'Pikachu V — Full Art',
+    cat: 'modern',
+    catLabel: 'Single',
+    meta: 'Vivid Voltage · Ultra Rare',
+    price: 79.90,
+    img: 'https://images.pokemontcg.io/swsh45/18_hires.png',
+  },
+  {
+    id: 4,
+    name: 'Moonbreon — Evolving Skies',
+    cat: 'modern',
+    catLabel: 'Single · Alt Art',
+    meta: 'Umbreon VMAX · Top chase',
+    price: 959.00,
+    img: 'https://images.pokemontcg.io/swsh7/215_hires.png',
+    badge: { text: 'Hot', cls: 'hot' },
+  },
+  {
+    id: 5,
+    name: 'Blastoise — Base Set',
+    cat: 'vintage',
+    catLabel: 'Single · Holo',
+    meta: '1999 · Base Set · Unlimited',
+    price: 299.00,
+    img: 'https://images.pokemontcg.io/base1/2_hires.png',
+  },
+  {
+    id: 6,
+    name: 'Venusaur — Base Set',
+    cat: 'vintage',
+    catLabel: 'Single · Holo',
+    meta: '1999 · Base Set · Unlimited',
+    price: 229.00,
+    img: 'https://images.pokemontcg.io/base1/15_hires.png',
+  },
+  {
+    id: 7,
+    name: 'Mew ex — 151',
+    cat: 'modern',
+    catLabel: 'Single · Ultra Rare',
+    meta: 'Scarlet & Violet 151',
+    price: 69.00,
+    img: 'https://images.pokemontcg.io/sv3pt5/193_hires.png',
+    badge: { text: 'New', cls: 'new' },
+  },
+  {
+    id: 8,
+    name: 'Giratina VSTAR — Alt',
+    cat: 'modern',
+    catLabel: 'Single · Alt Art',
+    meta: 'Lost Origin',
+    price: 349.00,
+    img: 'https://images.pokemontcg.io/swsh11/186_hires.png',
+    badge: { text: 'Rare', cls: 'rare' },
+  },
+  {
+    id: 9,
+    name: 'Gengar — Fossil',
+    cat: 'vintage',
+    catLabel: 'Single · Holo',
+    meta: '1999 · Fossil · PSA 8',
+    price: 189.00,
+    img: 'https://images.pokemontcg.io/base3/5_hires.png',
+    badge: { text: 'PSA 8', cls: 'psa' },
+  },
+  {
+    id: 10,
+    name: 'Charizard ex — Obsidian Flames',
+    cat: 'modern',
+    catLabel: 'Single',
+    meta: 'Obsidian Flames · Full Art',
+    price: 89.90,
+    img: 'https://images.pokemontcg.io/sv03/223_hires.png',
+  },
+  {
+    id: 11,
+    name: '151 ETB — Sealed',
+    cat: 'sealed',
+    catLabel: 'Elite Trainer Box',
+    meta: '9 boostery · promo karta',
+    price: 74.90,
+    img: 'https://images.pokemontcg.io/sv3pt5/205_hires.png',
+  },
+  {
+    id: 12,
+    name: 'Paldea Evolved — Booster Box',
+    cat: 'sealed',
+    catLabel: 'Booster Box',
+    meta: '36 balíčkov · sealed',
+    price: 149.00,
+    old: 169.00,
+    img: 'https://images.pokemontcg.io/sv2/198_hires.png',
+    badge: { text: 'Hot', cls: 'hot' },
+  },
+  {
+    id: 13,
+    name: 'Lugia — Neo Genesis',
+    cat: 'vintage',
+    catLabel: 'Single · PSA 7',
+    meta: '2000 · Neo Genesis',
+    price: 649.00,
+    img: 'https://images.pokemontcg.io/neo1/9_hires.png',
+    badge: { text: 'PSA 7', cls: 'psa' },
+  },
+  {
+    id: 14,
+    name: 'Mewtwo V — Alt Art',
+    cat: 'modern',
+    catLabel: 'Single · Alt Art',
+    meta: 'Pokémon GO',
+    price: 139.00,
+    img: 'https://images.pokemontcg.io/pgo/78_hires.png',
+    badge: { text: 'Rare', cls: 'rare' },
+  },
+  {
+    id: 15,
+    name: 'Iono — Paldea Evolved',
+    cat: 'graded',
+    catLabel: 'Trainer · PSA 10',
+    meta: 'Paldea Evolved · Special Art',
+    price: 449.00,
+    img: 'https://images.pokemontcg.io/sv2/269_hires.png',
+    badge: { text: 'PSA 10', cls: 'psa' },
+  },
+  {
+    id: 16,
+    name: 'Rayquaza VMAX — Alt',
+    cat: 'modern',
+    catLabel: 'Single · Alt Art',
+    meta: 'Evolving Skies',
+    price: 419.00,
+    img: 'https://images.pokemontcg.io/swsh7/218_hires.png',
+    badge: { text: 'Hot', cls: 'hot' },
+  },
+];
+
+const productsEl = document.getElementById('products');
+const filtersEl = document.getElementById('filters');
+const cartBadge = document.getElementById('cartBadge');
+let cart = 0;
+let currentFilter = 'all';
+
+const formatPrice = (n) =>
+  new Intl.NumberFormat('sk-SK', { style: 'currency', currency: 'EUR' }).format(n);
+
+function render() {
+  const list = currentFilter === 'all'
+    ? products
+    : products.filter((p) => p.cat === currentFilter);
+
+  productsEl.innerHTML = list
+    .map(
+      (p) => `
+    <article class="product" data-cat="${p.cat}">
+      ${p.badge ? `<span class="badge ${p.badge.cls}">${p.badge.text}</span>` : ''}
+      <div class="product-media">
+        <img src="${p.img}" alt="${p.name}" loading="lazy" />
+      </div>
+      <div class="product-body">
+        <span class="product-cat">${p.catLabel}</span>
+        <span class="product-name">${p.name}</span>
+        <div class="product-meta">${p.meta}</div>
+        <div class="product-foot">
+          <div class="price">
+            ${p.old ? `<span class="old">${formatPrice(p.old)}</span>` : ''}
+            ${formatPrice(p.price)}
+          </div>
+          <button class="add-btn" data-id="${p.id}">Pridať</button>
+        </div>
+      </div>
+    </article>
+  `,
+    )
+    .join('');
+}
+
+filtersEl.addEventListener('click', (e) => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+  document.querySelectorAll('.chip').forEach((c) => c.classList.remove('active'));
+  chip.classList.add('active');
+  currentFilter = chip.dataset.filter;
+  render();
+});
+
+productsEl.addEventListener('click', (e) => {
+  const btn = e.target.closest('.add-btn');
+  if (!btn) return;
+  const id = Number(btn.dataset.id);
+  const product = products.find((p) => p.id === id);
+  cart++;
+  cartBadge.textContent = cart;
+  cartBadge.animate(
+    [{ transform: 'scale(1)' }, { transform: 'scale(1.4)' }, { transform: 'scale(1)' }],
+    { duration: 300 },
+  );
+  showToast(`Pridané do košíka — ${product.name}`);
+});
+
+function showToast(msg) {
+  let toast = document.querySelector('.toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.className = 'toast';
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = `✓ ${msg}`;
+  toast.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => toast.classList.remove('show'), 2400);
+}
+
+document.getElementById('newsletter').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const input = e.target.querySelector('input');
+  showToast(`Prihlásené — ${input.value}`);
+  input.value = '';
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+render();
+
+</script>
+</body>
+</html>
