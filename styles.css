@@ -414,9 +414,10 @@ p { margin: 0 0 0.8em; color: var(--muted); }
   box-shadow: var(--shadow);
   border: 1px solid var(--line);
   animation: bubble-float 4s ease-in-out infinite;
+  z-index: 5;
 }
-.hero-bubble.top { top: 40px; right: 10px; animation-delay: 0s; }
-.hero-bubble.bottom { bottom: 60px; left: 30px; animation-delay: 1.5s; }
+.hero-bubble.top { top: 20px; right: 0; animation-delay: 0s; }
+.hero-bubble.bottom { bottom: 30px; left: 0; animation-delay: 1.5s; }
 @keyframes bubble-float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
