@@ -1,323 +1,187 @@
+// ---------- Market data ----------
+const marketCards = [
+  { rank: 1, name: 'Charizard — Base Set', set: '1999 · PSA 9', tcg: 'pokemon', tcgLabel: 'Pokémon', price: 2549, change: 4.2, img: 'https://images.pokemontcg.io/base1/4_hires.png', spark: [40, 42, 41, 45, 48, 47, 50, 52, 54] },
+  { rank: 2, name: 'Moonbreon — Umbreon VMAX', set: 'Evolving Skies · Alt Art', tcg: 'pokemon', tcgLabel: 'Pokémon', price: 969, change: 1.8, img: 'https://images.pokemontcg.io/swsh7/215_hires.png', spark: [60, 62, 61, 63, 65, 64, 66, 67, 68] },
+  { rank: 3, name: 'Lugia — Neo Genesis', set: '2000 · PSA 7', tcg: 'pokemon', tcgLabel: 'Pokémon', price: 655, change: 6.1, img: 'https://images.pokemontcg.io/neo1/9_hires.png', spark: [40, 38, 42, 41, 45, 50, 53, 58, 64] },
+  { rank: 4, name: 'Iono — SIR PSA 10', set: 'Paldea Evolved', tcg: 'pokemon', tcgLabel: 'Pokémon', price: 459, change: 2.4, img: 'https://images.pokemontcg.io/sv2/269_hires.png', spark: [40, 42, 44, 45, 46, 47, 48, 49, 50] },
+  { rank: 5, name: 'Rayquaza VMAX', set: 'Evolving Skies · Alt', tcg: 'pokemon', tcgLabel: 'Pokémon', price: 421, change: 3.0, img: 'https://images.pokemontcg.io/swsh7/218_hires.png', spark: [38, 40, 41, 43, 44, 45, 47, 48, 50] },
+  { rank: 6, name: 'Giratina VSTAR', set: 'Lost Origin · Alt', tcg: 'pokemon', tcgLabel: 'Pokémon', price: 345, change: -1.2, img: 'https://images.pokemontcg.io/swsh11/186_hires.png', spark: [50, 49, 48, 47, 46, 45, 44, 43, 42] },
+  { rank: 7, name: 'Black Lotus', set: 'Alpha · MP', tcg: 'mtg', tcgLabel: 'Magic', price: 12500, change: 8.4, img: 'https://images.pokemontcg.io/base1/15_hires.png', spark: [60, 62, 64, 67, 70, 73, 76, 80, 84] },
+  { rank: 8, name: 'Elsa — Spirit of Winter', set: 'Lorcana · Hyperrare', tcg: 'lorcana', tcgLabel: 'Lorcana', price: 289, change: 5.5, img: 'https://images.pokemontcg.io/sv3pt5/199_hires.png', spark: [42, 44, 45, 47, 48, 50, 52, 54, 56] },
+  { rank: 9, name: 'Monkey D. Luffy', set: 'Romance Dawn · SR', tcg: 'onepiece', tcgLabel: 'One Piece', price: 199, change: -0.8, img: 'https://images.pokemontcg.io/swsh4/188_hires.png', spark: [50, 51, 50, 49, 48, 47, 47, 46, 46] },
+  { rank: 10, name: 'Charizard ex SIR', set: 'Obsidian Flames', tcg: 'pokemon', tcgLabel: 'Pokémon', price: 94, change: 5.5, img: 'https://images.pokemontcg.io/sv3/223_hires.png', spark: [70, 72, 74, 76, 78, 80, 82, 84, 86] },
+];
+
+const marketEl = document.getElementById('market');
+const segEl = document.getElementById('seg');
+let currentTcg = 'all';
+
+const fmtPrice = (n) =>
+  '€' + new Intl.NumberFormat('sk-SK', { maximumFractionDigits: 0 }).format(n);
+
+const fmtChange = (n) => (n > 0 ? '+' : '') + n.toFixed(1) + '%';
+
+function sparkPath(values) {
+  const w = 80, h = 30, pad = 2;
+  const min = Math.min(...values), max = Math.max(...values);
+  const range = max - min || 1;
+  const points = values.map((v, i) => {
+    const x = (i / (values.length - 1)) * (w - pad * 2) + pad;
+    const y = h - pad - ((v - min) / range) * (h - pad * 2);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  });
+  return `M${points.join(' L')}`;
+}
+
+function renderMarket() {
+  const list = currentTcg === 'all' ? marketCards : marketCards.filter((c) => c.tcg === currentTcg);
+  marketEl.innerHTML =
+    `<div class="market-row head">
+      <span>#</span>
+      <span>Karta</span>
+      <span>TCG</span>
+      <span>Cena</span>
+      <span>Trend</span>
+      <span></span>
+    </div>` +
+    list
+      .map(
+        (c, i) => `
+    <div class="market-row">
+      <span class="mr-rank">${String(i + 1).padStart(2, '0')}</span>
+      <div class="mr-card">
+        <img src="${c.img}" alt="${c.name}" loading="lazy" />
+        <div>
+          <div class="mr-card-name">${c.name}</div>
+          <div class="mr-card-set">${c.set}</div>
+        </div>
+      </div>
+      <span class="mr-tcg ${c.tcg}">${c.tcgLabel}</span>
+      <span class="mr-price">${fmtPrice(c.price)}</span>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="mr-change ${c.change >= 0 ? 'up' : 'down'}">${fmtChange(c.change)}</span>
+        <svg class="mr-spark" viewBox="0 0 80 30">
+          <path d="${sparkPath(c.spark)}" fill="none" stroke="${c.change >= 0 ? '#059669' : '#dc2626'}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="mr-actions">
+        <button class="mr-btn sell" data-name="${c.name}" data-act="sell">Predať</button>
+        <button class="mr-btn buy" data-name="${c.name}" data-act="buy">Kúpiť</button>
+      </div>
+    </div>
+  `,
+      )
+      .join('');
+}
+
+segEl.addEventListener('click', (e) => {
+  const btn = e.target.closest('.seg-btn');
+  if (!btn) return;
+  document.querySelectorAll('.seg-btn').forEach((b) => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentTcg = btn.dataset.tcg;
+  renderMarket();
+});
+
+marketEl.addEventListener('click', (e) => {
+  const btn = e.target.closest('.mr-btn');
+  if (!btn) return;
+  const act = btn.dataset.act;
+  const name = btn.dataset.name;
+  showToast(act === 'sell' ? `Začínam ponuku — ${name}` : `Pridané do košíka — ${name}`, act);
+});
+
+// ---------- Buy catalog ----------
 const products = [
-  {
-    id: 1,
-    name: 'Charizard — Base Set',
-    cat: 'vintage',
-    catLabel: 'Single · PSA 9',
-    meta: '1999 · Base Set · Holo',
-    price: 2499.00,
-    rating: 5.0,
-    reviews: 42,
-    img: 'https://images.pokemontcg.io/base1/4_hires.png',
-    badge: { text: 'PSA 9', cls: 'psa' },
-  },
-  {
-    id: 2,
-    name: 'Charizard VMAX',
-    cat: 'modern',
-    catLabel: 'Single · Alt Art',
-    meta: 'Darkness Ablaze · Rainbow',
-    price: 389.00,
-    old: 449.00,
-    rating: 4.9,
-    reviews: 86,
-    img: 'https://images.pokemontcg.io/swsh3/74_hires.png',
-    badge: { text: 'Hot', cls: 'hot' },
-  },
-  {
-    id: 3,
-    name: 'Pikachu V — Full Art',
-    cat: 'modern',
-    catLabel: 'Single',
-    meta: 'Vivid Voltage · Ultra Rare',
-    price: 79.90,
-    rating: 4.8,
-    reviews: 134,
-    img: 'https://images.pokemontcg.io/swsh45/18_hires.png',
-  },
-  {
-    id: 4,
-    name: 'Moonbreon — Umbreon VMAX',
-    cat: 'modern',
-    catLabel: 'Single · Alt Art',
-    meta: 'Evolving Skies · Top chase',
-    price: 959.00,
-    rating: 5.0,
-    reviews: 58,
-    img: 'https://images.pokemontcg.io/swsh7/215_hires.png',
-    badge: { text: 'Hot', cls: 'hot' },
-  },
-  {
-    id: 5,
-    name: 'Blastoise — Base Set',
-    cat: 'vintage',
-    catLabel: 'Single · Holo',
-    meta: '1999 · Base Set',
-    price: 299.00,
-    rating: 4.9,
-    reviews: 29,
-    img: 'https://images.pokemontcg.io/base1/2_hires.png',
-  },
-  {
-    id: 6,
-    name: 'Venusaur — Base Set',
-    cat: 'vintage',
-    catLabel: 'Single · Holo',
-    meta: '1999 · Base Set',
-    price: 229.00,
-    rating: 4.8,
-    reviews: 21,
-    img: 'https://images.pokemontcg.io/base1/15_hires.png',
-  },
-  {
-    id: 7,
-    name: 'Mew ex — 151',
-    cat: 'modern',
-    catLabel: 'Single · Ultra Rare',
-    meta: 'Scarlet & Violet 151',
-    price: 69.00,
-    rating: 4.9,
-    reviews: 97,
-    img: 'https://images.pokemontcg.io/sv3pt5/193_hires.png',
-    badge: { text: 'New', cls: 'new' },
-  },
-  {
-    id: 8,
-    name: 'Giratina VSTAR',
-    cat: 'modern',
-    catLabel: 'Single · Alt Art',
-    meta: 'Lost Origin',
-    price: 349.00,
-    rating: 4.9,
-    reviews: 44,
-    img: 'https://images.pokemontcg.io/swsh11/186_hires.png',
-    badge: { text: 'Rare', cls: 'rare' },
-  },
-  {
-    id: 9,
-    name: 'Gengar — Fossil',
-    cat: 'vintage',
-    catLabel: 'Single · Holo',
-    meta: '1999 · Fossil · PSA 8',
-    price: 189.00,
-    rating: 4.8,
-    reviews: 38,
-    img: 'https://images.pokemontcg.io/base3/5_hires.png',
-    badge: { text: 'PSA 8', cls: 'psa' },
-  },
-  {
-    id: 10,
-    name: 'Charizard ex',
-    cat: 'modern',
-    catLabel: 'Single',
-    meta: 'Obsidian Flames · SIR',
-    price: 89.90,
-    rating: 4.8,
-    reviews: 112,
-    img: 'https://images.pokemontcg.io/sv3/223_hires.png',
-  },
-  {
-    id: 11,
-    name: '151 Elite Trainer Box',
-    cat: 'sealed',
-    catLabel: 'Elite Trainer Box',
-    meta: '9 boosterov · promo karta',
-    price: 74.90,
-    rating: 4.9,
-    reviews: 203,
-    img: 'https://images.pokemontcg.io/sv3pt5/205_hires.png',
-  },
-  {
-    id: 12,
-    name: 'Paldea Evolved Booster Box',
-    cat: 'sealed',
-    catLabel: 'Booster Box',
-    meta: '36 balíčkov · sealed',
-    price: 149.00,
-    old: 169.00,
-    rating: 4.9,
-    reviews: 87,
-    img: 'https://images.pokemontcg.io/sv2/198_hires.png',
-    badge: { text: 'Hot', cls: 'hot' },
-  },
-  {
-    id: 13,
-    name: 'Lugia — Neo Genesis',
-    cat: 'vintage',
-    catLabel: 'Single · PSA 7',
-    meta: '2000 · Neo Genesis',
-    price: 649.00,
-    rating: 4.9,
-    reviews: 17,
-    img: 'https://images.pokemontcg.io/neo1/9_hires.png',
-    badge: { text: 'PSA 7', cls: 'psa' },
-  },
-  {
-    id: 14,
-    name: 'Mewtwo V — Alt Art',
-    cat: 'modern',
-    catLabel: 'Single · Alt Art',
-    meta: 'Pokémon GO',
-    price: 139.00,
-    rating: 4.9,
-    reviews: 52,
-    img: 'https://images.pokemontcg.io/pgo/78_hires.png',
-    badge: { text: 'Rare', cls: 'rare' },
-  },
-  {
-    id: 15,
-    name: 'Iono — Paldea Evolved',
-    cat: 'graded',
-    catLabel: 'Trainer · PSA 10',
-    meta: 'Special Illustration Rare',
-    price: 449.00,
-    rating: 5.0,
-    reviews: 23,
-    img: 'https://images.pokemontcg.io/sv2/269_hires.png',
-    badge: { text: 'PSA 10', cls: 'psa' },
-  },
-  {
-    id: 16,
-    name: 'Rayquaza VMAX',
-    cat: 'modern',
-    catLabel: 'Single · Alt Art',
-    meta: 'Evolving Skies',
-    price: 419.00,
-    rating: 4.9,
-    reviews: 69,
-    img: 'https://images.pokemontcg.io/swsh7/218_hires.png',
-    badge: { text: 'Hot', cls: 'hot' },
-  },
+  { id: 1, name: 'Charizard ex', set: 'Obsidian Flames · SIR', cat: 'Single', price: 94, img: 'https://images.pokemontcg.io/sv3/223_hires.png', tag: { text: 'New', cls: 'new' } },
+  { id: 2, name: 'Pikachu V', set: 'Vivid Voltage · Full Art', cat: 'Single', price: 79, img: 'https://images.pokemontcg.io/swsh45/18_hires.png' },
+  { id: 3, name: 'Moonbreon — Umbreon VMAX', set: 'Evolving Skies · Alt Art', cat: 'Single', price: 969, img: 'https://images.pokemontcg.io/swsh7/215_hires.png', tag: { text: 'Rare', cls: 'rare' } },
+  { id: 4, name: 'Mew ex', set: 'SV 151 · Ultra Rare', cat: 'Single', price: 69, img: 'https://images.pokemontcg.io/sv3pt5/193_hires.png', tag: { text: 'New', cls: 'new' } },
+  { id: 5, name: 'Charizard — Base Set', set: '1999 · PSA 9', cat: 'PSA Graded', price: 2549, img: 'https://images.pokemontcg.io/base1/4_hires.png', tag: { text: 'PSA 9', cls: 'psa' } },
+  { id: 6, name: 'Iono', set: 'Paldea Evolved · SIR', cat: 'PSA Graded', price: 459, img: 'https://images.pokemontcg.io/sv2/269_hires.png', tag: { text: 'PSA 10', cls: 'psa' } },
+  { id: 7, name: 'Giratina VSTAR', set: 'Lost Origin · Alt Art', cat: 'Single', price: 345, img: 'https://images.pokemontcg.io/swsh11/186_hires.png', tag: { text: 'Rare', cls: 'rare' } },
+  { id: 8, name: 'Lugia', set: 'Neo Genesis · PSA 7', cat: 'PSA Graded', price: 655, img: 'https://images.pokemontcg.io/neo1/9_hires.png', tag: { text: 'PSA 7', cls: 'psa' } },
 ];
 
 const productsEl = document.getElementById('products');
-const tabsEl = document.getElementById('tabs');
-const cartBadge = document.getElementById('cartBadge');
-const wishBadge = document.getElementById('wishBadge');
-
-let cart = 0;
-let wishlist = new Set();
-let currentFilter = 'all';
-
-const formatPrice = (n) =>
-  new Intl.NumberFormat('sk-SK', { style: 'currency', currency: 'EUR' }).format(n);
-
-function renderStars(rating) {
-  const full = Math.floor(rating);
-  const half = rating - full >= 0.5;
-  return '★'.repeat(full) + (half ? '⯨' : '') + '☆'.repeat(5 - full - (half ? 1 : 0));
-}
-
-function render() {
-  const list =
-    currentFilter === 'all' ? products : products.filter((p) => p.cat === currentFilter);
-
-  productsEl.innerHTML = list
-    .map(
-      (p) => `
-    <article class="product" data-cat="${p.cat}">
-      ${p.badge ? `<span class="badge ${p.badge.cls}">${p.badge.text}</span>` : ''}
-      <button class="wishlist ${wishlist.has(p.id) ? 'active' : ''}" data-wish="${p.id}" aria-label="Pridať do obľúbených">
-        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="${wishlist.has(p.id) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 21s-8-4.8-8-11a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 6.2-8 11-8 11z"/></svg>
-      </button>
-      <div class="product-media">
-        <img src="${p.img}" alt="${p.name}" loading="lazy" />
+productsEl.innerHTML = products
+  .map(
+    (p) => `
+  <article class="product">
+    ${p.tag ? `<span class="tag ${p.tag.cls}">${p.tag.text}</span>` : ''}
+    <div class="product-media"><img src="${p.img}" alt="${p.name}" loading="lazy"/></div>
+    <div class="product-body">
+      <span class="product-cat">${p.cat}</span>
+      <span class="product-name">${p.name}</span>
+      <span class="product-set">${p.set}</span>
+      <div class="product-foot">
+        <span class="product-price">${fmtPrice(p.price)}</span>
+        <button class="product-buy" data-id="${p.id}">
+          Kúpiť
+          <svg viewBox="0 0 24 24" width="12" height="12"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M5 12h13M14 6l6 6-6 6"/></svg>
+        </button>
       </div>
-      <div class="product-body">
-        <span class="product-cat">${p.catLabel}</span>
-        <span class="product-name">${p.name}</span>
-        <div class="product-meta">${p.meta}</div>
-        <div class="product-rating">
-          ${'★'.repeat(Math.round(p.rating))}<span class="count">(${p.reviews})</span>
-        </div>
-        <div class="product-foot">
-          <div class="price">
-            ${p.old ? `<span class="old">${formatPrice(p.old)}</span>` : ''}
-            ${formatPrice(p.price)}
-          </div>
-          <button class="add-btn" data-id="${p.id}">
-            <svg viewBox="0 0 24 24" width="14" height="14"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>
-            Pridať
-          </button>
-        </div>
-      </div>
-    </article>
-  `,
-    )
-    .join('');
-}
-
-tabsEl.addEventListener('click', (e) => {
-  const tab = e.target.closest('.tab');
-  if (!tab) return;
-  document.querySelectorAll('.tab').forEach((t) => t.classList.remove('active'));
-  tab.classList.add('active');
-  currentFilter = tab.dataset.filter;
-  render();
-});
+    </div>
+  </article>
+`,
+  )
+  .join('');
 
 productsEl.addEventListener('click', (e) => {
-  const addBtn = e.target.closest('.add-btn');
-  if (addBtn) {
-    const id = Number(addBtn.dataset.id);
-    const product = products.find((p) => p.id === id);
-    cart++;
-    cartBadge.textContent = cart;
-    cartBadge.animate(
-      [{ transform: 'scale(1)' }, { transform: 'scale(1.4)' }, { transform: 'scale(1)' }],
-      { duration: 300 },
-    );
-    showToast(`Pridané do košíka — ${product.name}`);
-    return;
-  }
-
-  const wishBtn = e.target.closest('.wishlist');
-  if (wishBtn) {
-    const id = Number(wishBtn.dataset.wish);
-    const product = products.find((p) => p.id === id);
-    if (wishlist.has(id)) {
-      wishlist.delete(id);
-      showToast(`Odobrané z obľúbených — ${product.name}`);
-    } else {
-      wishlist.add(id);
-      showToast(`Pridané do obľúbených — ${product.name}`);
-    }
-    updateWishlistBadge();
-    render();
-    return;
-  }
+  const btn = e.target.closest('.product-buy');
+  if (!btn) return;
+  const product = products.find((p) => p.id === Number(btn.dataset.id));
+  showToast(`Pridané do košíka — ${product.name}`, 'buy');
 });
 
-function updateWishlistBadge() {
-  if (!wishBadge) return;
-  if (wishlist.size > 0) {
-    wishBadge.textContent = wishlist.size;
-    wishBadge.hidden = false;
-  } else {
-    wishBadge.hidden = true;
-  }
+// ---------- Quote widget ----------
+const qCard = document.getElementById('qCard');
+const qCondition = document.getElementById('qCondition');
+const qQty = document.getElementById('qQty');
+const qAmount = document.getElementById('qAmount');
+const qMkt = document.getElementById('qMkt');
+const qSubmit = document.getElementById('qSubmit');
+
+function calcQuote() {
+  const base = parseFloat(qCard.value);
+  const cond = parseFloat(qCondition.value);
+  const qty = Math.max(1, parseInt(qQty.value, 10) || 1);
+  const market = base * cond * qty;
+  const offer = market * 0.85;
+  qAmount.textContent = fmtPrice(offer);
+  qMkt.textContent = fmtPrice(market);
 }
 
-function showToast(msg) {
+[qCard, qCondition, qQty].forEach((el) => el.addEventListener('input', calcQuote));
+calcQuote();
+
+qSubmit.addEventListener('click', () => {
+  showToast(`Ponuka prijatá — pošleme ti štítok mailom`, 'sell');
+});
+
+// ---------- Newsletter ----------
+document.getElementById('newsletter').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const input = e.target.querySelector('input');
+  showToast(`Prihlásené — ${input.value}`, 'buy');
+  input.value = '';
+});
+
+// ---------- Toast ----------
+function showToast(msg, type = '') {
   let toast = document.querySelector('.toast');
   if (!toast) {
     toast = document.createElement('div');
     toast.className = 'toast';
     document.body.appendChild(toast);
   }
-  toast.innerHTML = `<span class="toast-check">✓</span> <span>${msg}</span>`;
+  toast.className = 'toast' + (type ? ' ' + type : '');
+  toast.innerHTML = `✓ ${msg}`;
   toast.classList.add('show');
   clearTimeout(toast._t);
   toast._t = setTimeout(() => toast.classList.remove('show'), 2400);
 }
 
-document.getElementById('newsletter').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const input = e.target.querySelector('input');
-  showToast(`Prihlásené — ${input.value}`);
-  input.value = '';
-});
-
 document.getElementById('year').textContent = new Date().getFullYear();
 
-render();
+renderMarket();
