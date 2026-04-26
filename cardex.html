@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Cardex — Výkup a predaj zberateľských kariet</title>
 <meta name="description" content="Cardex je najrýchlejšia platforma na výkup a predaj Pokémon, Lorcana a Magic kariet. Online ponuka za 60 sekúnd, výplata do 24 h." />
+
+<meta property="og:title" content="Cardex — Výkup a predaj zberateľských kariet" />
+<meta property="og:description" content="Najrýchlejšia platforma na výkup a predaj Pokémon, Lorcana a Magic kariet. Pevná ponuka za 60 sekúnd, výplata do 24 hodín." />
+<meta property="og:image" content="https://images.pokemontcg.io/base1/4_hires.png" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://cardex.sk" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%233b4cca'/><text x='50' y='72' text-anchor='middle' font-size='60' font-weight='800' fill='white' font-family='system-ui'>C</text></svg>" />
 <style>
 :root{--bg:#f5f8ff;--surface:#fff;--surface-2:#f0f3fa;--ink:#111a32;--ink-2:#1f2d4d;--muted:#5d6580;--muted-2:#8f96ad;--line:#e2e6f0;--red:#e3350d;--red-d:#b8290a;--yellow:#ffcb05;--yellow-d:#d4a600;--blue:#3b4cca;--blue-d:#2a38a0;--green:#059669;--radius:16px;--r-sm:12px;--r-lg:24px;--shadow:0 8px 30px -8px rgba(17,26,50,.12);--shadow-lg:0 20px 50px -12px rgba(17,26,50,.22);--head:'Plus Jakarta Sans',Inter,system-ui,sans-serif;--body:'Inter',system-ui,sans-serif}
 *{box-sizing:border-box}html,body{margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}.container{width:min(1240px,92%);margin:0 auto}
@@ -104,6 +113,93 @@ h1,h2,h3,h4{font-family:var(--head);margin:0 0 .4em;line-height:1.06;letter-spac
 .copyright{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;font-size:.8rem;color:rgba(255,255,255,.4);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 @media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr;gap:28px}}
 
+/* Hamburger */
+.hamburger{display:none;flex-direction:column;gap:5px;padding:8px;z-index:60;background:none;border:none;cursor:pointer}
+.hamburger-line{display:block;width:24px;height:2.5px;border-radius:2px;background:var(--ink);transition:transform .3s,opacity .3s}
+.hamburger.open .hamburger-line:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.hamburger.open .hamburger-line:nth-child(2){opacity:0}
+.hamburger.open .hamburger-line:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+@media(max-width:900px){
+  .hamburger{display:flex}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);flex-direction:column;gap:0;padding:12px 0;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+  .nav-links.open{display:flex}
+  .nav-links li a{display:block;padding:14px 28px;font-size:1rem;color:var(--ink)}
+  .nav-links li a:hover{background:var(--surface-2)}
+  .nav-actions{display:none}
+}
+
+/* Quote Section */
+.quote-section{padding:0 0 60px;margin-top:-40px;position:relative;z-index:5}
+.quote-card{background:#fff;border-radius:var(--r-lg);box-shadow:var(--shadow-lg);max-width:780px;margin:0 auto;overflow:hidden;position:relative;padding:2px}
+.quote-card::before{content:'';position:absolute;inset:-2px;border-radius:calc(var(--r-lg) + 2px);background:conic-gradient(from 0deg,var(--red),var(--yellow),var(--green),var(--blue),#a855f7,var(--red));z-index:-1;animation:holoSpin 6s linear infinite}
+@keyframes holoSpin{to{transform:rotate(360deg)}}
+.quote-card-inner{background:#fff;border-radius:calc(var(--r-lg) - 1px);padding:32px 36px}
+.quote-header{margin-bottom:22px}
+.quote-header .kicker{margin-bottom:6px}
+.quote-header h3{margin:0;font-size:1.25rem}
+.quote-body{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:start}
+.quote-fields{display:flex;flex-direction:column;gap:14px}
+.quote-field label{display:block;font-family:var(--head);font-weight:600;font-size:.82rem;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}
+.quote-field select,.quote-field input{width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:var(--r-sm);font-family:var(--body);font-size:.95rem;color:var(--ink);background:#fff;outline:none;transition:border-color .15s}
+.quote-field select:focus,.quote-field input:focus{border-color:var(--blue)}
+.quote-result{text-align:center;min-width:200px;display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:6px}
+.quote-label{display:block;font-family:var(--head);font-weight:600;font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.quote-price{display:block;font-family:var(--head);font-weight:800;font-size:2.2rem;color:var(--green);letter-spacing:-.02em}
+.quote-market-price{display:block;font-family:var(--head);font-weight:700;font-size:1rem;color:var(--muted)}
+.quote-offer,.quote-market{margin-bottom:4px}
+.quote-cta{width:100%;margin-top:6px}
+@media(max-width:700px){
+  .quote-body{grid-template-columns:1fr;gap:22px}
+  .quote-result{min-width:0;flex-direction:row;flex-wrap:wrap;justify-content:center}
+  .quote-card-inner{padding:24px 20px}
+}
+
+/* 3D Card tile hover tilt */
+.card-tile{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .25s}
+.card-tile:hover{transform:perspective(800px) rotateX(-2deg) rotateY(3deg) translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
+
+/* Card tile image shine effect */
+.card-tile-media::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.4) 45%,transparent 50%);transform:translateX(-100%);transition:none;z-index:1;pointer-events:none}
+.card-tile:hover .card-tile-media::after{animation:shine .7s ease forwards}
+@keyframes shine{to{transform:translateX(100%)}}
+
+/* Hero cards 3D depth + reflection */
+.float-card{box-shadow:0 20px 50px -12px rgba(17,26,50,.28),0 8px 20px -8px rgba(17,26,50,.14);border-radius:12px}
+.float-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;border-radius:0 0 12px 12px;background:linear-gradient(to top,rgba(255,255,255,.18),transparent);pointer-events:none}
+
+/* Step cards hover lift with colored shadow */
+.step{transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s;overflow:hidden}
+.step:hover{transform:translateY(-8px);box-shadow:0 20px 40px -10px color-mix(in srgb,var(--accent),transparent 55%)}
+
+/* Step decorative card images */
+.step-decor-card{position:absolute;top:12px;right:-10px;width:70px;opacity:.08;transform:rotate(12deg);pointer-events:none;z-index:0}
+
+/* Glassmorphism on info badges */
+.info-badge{background:rgba(255,255,255,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.5)}
+.ib2{background:rgba(255,203,5,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-color:rgba(212,166,0,.4)}
+
+/* Sell section background pattern */
+.sell-section{background:radial-gradient(circle at 80% 20%,rgba(255,203,5,.12),transparent 50%),radial-gradient(circle at 10% 90%,rgba(227,53,13,.1),transparent 50%),var(--ink);position:relative}
+.sell-section::before{content:'';position:absolute;inset:0;background-image:
+  radial-gradient(circle at 25% 35%,rgba(255,255,255,.025) 0%,transparent 50%),
+  radial-gradient(circle at 75% 65%,rgba(255,255,255,.02) 0%,transparent 50%);
+  background-size:300px 300px;pointer-events:none}
+.sell-section::after{content:'';position:absolute;top:20%;right:5%;width:120px;height:170px;border:2px solid rgba(255,255,255,.04);border-radius:12px;transform:rotate(15deg);pointer-events:none}
+
+/* Floating decorative elements */
+.has-floaters{position:relative;overflow:hidden}
+.has-floaters::before,.has-floaters::after{content:'';position:absolute;border-radius:50%;opacity:.06;pointer-events:none;z-index:0}
+.has-floaters::before{width:180px;height:180px;top:-40px;right:8%;background:var(--red);animation:floatDeco 8s ease-in-out infinite}
+.has-floaters::after{width:120px;height:120px;bottom:20px;left:5%;background:var(--blue);border-radius:24px;animation:floatDeco 10s ease-in-out infinite reverse}
+@keyframes floatDeco{0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(12px,-18px) rotate(8deg)}}
+
+/* Section reveal animation */
+@keyframes reveal{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.section-reveal{animation:reveal .6s ease backwards}
+.section-reveal:nth-child(2){animation-delay:.1s}
+.section-reveal:nth-child(3){animation-delay:.2s}
+.section-reveal:nth-child(4){animation-delay:.3s}
+
 /* Toast */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--ink);color:#fff;padding:12px 22px;border-radius:999px;box-shadow:var(--shadow-lg);font-family:var(--head);font-weight:600;font-size:.9rem;z-index:100;transition:transform .35s cubic-bezier(.2,.8,.2,1)}.toast.show{transform:translateX(-50%) translateY(0)}
 
@@ -141,7 +237,12 @@ h1,h2,h3,h4{font-family:var(--head);margin:0 0 .4em;line-height:1.06;letter-spac
       <span class="logo-mark">C</span>
       <span class="logo-text">Card<em>EX</em></span>
     </a>
-    <ul class="nav-links">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
       <li><a href="#sell">Predaj</a></li>
       <li><a href="#buy">Nákup</a></li>
       <li><a href="#hot">Ceny</a></li>
@@ -198,6 +299,61 @@ h1,h2,h3,h4{font-family:var(--head);margin:0 0 .4em;line-height:1.06;letter-spac
   </div>
 </section>
 
+<section class="quote-section">
+  <div class="container">
+    <div class="quote-card" id="quote-card">
+      <div class="quote-card-inner">
+        <div class="quote-header">
+          <span class="kicker">Kolko ti zaplatime?</span>
+          <h3>Okamzita ponuka za tvoju kartu</h3>
+        </div>
+        <div class="quote-body">
+          <div class="quote-fields">
+            <div class="quote-field">
+              <label for="quote-card-select">Karta</label>
+              <select id="quote-card-select">
+                <option value="charizard" data-base="2549">Charizard Base PSA 9</option>
+                <option value="moonbreon" data-base="969">Moonbreon Alt Art</option>
+                <option value="rayquaza" data-base="421">Rayquaza VMAX Alt</option>
+                <option value="lugia" data-base="655">Lugia Neo Genesis PSA 7</option>
+                <option value="iono" data-base="459">Iono SIR PSA 10</option>
+                <option value="pikachu" data-base="79">Pikachu V Full Art</option>
+                <option value="giratina" data-base="345">Giratina VSTAR Alt</option>
+                <option value="charizard-ex" data-base="94">Charizard ex SIR</option>
+              </select>
+            </div>
+            <div class="quote-field">
+              <label for="quote-condition">Stav</label>
+              <select id="quote-condition">
+                <option value="1.0">Mint / Near Mint</option>
+                <option value="0.88">Excellent</option>
+                <option value="0.75">Light Played</option>
+                <option value="0.60">Played</option>
+                <option value="0.40">Heavy Played</option>
+              </select>
+            </div>
+            <div class="quote-field">
+              <label for="quote-qty">Pocet</label>
+              <input type="number" id="quote-qty" value="1" min="1" max="99" />
+            </div>
+          </div>
+          <div class="quote-result">
+            <div class="quote-offer">
+              <span class="quote-label">Nasa ponuka</span>
+              <span class="quote-price" id="quote-price">---</span>
+            </div>
+            <div class="quote-market">
+              <span class="quote-label">Trzna cena</span>
+              <span class="quote-market-price" id="quote-market">---</span>
+            </div>
+            <button class="btn btn-sell quote-cta" id="quote-accept">Akceptovat ponuku</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="trust-bar">
   <div class="container trust-inner">
     <div class="trust-item"><strong>€4.8M</strong><span>Vykúpených kariet 2024</span></div>
@@ -207,7 +363,7 @@ h1,h2,h3,h4{font-family:var(--head);margin:0 0 .4em;line-height:1.06;letter-spac
   </div>
 </section>
 
-<section id="how" class="section">
+<section id="how" class="section section-reveal has-floaters">
   <div class="container">
     <div class="section-head centered">
       <span class="kicker">Ako to funguje</span>
@@ -216,6 +372,7 @@ h1,h2,h3,h4{font-family:var(--head);margin:0 0 .4em;line-height:1.06;letter-spac
     </div>
     <div class="steps-grid">
       <article class="step" style="--accent:var(--yellow)">
+        <img class="step-decor-card" src="https://images.pokemontcg.io/swsh45/18_hires.png" alt="" aria-hidden="true" />
         <span class="step-num">1</span>
         <h3>Získajte ponuku</h3>
         <p>Vyhľadajte kartu v katalógu, zadajte stav a dostanete pevnú cenu. Bez nutnosti fotografovať.</p>
@@ -225,6 +382,7 @@ h1,h2,h3,h4{font-family:var(--head);margin:0 0 .4em;line-height:1.06;letter-spac
         </ul>
       </article>
       <article class="step" style="--accent:var(--red)">
+        <img class="step-decor-card" src="https://images.pokemontcg.io/base1/4_hires.png" alt="" aria-hidden="true" />
         <span class="step-num">2</span>
         <h3>Odošlite karty</h3>
         <p>Nalepte bezplatný predtlačený štítok a vhoďte do schránky. Poistenie až do €5 000 v cene.</p>
@@ -234,6 +392,7 @@ h1,h2,h3,h4{font-family:var(--head);margin:0 0 .4em;line-height:1.06;letter-spac
         </ul>
       </article>
       <article class="step" style="--accent:var(--blue)">
+        <img class="step-decor-card" src="https://images.pokemontcg.io/swsh7/215_hires.png" alt="" aria-hidden="true" />
         <span class="step-num">3</span>
         <h3>Dostanete platbu</h3>
         <p>Po overení karty odosielame peniaze na účet. SEPA do 4 hodín, krypto do 30 minút.</p>
@@ -246,7 +405,7 @@ h1,h2,h3,h4{font-family:var(--head);margin:0 0 .4em;line-height:1.06;letter-spac
   </div>
 </section>
 
-<section id="hot" class="section alt">
+<section id="hot" class="section alt section-reveal">
   <div class="container">
     <div class="section-head row">
       <div>
@@ -265,7 +424,7 @@ h1,h2,h3,h4{font-family:var(--head);margin:0 0 .4em;line-height:1.06;letter-spac
   </div>
 </section>
 
-<section id="sell" class="section sell-section">
+<section id="sell" class="section sell-section section-reveal">
   <div class="container sell-inner">
     <div>
       <span class="kicker kicker-light">Výkup celej zbierky</span>
@@ -291,7 +450,7 @@ h1,h2,h3,h4{font-family:var(--head);margin:0 0 .4em;line-height:1.06;letter-spac
   </div>
 </section>
 
-<section id="buy" class="section">
+<section id="buy" class="section section-reveal has-floaters">
   <div class="container">
     <div class="section-head row">
       <div>
@@ -305,7 +464,7 @@ h1,h2,h3,h4{font-family:var(--head);margin:0 0 .4em;line-height:1.06;letter-spac
   </div>
 </section>
 
-<section class="reviews-section">
+<section class="reviews-section section-reveal">
   <div class="container">
     <div class="section-head centered">
       <span class="kicker">Recenzie</span>
@@ -436,6 +595,71 @@ function toast(msg) {
   el.classList.add('show');
   clearTimeout(el._t);
   el._t = setTimeout(() => el.classList.remove('show'), 2400);
+}
+
+/* Hamburger menu */
+var hamburger = document.getElementById('hamburger');
+var navLinks = document.getElementById('nav-links');
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A') {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+    }
+  });
+}
+
+/* Quote calculator */
+var quoteCardSelect = document.getElementById('quote-card-select');
+var quoteCondition = document.getElementById('quote-condition');
+var quoteQty = document.getElementById('quote-qty');
+var quotePrice = document.getElementById('quote-price');
+var quoteMarket = document.getElementById('quote-market');
+var quoteAccept = document.getElementById('quote-accept');
+
+function updateQuote() {
+  var sel = quoteCardSelect.options[quoteCardSelect.selectedIndex];
+  var base = Number(sel.getAttribute('data-base'));
+  var cond = parseFloat(quoteCondition.value);
+  var qty = Math.max(1, Math.min(99, parseInt(quoteQty.value) || 1));
+  var offer = Math.round(base * 0.85 * cond * qty);
+  var market = Math.round(base * cond * qty);
+  quotePrice.textContent = fmt(offer);
+  quoteMarket.textContent = fmt(market);
+}
+
+if (quoteCardSelect && quoteCondition && quoteQty) {
+  quoteCardSelect.addEventListener('change', updateQuote);
+  quoteCondition.addEventListener('change', updateQuote);
+  quoteQty.addEventListener('input', updateQuote);
+  updateQuote();
+}
+
+if (quoteAccept) {
+  quoteAccept.addEventListener('click', function() {
+    toast('Ponuka akceptovana -- kontaktujeme vas do 60 sekund.');
+  });
+}
+
+/* Section reveal on scroll */
+var revealSections = document.querySelectorAll('.section-reveal');
+if (revealSections.length > 0 && 'IntersectionObserver' in window) {
+  var revealObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealSections.forEach(function(s) {
+    s.style.animationPlayState = 'paused';
+    revealObs.observe(s);
+  });
 }
 
 document.getElementById('year').textContent = new Date().getFullYear();

@@ -113,50 +113,52 @@
 <section class="quote-section">
   <div class="container">
     <div class="quote-card" id="quote-card">
-      <div class="quote-header">
-        <span class="kicker">Kolko ti zaplatime?</span>
-        <h3>Okamzita ponuka za tvoju kartu</h3>
-      </div>
-      <div class="quote-body">
-        <div class="quote-fields">
-          <div class="quote-field">
-            <label for="quote-card-select">Karta</label>
-            <select id="quote-card-select">
-              <option value="charizard" data-base="2549">Charizard Base PSA 9</option>
-              <option value="moonbreon" data-base="969">Moonbreon Alt Art</option>
-              <option value="rayquaza" data-base="421">Rayquaza VMAX Alt</option>
-              <option value="lugia" data-base="655">Lugia Neo Genesis PSA 7</option>
-              <option value="iono" data-base="459">Iono SIR PSA 10</option>
-              <option value="pikachu" data-base="79">Pikachu V Full Art</option>
-              <option value="giratina" data-base="345">Giratina VSTAR Alt</option>
-              <option value="charizard-ex" data-base="94">Charizard ex SIR</option>
-            </select>
-          </div>
-          <div class="quote-field">
-            <label for="quote-condition">Stav</label>
-            <select id="quote-condition">
-              <option value="1.0">Mint / Near Mint</option>
-              <option value="0.88">Excellent</option>
-              <option value="0.75">Light Played</option>
-              <option value="0.60">Played</option>
-              <option value="0.40">Heavy Played</option>
-            </select>
-          </div>
-          <div class="quote-field">
-            <label for="quote-qty">Pocet</label>
-            <input type="number" id="quote-qty" value="1" min="1" max="99" />
-          </div>
+      <div class="quote-card-inner">
+        <div class="quote-header">
+          <span class="kicker">Kolko ti zaplatime?</span>
+          <h3>Okamzita ponuka za tvoju kartu</h3>
         </div>
-        <div class="quote-result">
-          <div class="quote-offer">
-            <span class="quote-label">Nasa ponuka</span>
-            <span class="quote-price" id="quote-price">---</span>
+        <div class="quote-body">
+          <div class="quote-fields">
+            <div class="quote-field">
+              <label for="quote-card-select">Karta</label>
+              <select id="quote-card-select">
+                <option value="charizard" data-base="2549">Charizard Base PSA 9</option>
+                <option value="moonbreon" data-base="969">Moonbreon Alt Art</option>
+                <option value="rayquaza" data-base="421">Rayquaza VMAX Alt</option>
+                <option value="lugia" data-base="655">Lugia Neo Genesis PSA 7</option>
+                <option value="iono" data-base="459">Iono SIR PSA 10</option>
+                <option value="pikachu" data-base="79">Pikachu V Full Art</option>
+                <option value="giratina" data-base="345">Giratina VSTAR Alt</option>
+                <option value="charizard-ex" data-base="94">Charizard ex SIR</option>
+              </select>
+            </div>
+            <div class="quote-field">
+              <label for="quote-condition">Stav</label>
+              <select id="quote-condition">
+                <option value="1.0">Mint / Near Mint</option>
+                <option value="0.88">Excellent</option>
+                <option value="0.75">Light Played</option>
+                <option value="0.60">Played</option>
+                <option value="0.40">Heavy Played</option>
+              </select>
+            </div>
+            <div class="quote-field">
+              <label for="quote-qty">Pocet</label>
+              <input type="number" id="quote-qty" value="1" min="1" max="99" />
+            </div>
           </div>
-          <div class="quote-market">
-            <span class="quote-label">Trzna cena</span>
-            <span class="quote-market-price" id="quote-market">---</span>
+          <div class="quote-result">
+            <div class="quote-offer">
+              <span class="quote-label">Nasa ponuka</span>
+              <span class="quote-price" id="quote-price">---</span>
+            </div>
+            <div class="quote-market">
+              <span class="quote-label">Trzna cena</span>
+              <span class="quote-market-price" id="quote-market">---</span>
+            </div>
+            <button class="btn btn-sell quote-cta" id="quote-accept">Akceptovat ponuku</button>
           </div>
-          <button class="btn btn-sell quote-cta" id="quote-accept">Akceptovat ponuku</button>
         </div>
       </div>
     </div>

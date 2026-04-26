@@ -79,6 +79,71 @@ function toast(msg) {
   el._t = setTimeout(() => el.classList.remove('show'), 2400);
 }
 
+/* Hamburger menu */
+var hamburger = document.getElementById('hamburger');
+var navLinks = document.getElementById('nav-links');
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A') {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+    }
+  });
+}
+
+/* Quote calculator */
+var quoteCardSelect = document.getElementById('quote-card-select');
+var quoteCondition = document.getElementById('quote-condition');
+var quoteQty = document.getElementById('quote-qty');
+var quotePrice = document.getElementById('quote-price');
+var quoteMarket = document.getElementById('quote-market');
+var quoteAccept = document.getElementById('quote-accept');
+
+function updateQuote() {
+  var sel = quoteCardSelect.options[quoteCardSelect.selectedIndex];
+  var base = Number(sel.getAttribute('data-base'));
+  var cond = parseFloat(quoteCondition.value);
+  var qty = Math.max(1, Math.min(99, parseInt(quoteQty.value) || 1));
+  var offer = Math.round(base * 0.85 * cond * qty);
+  var market = Math.round(base * cond * qty);
+  quotePrice.textContent = fmt(offer);
+  quoteMarket.textContent = fmt(market);
+}
+
+if (quoteCardSelect && quoteCondition && quoteQty) {
+  quoteCardSelect.addEventListener('change', updateQuote);
+  quoteCondition.addEventListener('change', updateQuote);
+  quoteQty.addEventListener('input', updateQuote);
+  updateQuote();
+}
+
+if (quoteAccept) {
+  quoteAccept.addEventListener('click', function() {
+    toast('Ponuka akceptovana -- kontaktujeme vas do 60 sekund.');
+  });
+}
+
+/* Section reveal on scroll */
+var revealSections = document.querySelectorAll('.section-reveal');
+if (revealSections.length > 0 && 'IntersectionObserver' in window) {
+  var revealObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealSections.forEach(function(s) {
+    s.style.animationPlayState = 'paused';
+    revealObs.observe(s);
+  });
+}
+
 document.getElementById('year').textContent = new Date().getFullYear();
 renderHot();
 renderProducts();
