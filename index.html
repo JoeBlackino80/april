@@ -3,47 +3,51 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Cardex — Loví karty, vyhraj zbierku</title>
-<meta name="description" content="Najjasnejšia platforma na výkup a predaj Pokémon TCG kariet. Lov karty, predaj zbierku, žij ako tréner." />
+<title>Cardex — Výkup a predaj zberateľských kariet</title>
+<meta name="description" content="Cardex je najrýchlejšia platforma na výkup a predaj Pokémon, Lorcana a Magic kariet. Online ponuka za 60 sekúnd, výplata do 24 h." />
 <link rel="stylesheet" href="styles.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-<div class="sky-bg" aria-hidden="true">
-  <div class="cloud cl1"></div>
-  <div class="cloud cl2"></div>
-  <div class="cloud cl3"></div>
-  <div class="cloud cl4"></div>
-  <span class="sparkle sp1">✦</span>
-  <span class="sparkle sp2">✦</span>
-  <span class="sparkle sp3">✧</span>
-  <span class="sparkle sp4">✦</span>
-</div>
+<header class="ticker-bar">
+  <div class="ticker-track">
+    <span class="t-item"><b>Charizard Base PSA 9</b> <em class="up">+4.2%</em> <span class="px">€2 549</span></span>
+    <span class="t-item"><b>Moonbreon Alt Art</b> <em class="up">+1.8%</em> <span class="px">€969</span></span>
+    <span class="t-item"><b>Pikachu V Full Art</b> <em class="dn">-0.6%</em> <span class="px">€79</span></span>
+    <span class="t-item"><b>Lugia Neo Genesis PSA 7</b> <em class="up">+6.1%</em> <span class="px">€655</span></span>
+    <span class="t-item"><b>Iono SIR PSA 10</b> <em class="up">+2.4%</em> <span class="px">€459</span></span>
+    <span class="t-item"><b>Rayquaza VMAX Alt</b> <em class="up">+3.0%</em> <span class="px">€421</span></span>
+    <span class="t-item"><b>Giratina VSTAR Alt</b> <em class="dn">-1.2%</em> <span class="px">€345</span></span>
+    <span class="t-item"><b>Charizard ex SIR</b> <em class="up">+5.5%</em> <span class="px">€94</span></span>
+    <span class="t-item"><b>Charizard Base PSA 9</b> <em class="up">+4.2%</em> <span class="px">€2 549</span></span>
+    <span class="t-item"><b>Moonbreon Alt Art</b> <em class="up">+1.8%</em> <span class="px">€969</span></span>
+    <span class="t-item"><b>Pikachu V Full Art</b> <em class="dn">-0.6%</em> <span class="px">€79</span></span>
+    <span class="t-item"><b>Lugia Neo Genesis PSA 7</b> <em class="up">+6.1%</em> <span class="px">€655</span></span>
+    <span class="t-item"><b>Iono SIR PSA 10</b> <em class="up">+2.4%</em> <span class="px">€459</span></span>
+    <span class="t-item"><b>Rayquaza VMAX Alt</b> <em class="up">+3.0%</em> <span class="px">€421</span></span>
+    <span class="t-item"><b>Giratina VSTAR Alt</b> <em class="dn">-1.2%</em> <span class="px">€345</span></span>
+    <span class="t-item"><b>Charizard ex SIR</b> <em class="up">+5.5%</em> <span class="px">€94</span></span>
+  </div>
+</header>
 
 <nav class="nav">
   <div class="container nav-inner">
     <a href="#" class="logo">
-      <span class="logo-ball">
-        <span class="logo-ball-top"></span>
-        <span class="logo-ball-bottom"></span>
-        <span class="logo-ball-center"></span>
-      </span>
+      <span class="logo-mark">C</span>
       <span class="logo-text">Card<em>EX</em></span>
     </a>
     <ul class="nav-links">
-      <li><a href="#sell">Predať</a></li>
-      <li><a href="#buy">Kúpiť</a></li>
-      <li><a href="#hot">Hot karty</a></li>
-      <li><a href="#how">Ako to ide</a></li>
+      <li><a href="#sell">Predaj</a></li>
+      <li><a href="#buy">Nákup</a></li>
+      <li><a href="#hot">Ceny</a></li>
+      <li><a href="#how">Ako to funguje</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="chip-btn">
-        <span class="chip-emoji">⚡</span>
-        <span>Prihlásiť</span>
-      </button>
+      <a href="#sell" class="btn btn-sell">Získať ponuku</a>
+      <a href="#buy" class="btn btn-buy">Katalóg</a>
     </div>
   </div>
 </nav>
@@ -51,118 +55,102 @@
 <section class="hero">
   <div class="container hero-inner">
     <div class="hero-text">
-      <span class="badge-bubble">
-        <span class="dot"></span>
-        Live · 1 287 obchodov dnes
-      </span>
-      <h1>
-        Loví karty.<br/>
-        <span class="hl-yellow">Vyhraj</span> zbierku.<br/>
-        <span class="hl-red">Predaj</span> ako boss.
-      </h1>
+      <span class="pill"><span class="live-dot"></span> Live trh — 1 287 obchodov dnes</span>
+      <h1>Najrýchlejší výkup a predaj <span class="hl-grad">zberateľských kariet</span></h1>
       <p class="lead">
-        Cardex je najrýchlejšia platforma na výkup a predaj Pokémon TCG kariet
-        v strednej Európe. Online ponuka za 60 sekúnd. Peniaze do 24 hodín.
+        Pevná ponuka za 60 sekúnd, výplata do 24 hodín.
+        Pokémon, Lorcana, Magic, One Piece — všetky karty s garanciou pravosti.
       </p>
       <div class="hero-cta">
-        <a class="big-btn big-btn-red" href="#sell">
-          <span class="big-btn-icon">💰</span>
-          <span class="big-btn-content">
-            <strong>PREDAJ KARTY</strong>
-            <small>peniaze do 24 h</small>
-          </span>
+        <a class="btn btn-sell btn-lg" href="#sell">
+          Predať karty
+          <span class="btn-sub">Peniaze na účte do 24 h</span>
         </a>
-        <a class="big-btn big-btn-blue" href="#buy">
-          <span class="big-btn-icon">🎴</span>
-          <span class="big-btn-content">
-            <strong>KÚP KARTY</strong>
-            <small>3 800+ skladom</small>
-          </span>
+        <a class="btn btn-buy btn-lg" href="#buy">
+          Kúpiť karty
+          <span class="btn-sub">3 800+ kariet skladom</span>
         </a>
       </div>
-      <div class="hero-trust">
-        <span class="trust-pill">⭐ 4.9 / 5 z 1 283 recenzií</span>
-        <span class="trust-pill">🔒 Garancia pravosti</span>
+      <div class="hero-meta">
+        <span>4.9 / 5 z 1 283 recenzií</span>
+        <span class="sep"></span>
+        <span>0 % poplatky pri výkupe</span>
+        <span class="sep"></span>
+        <span>Poistená preprava zdarma</span>
       </div>
     </div>
 
     <div class="hero-visual" aria-hidden="true">
-      <div class="poke-floor"></div>
       <img class="float-card fc1" src="https://images.pokemontcg.io/swsh45/18_hires.png" alt="" />
       <img class="float-card fc2" src="https://images.pokemontcg.io/swsh4/188_hires.png" alt="" />
       <img class="float-card fc3" src="https://images.pokemontcg.io/swsh7/215_hires.png" alt="" />
-      <span class="speech-bubble sb1">
+      <div class="info-badge ib1">
         <strong>+€2 549</strong>
-        <span>Charizard PSA 9 práve predaný</span>
-      </span>
-      <span class="speech-bubble sb2">
-        <strong>NOVÉ!</strong>
+        <span>Charizard PSA 9 — práve predaný</span>
+      </div>
+      <div class="info-badge ib2">
+        <strong>Nové</strong>
         <span>Surging Sparks už skladom</span>
-      </span>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="ticker-section">
-  <div class="ticker-track">
-    <span class="t-item">⚡ <b>Charizard Base PSA 9</b> <em>+4.2%</em> <span>€2 549</span></span>
-    <span class="t-item">🌙 <b>Moonbreon Alt</b> <em>+1.8%</em> <span>€969</span></span>
-    <span class="t-item">⚡ <b>Pikachu V Full Art</b> <em class="d">−0.6%</em> <span>€79</span></span>
-    <span class="t-item">🦅 <b>Lugia Neo PSA 7</b> <em>+6.1%</em> <span>€655</span></span>
-    <span class="t-item">⚡ <b>Iono SIR PSA 10</b> <em>+2.4%</em> <span>€459</span></span>
-    <span class="t-item">🐲 <b>Rayquaza VMAX</b> <em>+3.0%</em> <span>€421</span></span>
-    <span class="t-item">👻 <b>Giratina VSTAR</b> <em class="d">−1.2%</em> <span>€345</span></span>
-    <span class="t-item">🔥 <b>Charizard ex SIR</b> <em>+5.5%</em> <span>€94</span></span>
-    <!-- duplicate -->
-    <span class="t-item">⚡ <b>Charizard Base PSA 9</b> <em>+4.2%</em> <span>€2 549</span></span>
-    <span class="t-item">🌙 <b>Moonbreon Alt</b> <em>+1.8%</em> <span>€969</span></span>
-    <span class="t-item">⚡ <b>Pikachu V Full Art</b> <em class="d">−0.6%</em> <span>€79</span></span>
-    <span class="t-item">🦅 <b>Lugia Neo PSA 7</b> <em>+6.1%</em> <span>€655</span></span>
-    <span class="t-item">⚡ <b>Iono SIR PSA 10</b> <em>+2.4%</em> <span>€459</span></span>
-    <span class="t-item">🐲 <b>Rayquaza VMAX</b> <em>+3.0%</em> <span>€421</span></span>
-    <span class="t-item">👻 <b>Giratina VSTAR</b> <em class="d">−1.2%</em> <span>€345</span></span>
-    <span class="t-item">🔥 <b>Charizard ex SIR</b> <em>+5.5%</em> <span>€94</span></span>
+<section class="trust-bar">
+  <div class="container trust-inner">
+    <div class="trust-item"><strong>€4.8M</strong><span>Vykúpených kariet 2024</span></div>
+    <div class="trust-item"><strong>22 min</strong><span>Priemerný čas ponuky</span></div>
+    <div class="trust-item"><strong>97 %</strong><span>Akceptovaných ponúk</span></div>
+    <div class="trust-item"><strong>15 000+</strong><span>Spokojných zákazníkov</span></div>
   </div>
 </section>
 
-<section id="how" class="section how">
+<section id="how" class="section">
   <div class="container">
-    <div class="section-head">
-      <span class="kicker">Ako to ide</span>
-      <h2>Tri kroky k <span class="hl-yellow">hotovosti</span>.</h2>
-      <p>Žiadne aukcie, žiadne čakanie. Pevná ponuka, peniaze do 24 hodín.</p>
+    <div class="section-head centered">
+      <span class="kicker">Ako to funguje</span>
+      <h2>Tri kroky k výplate</h2>
+      <p>Žiadne aukcie, žiadne čakanie na kupca. Pevná ponuka, peniaze do 24 hodín.</p>
     </div>
-
-    <div class="how-grid">
-      <article class="step-card s-yellow">
-        <span class="step-num">01</span>
-        <span class="step-emoji">🎯</span>
-        <h3>Vyber kartu</h3>
-        <p>Pošli nám čo máš — vyhľadaj v katalógu, zadaj stav a hneď vidíš pevnú cenu. Žiadne fotky netreba.</p>
+    <div class="steps-grid">
+      <article class="step" style="--accent:var(--yellow)">
+        <span class="step-num">1</span>
+        <h3>Získajte ponuku</h3>
+        <p>Vyhľadajte kartu v katalógu, zadajte stav a dostanete pevnú cenu. Bez nutnosti fotografovať.</p>
+        <ul class="step-list">
+          <li>Prepojené na live ceny TCGplayer a Cardmarket</li>
+          <li>Garancia ceny 7 dní</li>
+        </ul>
       </article>
-      <article class="step-card s-red">
-        <span class="step-num">02</span>
-        <span class="step-emoji">📦</span>
-        <h3>Pošli balík</h3>
-        <p>Vytlač zadarmo predtlačený štítok, vlož do schránky. Trackovanie 1:1, poistené až do €5 000.</p>
+      <article class="step" style="--accent:var(--red)">
+        <span class="step-num">2</span>
+        <h3>Odošlite karty</h3>
+        <p>Nalepte bezplatný predtlačený štítok a vhoďte do schránky. Poistenie až do €5 000 v cene.</p>
+        <ul class="step-list">
+          <li>Slovenská pošta, GLS, Packeta</li>
+          <li>Sledovanie v reálnom čase</li>
+        </ul>
       </article>
-      <article class="step-card s-blue">
-        <span class="step-num">03</span>
-        <span class="step-emoji">💸</span>
-        <h3>Hotovosť</h3>
-        <p>Hneď po overení posielame peniaze. SEPA do 4 h, krypto do 30 min. Bez skrytých poplatkov.</p>
+      <article class="step" style="--accent:var(--blue)">
+        <span class="step-num">3</span>
+        <h3>Dostanete platbu</h3>
+        <p>Po overení karty odosielame peniaze na účet. SEPA do 4 hodín, krypto do 30 minút.</p>
+        <ul class="step-list">
+          <li>Bankový prevod, PayPal, USDT</li>
+          <li>Daňové potvrdenie pre účtovníctvo</li>
+        </ul>
       </article>
     </div>
   </div>
 </section>
 
-<section id="hot" class="section hot">
+<section id="hot" class="section alt">
   <div class="container">
     <div class="section-head row">
       <div>
-        <span class="kicker">Hot karty</span>
-        <h2>Tieto sa <span class="hl-red">trhajú</span>.</h2>
-        <p>Top karty tohto týždňa — ceny aktualizujeme každých 15 minút.</p>
+        <span class="kicker">Live trh</span>
+        <h2>Najžiadanejšie karty</h2>
+        <p>Aktuálne výkupné ceny — aktualizujeme každých 15 minút.</p>
       </div>
       <div class="seg" id="seg">
         <button class="seg-btn active" data-tcg="all">Všetko</button>
@@ -171,106 +159,71 @@
         <button class="seg-btn" data-tcg="psa">PSA</button>
       </div>
     </div>
-
     <div class="cards-grid" id="cards"></div>
   </div>
 </section>
 
-<section id="sell" class="section sell-cta">
+<section id="sell" class="section sell-section">
   <div class="container sell-inner">
-    <div class="sell-text">
-      <span class="kicker on-dark">Výkup zbierky</span>
-      <h2>Máš celú <span class="hl-yellow">kolekciu</span>?</h2>
+    <div>
+      <span class="kicker kicker-light">Výkup celej zbierky</span>
+      <h2>Chcete predať väčšiu kolekciu?</h2>
       <p>
-        Špecializovaný výkupný tím prevezme aj zbierky 1000+ kariet.
-        Prídeme po ne osobne v rámci SK, alebo pošleme zadarmo
+        Špecializovaný tím prevezme aj zbierky nad 1 000 kusov.
+        Prídeme osobne v rámci SR a ČR, alebo pošleme zadarmo
         kuriéra so zabezpečeným balením.
       </p>
-      <ul class="bullets">
-        <li>✓ Bezplatné ocenenie do 48 h</li>
-        <li>✓ Hotovosť alebo prevod na mieste</li>
-        <li>✓ Diskrétny pickup po SK a ČR</li>
-        <li>✓ Dedičstvo — vystavíme znalecký posudok</li>
+      <ul class="check-list">
+        <li>Bezplatné ocenenie do 48 hodín</li>
+        <li>Hotovosť alebo prevod na mieste</li>
+        <li>Diskrétny pickup po celom Slovensku a Česku</li>
+        <li>Dedičstvo a majetok — vystavíme znalecký posudok</li>
       </ul>
-      <div class="cta-row">
-        <a href="#" class="big-btn big-btn-yellow">
-          <span class="big-btn-icon">📞</span>
-          <span class="big-btn-content">
-            <strong>DOHODNÚŤ PICKUP</strong>
-            <small>do 48 h</small>
-          </span>
-        </a>
-      </div>
+      <a href="#" class="btn btn-sell btn-lg">Dohodnúť pickup</a>
     </div>
-
     <div class="sell-stats">
-      <div class="stat-card s-cyan">
-        <span class="stat-emoji">🏆</span>
-        <strong>€87 400</strong>
-        <span>Najväčšia zbierka 2025</span>
-        <small>3 412 kariet · Bratislava</small>
-      </div>
-      <div class="stat-card s-yellow">
-        <span class="stat-emoji">📈</span>
-        <strong>€1 240</strong>
-        <span>Priemerná ponuka</span>
-        <small>+12 % vs minulý mesiac</small>
-      </div>
-      <div class="stat-card s-pink">
-        <span class="stat-emoji">⚡</span>
-        <strong>22 min</strong>
-        <span>Priemerný čas ponuky</span>
-        <small>97 % akceptovaných</small>
-      </div>
+      <div class="stat-card"><strong>€87 400</strong><span>Najväčšia zbierka 2025</span><small>3 412 kariet — Bratislava</small></div>
+      <div class="stat-card"><strong>€1 240</strong><span>Priemerná ponuka</span><small>+12 % oproti minulému mesiacu</small></div>
+      <div class="stat-card"><strong>22 min</strong><span>Priemerný čas ponuky</span><small>97 % akceptovaných</small></div>
     </div>
   </div>
 </section>
 
-<section id="buy" class="section buy">
+<section id="buy" class="section">
   <div class="container">
     <div class="section-head row">
       <div>
         <span class="kicker">Katalóg</span>
-        <h2>Karty čakajú na <span class="hl-blue">teba</span>.</h2>
-        <p>Každá overená 2 expertmi. Vrátime dvojnásobok pri falzifikáte.</p>
+        <h2>Overené karty na predaj</h2>
+        <p>Každá karta overená dvomi expertmi. Pri falzifikáte vraciame dvojnásobok ceny.</p>
       </div>
       <a href="#" class="link-arrow">Celý katalóg →</a>
     </div>
-    <div class="products" id="products"></div>
+    <div class="cards-grid" id="products"></div>
   </div>
 </section>
 
-<section class="reviews">
+<section class="reviews-section">
   <div class="container">
     <div class="section-head centered">
-      <span class="kicker">Tréneri vravia</span>
-      <h2>4.9 / 5 ★ z <span class="hl-yellow">1 283</span> recenzií</h2>
+      <span class="kicker">Recenzie</span>
+      <h2>4.9 / 5 z 1 283 overených hodnotení</h2>
     </div>
-
     <div class="reviews-grid">
       <article class="review">
-        <span class="rv-tag rv-sell">Predaj · €4 280</span>
-        <p>"Predal som im starú zbierku — ponuku som dostal za 5 minút, peniaze za pol dňa. Lepšie ako Cardmarket aukcie."</p>
-        <div class="rv-author">
-          <span class="avatar" style="background:#FFE066">M</span>
-          <strong>Martin K. · Bratislava</strong>
-        </div>
+        <div class="rv-header"><span class="rv-tag rv-sell">Predaj</span><span class="stars">★★★★★</span></div>
+        <p>„Predal som im starú zbierku — ponuku som dostal za 5 minút, peniaze za pol dňa. Lepšie ako Cardmarket aukcie."</p>
+        <div class="rv-author"><span class="avatar" style="background:#dcfce7">M</span><div><strong>Martin K.</strong><span>Bratislava — výkup €4 280</span></div></div>
       </article>
       <article class="review">
-        <span class="rv-tag rv-buy">Nákup</span>
-        <p>"Kúpila som darček pre syna — Charizard ex v perfektnom stave, dorazilo do 24 h. Kvalita ako od najlepších."</p>
-        <div class="rv-author">
-          <span class="avatar" style="background:#A8D8FF">L</span>
-          <strong>Lucia D. · Praha</strong>
-        </div>
+        <div class="rv-header"><span class="rv-tag rv-buy">Nákup</span><span class="stars">★★★★★</span></div>
+        <p>„Kúpila som darček pre syna — Charizard ex v perfektnom stave, dorazil do 24 h v sleeve a toploaderi."</p>
+        <div class="rv-author"><span class="avatar" style="background:#dbeafe">L</span><div><strong>Lucia D.</strong><span>Praha — 2. objednávka</span></div></div>
       </article>
       <article class="review">
-        <span class="rv-tag rv-sell">Pickup zbierky</span>
-        <p>"Po smrti otca som zdedil 800 kariet. Cardex prišiel osobne, ocenil zadarmo a vyplatil v hotovosti."</p>
-        <div class="rv-author">
-          <span class="avatar" style="background:#FFB3D1">A</span>
-          <strong>Adam S. · Žilina</strong>
-        </div>
+        <div class="rv-header"><span class="rv-tag rv-sell">Výkup zbierky</span><span class="stars">★★★★★</span></div>
+        <p>„Po smrti otca som zdedil 800 kariet. Cardex prišiel osobne, ocenil zadarmo a vyplatil v hotovosti. Profesionálne."</p>
+        <div class="rv-author"><span class="avatar" style="background:#fef3c7">A</span><div><strong>Adam S.</strong><span>Žilina — zbierka 800 ks</span></div></div>
       </article>
     </div>
   </div>
@@ -278,16 +231,10 @@
 
 <section class="newsletter">
   <div class="container newsletter-inner">
-    <div>
-      <span class="kicker on-dark">Drop alerts</span>
-      <h3>Pošleme ti hot drops do mailu.</h3>
-      <p>Top 100 kariet, pohyby cien, raritné finds. Žiadny spam.</p>
-    </div>
+    <div><h3>Týždenný prehľad cien zadarmo do mailu</h3><p>Top 100 kariet s pohybmi cien, výkupnými kvótami a novinkami. Žiadny spam.</p></div>
     <form id="newsletter" class="newsletter-form">
       <input type="email" required placeholder="tvoj@email.sk" aria-label="Email" />
-      <button class="big-btn big-btn-yellow big-btn-sm" type="submit">
-        <strong>PRIHLÁSIŤ</strong>
-      </button>
+      <button class="btn btn-buy" type="submit">Prihlásiť sa</button>
     </form>
   </div>
 </section>
@@ -295,43 +242,16 @@
 <footer class="footer">
   <div class="container footer-inner">
     <div class="footer-brand">
-      <div class="logo">
-        <span class="logo-ball">
-          <span class="logo-ball-top"></span>
-          <span class="logo-ball-bottom"></span>
-          <span class="logo-ball-center"></span>
-        </span>
-        <span class="logo-text">Card<em>EX</em></span>
-      </div>
-      <p>Najrýchlejšia platforma na výkup a predaj Pokémon TCG kariet v strednej Európe.</p>
-      <div class="socials">
-        <a href="#" aria-label="Instagram">IG</a>
-        <a href="#" aria-label="Discord">DC</a>
-        <a href="#" aria-label="YouTube">YT</a>
-        <a href="#" aria-label="X">X</a>
-      </div>
+      <div class="logo"><span class="logo-mark">C</span><span class="logo-text">Card<em>EX</em></span></div>
+      <p>Najrýchlejšia platforma na výkup a predaj zberateľských kariet v strednej Európe.</p>
+      <div class="socials"><a href="#">IG</a><a href="#">DC</a><a href="#">YT</a><a href="#">X</a></div>
     </div>
-    <div>
-      <h4>Predaj</h4>
-      <ul><li><a href="#sell">Získať ponuku</a></li><li><a href="#">Výkup zbierky</a></li><li><a href="#">Cenník</a></li></ul>
-    </div>
-    <div>
-      <h4>Nákup</h4>
-      <ul><li><a href="#buy">Katalóg</a></li><li><a href="#">PSA Graded</a></li><li><a href="#">Sealed</a></li></ul>
-    </div>
-    <div>
-      <h4>Pomoc</h4>
-      <ul><li><a href="#">FAQ</a></li><li><a href="#">Doprava</a></li><li><a href="#">Kontakt</a></li></ul>
-    </div>
-    <div>
-      <h4>Kontakt</h4>
-      <ul><li>Gessayova 14, BA</li><li>hello@cardex.sk</li><li>+421 900 000 000</li></ul>
-    </div>
+    <div><h4>Predaj</h4><ul><li><a href="#">Získať ponuku</a></li><li><a href="#">Výkup zbierky</a></li><li><a href="#">Cenník</a></li></ul></div>
+    <div><h4>Nákup</h4><ul><li><a href="#">Katalóg</a></li><li><a href="#">PSA Graded</a></li><li><a href="#">Sealed</a></li></ul></div>
+    <div><h4>Pomoc</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Doprava</a></li><li><a href="#">Kontakt</a></li></ul></div>
+    <div><h4>Kontakt</h4><ul><li>Gessayova 14, Bratislava</li><li>hello@cardex.sk</li><li>+421 900 000 000</li></ul></div>
   </div>
-  <div class="container copyright">
-    <span>© <span id="year"></span> Cardex s.r.o.</span>
-    <span class="muted">Pokémon a súvisiace značky patria ich vlastníkom.</span>
-  </div>
+  <div class="container copyright"><span>© <span id="year"></span> Cardex s.r.o.</span><span>Pokémon a súvisiace značky patria ich vlastníkom.</span></div>
 </footer>
 
 <script src="app.js"></script>

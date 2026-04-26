@@ -3,1001 +3,153 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Cardex — Loví karty, vyhraj zbierku</title>
-<meta name="description" content="Najjasnejšia platforma na výkup a predaj Pokémon TCG kariet. Lov karty, predaj zbierku, žij ako tréner." />
+<title>Cardex — Výkup a predaj zberateľských kariet</title>
+<meta name="description" content="Cardex je najrýchlejšia platforma na výkup a predaj Pokémon, Lorcana a Magic kariet. Online ponuka za 60 sekúnd, výplata do 24 h." />
 <style>
-:root {
-  --sky-1: #4FC3F7;
-  --sky-2: #81D4FA;
-  --sky-3: #B3E5FC;
-  --sky-4: #E1F5FE;
-  --sun: #FFCB05;
-  --sun-dark: #E6B400;
-  --red: #E3350D;
-  --red-dark: #B42509;
-  --blue: #3B4CCA;
-  --blue-dark: #2A38A0;
-  --pink: #FF5C8A;
-  --cyan: #06B6D4;
-  --cream: #FFF8E1;
-  --ink: #1a2342;
-  --ink-2: #2a3258;
-  --muted: #5a6280;
-  --muted-2: #9098b0;
-  --line: #e5e8f2;
-  --bg: #F5F9FF;
-  --surface: #ffffff;
-
-  --radius: 22px;
-  --radius-sm: 14px;
-  --radius-lg: 32px;
-
-  --shadow-flat: 0 4px 0;
-  --shadow-soft: 0 10px 30px -8px rgba(20, 30, 70, 0.18);
-  --shadow-pop: 0 20px 50px -10px rgba(20, 30, 70, 0.28);
-}
-
-* { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  color: var(--ink);
-  background: var(--bg);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-a { color: inherit; text-decoration: none; }
-img { max-width: 100%; display: block; }
-button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
-
-.container { width: min(1240px, 92%); margin: 0 auto; }
-
-h1, h2, h3, h4 {
-  font-family: 'Baloo 2', 'Inter', sans-serif;
-  margin: 0 0 0.4em;
-  line-height: 1.05;
-  letter-spacing: -0.015em;
-  font-weight: 800;
-  color: var(--ink);
-}
-h1 { font-size: clamp(2.6rem, 6vw, 5rem); }
-h2 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; }
-h3 { font-size: 1.4rem; font-weight: 700; }
-h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink); margin-bottom: 14px; font-family: 'Baloo 2', sans-serif; font-weight: 700; }
-
-p { margin: 0 0 0.8em; color: var(--muted); }
-
-.kicker {
-  display: inline-block;
-  font-family: 'Baloo 2', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 14px;
-  padding: 4px 12px;
-  background: rgba(227, 53, 13, 0.1);
-  border-radius: 999px;
-}
-.kicker.on-dark { color: var(--sun); background: rgba(255, 203, 5, 0.15); }
-
-.muted { color: var(--muted); }
-.hl-yellow { color: var(--sun); text-shadow: 0 3px 0 rgba(0,0,0,0.06); }
-.hl-red { color: var(--red); }
-.hl-blue { color: var(--blue); }
-
-/* Sky background */
-.sky-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(180deg, #6BC5F8 0%, #B3E5FC 40%, #FFF3D6 80%, #F5F9FF 100%);
-  pointer-events: none;
-}
-.cloud {
-  position: absolute;
-  width: 200px;
-  height: 60px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 100px;
-  filter: blur(20px);
-  animation: cloudDrift 60s linear infinite;
-}
-.cl1 { top: 8%; left: 5%; }
-.cl2 { top: 15%; right: 10%; width: 280px; animation-duration: 80s; }
-.cl3 { top: 30%; left: 20%; width: 160px; animation-duration: 70s; opacity: 0.5; }
-.cl4 { top: 50%; right: 5%; width: 220px; animation-duration: 90s; opacity: 0.5; }
-@keyframes cloudDrift {
-  from { transform: translateX(0); }
-  to { transform: translateX(50px); }
-}
-.sparkle {
-  position: absolute;
-  color: var(--sun);
-  font-size: 1.4rem;
-  animation: twinkle 3s infinite;
-  text-shadow: 0 0 10px rgba(255, 203, 5, 0.6);
-}
-.sp1 { top: 12%; left: 50%; }
-.sp2 { top: 25%; right: 30%; animation-delay: 0.5s; }
-.sp3 { top: 40%; left: 8%; animation-delay: 1s; color: #fff; }
-.sp4 { top: 6%; left: 80%; animation-delay: 1.5s; }
-@keyframes twinkle {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.3; transform: scale(0.7); }
-}
-
-/* Nav */
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: saturate(180%) blur(16px);
-  -webkit-backdrop-filter: saturate(180%) blur(16px);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 0 rgba(20, 30, 70, 0.05);
-}
-.nav-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 14px 0;
-}
-.logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 800;
-  font-size: 1.5rem;
-  color: var(--ink);
-}
-.logo-text em {
-  font-style: normal;
-  background: linear-gradient(135deg, var(--red), var(--sun));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.logo-ball {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 3px solid var(--ink);
-  background: #fff;
-  overflow: hidden;
-  box-shadow: 0 3px 0 var(--ink);
-}
-.logo-ball-top { position: absolute; top: 0; left: 0; right: 0; height: 50%; background: var(--red); }
-.logo-ball-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: #fff; }
-.logo-ball-center {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 12px; height: 12px;
-  background: #fff;
-  border: 3px solid var(--ink);
-  border-radius: 50%;
-}
-
-.nav-links {
-  display: flex;
-  gap: 28px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-}
-.nav-links a {
-  color: var(--ink-2);
-  padding: 6px 0;
-  position: relative;
-  transition: color 0.15s;
-}
-.nav-links a:hover { color: var(--red); }
-
-.chip-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 18px;
-  background: #fff;
-  border: 2px solid var(--ink);
-  border-radius: 999px;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 700;
-  font-size: 0.9rem;
-  color: var(--ink);
-  box-shadow: 0 3px 0 var(--ink);
-  transition: transform 0.1s, box-shadow 0.1s;
-}
-.chip-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 0 var(--ink); }
-.chip-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
-
-@media (max-width: 900px) { .nav-links { display: none; } }
-
-/* CHUNKY BUTTONS - Pokemon GO style */
-.big-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  padding: 18px 28px;
-  border: 3px solid var(--ink);
-  border-radius: 18px;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 700;
-  color: var(--ink);
-  text-decoration: none;
-  position: relative;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-  user-select: none;
-  white-space: nowrap;
-}
-.big-btn-content {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  line-height: 1.1;
-}
-.big-btn-content strong { font-size: 1.1rem; letter-spacing: 0.02em; }
-.big-btn-content small { font-size: 0.78rem; font-weight: 500; opacity: 0.7; margin-top: 2px; }
-.big-btn-icon {
-  font-size: 2rem;
-  filter: drop-shadow(0 2px 0 rgba(0,0,0,0.1));
-}
-.big-btn-red { background: var(--red); color: #fff; box-shadow: 0 6px 0 var(--red-dark); }
-.big-btn-red .big-btn-content small { color: rgba(255, 255, 255, 0.85); }
-.big-btn-blue { background: var(--blue); color: #fff; box-shadow: 0 6px 0 var(--blue-dark); }
-.big-btn-blue .big-btn-content small { color: rgba(255, 255, 255, 0.85); }
-.big-btn-yellow { background: var(--sun); color: var(--ink); box-shadow: 0 6px 0 var(--sun-dark); }
-.big-btn-yellow .big-btn-content small { color: rgba(26, 35, 66, 0.7); }
-.big-btn:hover { transform: translateY(-2px); }
-.big-btn-red:hover { box-shadow: 0 8px 0 var(--red-dark); }
-.big-btn-blue:hover { box-shadow: 0 8px 0 var(--blue-dark); }
-.big-btn-yellow:hover { box-shadow: 0 8px 0 var(--sun-dark); }
-.big-btn:active { transform: translateY(4px); }
-.big-btn-red:active { box-shadow: 0 2px 0 var(--red-dark); }
-.big-btn-blue:active { box-shadow: 0 2px 0 var(--blue-dark); }
-.big-btn-yellow:active { box-shadow: 0 2px 0 var(--sun-dark); }
-.big-btn-sm { padding: 14px 22px; }
-
-/* Hero */
-.hero {
-  padding: 70px 0 100px;
-  position: relative;
-  overflow: hidden;
-}
-.hero-inner {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 50px;
-  align-items: center;
-  position: relative;
-  z-index: 2;
-}
-.hero-text { position: relative; z-index: 3; }
-
-.badge-bubble {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px 8px 14px;
-  background: #fff;
-  border: 2px solid var(--ink);
-  border-radius: 999px;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 600;
-  font-size: 0.88rem;
-  color: var(--ink);
-  margin-bottom: 24px;
-  box-shadow: 0 3px 0 var(--ink);
-}
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--red);
-  box-shadow: 0 0 0 4px rgba(227, 53, 13, 0.2);
-  animation: pulseLive 1.6s infinite;
-}
-@keyframes pulseLive {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.3); }
-}
-
-.hero h1 {
-  margin: 0 0 18px;
-  text-shadow: 0 4px 0 rgba(20, 30, 70, 0.06);
-}
-.lead {
-  font-size: 1.15rem;
-  color: var(--ink-2);
-  max-width: 540px;
-  margin: 0 0 32px;
-  font-weight: 500;
-}
-.hero-cta {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 28px;
-  flex-wrap: wrap;
-}
-.hero-trust {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.trust-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  background: rgba(255, 255, 255, 0.8);
-  border: 2px solid rgba(20, 30, 70, 0.1);
-  border-radius: 999px;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 600;
-  font-size: 0.85rem;
-  color: var(--ink-2);
-}
-
-/* Hero visual */
-.hero-visual {
-  position: relative;
-  height: 540px;
-  display: grid;
-  place-items: center;
-}
-.poke-floor {
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 360px;
-  height: 80px;
-  background: radial-gradient(ellipse, rgba(20, 30, 70, 0.18), transparent 70%);
-  filter: blur(8px);
-  border-radius: 50%;
-}
-.float-card {
-  position: absolute;
-  width: 200px;
-  border-radius: 12px;
-  box-shadow: 0 20px 50px -10px rgba(20, 30, 70, 0.4), 0 0 0 1px rgba(20,30,70,0.05);
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  animation: bobFloat 5s ease-in-out infinite;
-}
-.fc1 { top: 30px; left: 0; transform: rotate(-12deg); animation-delay: 0s; z-index: 1; }
-.fc2 { top: 0; left: 50%; transform: translateX(-50%) rotate(2deg); animation-delay: 0.3s; z-index: 3; }
-.fc3 { top: 30px; right: 0; transform: rotate(12deg); animation-delay: 0.6s; z-index: 2; }
-@keyframes bobFloat {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -12px; }
-}
-
-.speech-bubble {
-  position: absolute;
-  background: #fff;
-  border: 2px solid var(--ink);
-  border-radius: 16px;
-  padding: 12px 16px;
-  font-family: 'Baloo 2', sans-serif;
-  box-shadow: 0 4px 0 var(--ink);
-  z-index: 5;
-  animation: bobFloat 4s ease-in-out infinite;
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-  max-width: 200px;
-}
-.speech-bubble strong { color: var(--ink); font-size: 0.98rem; font-weight: 800; }
-.speech-bubble span { color: var(--muted); font-size: 0.78rem; font-weight: 500; margin-top: 2px; }
-.sb1 {
-  bottom: 30px;
-  left: -10px;
-  border-color: var(--red);
-  animation-delay: 0.5s;
-}
-.sb1 strong { color: var(--red); }
-.sb2 {
-  top: 50px;
-  right: -20px;
-  border-color: var(--sun-dark);
-  background: var(--sun);
-  animation-delay: 1s;
-  box-shadow: 0 4px 0 var(--sun-dark);
-}
-.sb2 span { color: var(--ink-2); }
-
-@media (max-width: 1100px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hero-visual { order: 2; height: 480px; }
-}
+:root{--bg:#f5f8ff;--surface:#fff;--surface-2:#f0f3fa;--ink:#111a32;--ink-2:#1f2d4d;--muted:#5d6580;--muted-2:#8f96ad;--line:#e2e6f0;--red:#e3350d;--red-d:#b8290a;--yellow:#ffcb05;--yellow-d:#d4a600;--blue:#3b4cca;--blue-d:#2a38a0;--green:#059669;--radius:16px;--r-sm:12px;--r-lg:24px;--shadow:0 8px 30px -8px rgba(17,26,50,.12);--shadow-lg:0 20px 50px -12px rgba(17,26,50,.22);--head:'Plus Jakarta Sans',Inter,system-ui,sans-serif;--body:'Inter',system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}a{color:inherit;text-decoration:none}img{max-width:100%;display:block}button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}.container{width:min(1240px,92%);margin:0 auto}
+h1,h2,h3,h4{font-family:var(--head);margin:0 0 .4em;line-height:1.06;letter-spacing:-.025em;font-weight:800;color:var(--ink)}h1{font-size:clamp(2.4rem,5vw,4rem)}h2{font-size:clamp(1.8rem,3.5vw,2.8rem)}h3{font-size:1.25rem;font-weight:700}h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px;font-weight:700}p{margin:0 0 .8em;color:var(--muted)}
+.kicker{display:inline-block;font-family:var(--head);font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:14px}.kicker-light{color:var(--yellow)}
+.hl-grad{background:linear-gradient(90deg,var(--red),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
 
 /* Ticker */
-.ticker-section {
-  background: var(--ink);
-  color: #fff;
-  padding: 18px 0;
-  overflow: hidden;
-  border-top: 4px solid var(--sun);
-  border-bottom: 4px solid var(--red);
-  position: relative;
-  z-index: 2;
-}
-.ticker-track {
-  display: flex;
-  gap: 32px;
-  white-space: nowrap;
-  width: max-content;
-  animation: ticker 50s linear infinite;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 600;
-}
-.t-item { display: inline-flex; gap: 8px; align-items: center; font-size: 0.96rem; }
-.t-item b { color: #fff; font-weight: 600; }
-.t-item em {
-  font-style: normal;
-  color: #34d399;
-  font-weight: 700;
-  background: rgba(52, 211, 153, 0.15);
-  padding: 2px 8px;
-  border-radius: 6px;
-  font-size: 0.86rem;
-}
-.t-item em.d { color: #f87171; background: rgba(248, 113, 113, 0.15); }
-.t-item span { color: var(--sun); font-weight: 700; }
-@keyframes ticker { to { transform: translateX(-50%); } }
+.ticker-bar{background:var(--ink);color:rgba(255,255,255,.85);font-size:.82rem;overflow:hidden;border-bottom:3px solid var(--yellow)}.ticker-track{display:flex;gap:36px;padding:10px 0;white-space:nowrap;width:max-content;animation:ticker 55s linear infinite}.t-item{display:inline-flex;gap:10px;align-items:center}.t-item b{color:#fff;font-weight:600}.t-item em{font-style:normal;font-weight:700;font-size:.78rem;padding:2px 7px;border-radius:4px}.t-item em.up{color:#34d399;background:rgba(52,211,153,.14)}.t-item em.dn{color:#f87171;background:rgba(248,113,113,.14)}.t-item .px{color:var(--yellow);font-weight:700}@keyframes ticker{to{transform:translateX(-50%)}}
 
-/* Sections */
-.section { padding: 100px 0; position: relative; }
-.section-head { max-width: 720px; margin: 0 auto 50px; text-align: center; }
-.section-head.row {
-  max-width: none;
-  margin: 0 0 40px;
-  text-align: left;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 30px;
-  flex-wrap: wrap;
-}
-.section-head.centered {
-  max-width: 800px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.section-head p {
-  font-size: 1.1rem;
-  color: var(--ink-2);
-  font-weight: 500;
-  margin: 6px 0 0;
-}
+/* Nav */
+.nav{background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0}
+.logo{display:inline-flex;align-items:center;gap:10px;font-family:var(--head);font-weight:800;font-size:1.4rem;color:var(--ink)}.logo em{font-style:normal;background:linear-gradient(135deg,var(--red),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}.logo-mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--red),var(--blue));display:grid;place-items:center;color:#fff;font-weight:800;font-size:1.15rem;box-shadow:0 6px 18px -4px rgba(59,76,202,.4)}
+.nav-links{display:flex;gap:28px;list-style:none;margin:0;padding:0;font-family:var(--head);font-weight:600;font-size:.95rem}.nav-links a{color:var(--muted);transition:color .15s}.nav-links a:hover{color:var(--ink)}.nav-actions{display:flex;gap:10px}
+@media(max-width:900px){.nav-links{display:none}}
 
-/* HOW steps */
-.how-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-.step-card {
-  background: #fff;
-  border: 3px solid var(--ink);
-  border-radius: var(--radius);
-  padding: 32px 28px;
-  text-align: center;
-  box-shadow: 0 8px 0 var(--ink);
-  transition: transform 0.2s, box-shadow 0.2s;
-  position: relative;
-  overflow: hidden;
-}
-.step-card:hover { transform: translateY(-4px); box-shadow: 0 12px 0 var(--ink); }
-.step-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--bgcolor);
-  opacity: 0.18;
-  z-index: 0;
-}
-.step-card.s-yellow { --bgcolor: var(--sun); }
-.step-card.s-red { --bgcolor: var(--red); }
-.step-card.s-blue { --bgcolor: var(--blue); }
-.step-card > * { position: relative; z-index: 1; }
-.step-num {
-  display: inline-block;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 800;
-  font-size: 0.95rem;
-  letter-spacing: 0.1em;
-  color: var(--ink);
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid var(--ink);
-  padding: 4px 12px;
-  border-radius: 999px;
-  margin-bottom: 18px;
-}
-.step-emoji {
-  display: block;
-  font-size: 4rem;
-  margin: 8px 0 14px;
-  filter: drop-shadow(0 6px 0 rgba(0,0,0,0.1));
-}
-.step-card h3 {
-  margin: 0 0 8px;
-  font-size: 1.5rem;
-  font-weight: 800;
-}
-.step-card p {
-  color: var(--ink-2);
-  font-weight: 500;
-  margin: 0;
-}
-@media (max-width: 900px) { .how-grid { grid-template-columns: 1fr; } }
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;border-radius:999px;font-family:var(--head);font-weight:700;font-size:.92rem;transition:all .18s ease;cursor:pointer;white-space:nowrap;line-height:1.2;position:relative}.btn-lg{padding:16px 28px;font-size:1rem;flex-direction:column;align-items:flex-start}.btn-sub{display:block;font-size:.78rem;font-weight:500;opacity:.8;margin-top:2px;letter-spacing:0}
+.btn-sell{background:var(--red);color:#fff;box-shadow:0 6px 20px -4px rgba(227,53,13,.45)}.btn-sell:hover{background:var(--red-d);transform:translateY(-2px);box-shadow:0 10px 28px -4px rgba(227,53,13,.45)}
+.btn-buy{background:var(--blue);color:#fff;box-shadow:0 6px 20px -4px rgba(59,76,202,.45)}.btn-buy:hover{background:var(--blue-d);transform:translateY(-2px);box-shadow:0 10px 28px -4px rgba(59,76,202,.45)}
+.btn:active{transform:translateY(1px)}
 
-/* Hot cards */
-.hot { background: rgba(255,255,255,0.4); border-top: 1px solid rgba(20,30,70,0.06); border-bottom: 1px solid rgba(20,30,70,0.06); }
-.seg {
-  display: flex;
-  gap: 4px;
-  background: #fff;
-  border: 2px solid var(--ink);
-  padding: 4px;
-  border-radius: 999px;
-  box-shadow: 0 3px 0 var(--ink);
-}
-.seg-btn {
-  padding: 8px 16px;
-  border-radius: 999px;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 600;
-  font-size: 0.88rem;
-  color: var(--ink-2);
-  transition: all 0.15s;
-}
-.seg-btn:hover { color: var(--ink); }
-.seg-btn.active { background: var(--ink); color: #fff; }
+/* Hero */
+.hero{padding:70px 0 90px;background:linear-gradient(180deg,#e8f4ff 0%,#fef9e7 50%,var(--bg) 100%);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-180px;right:-120px;width:500px;height:500px;background:radial-gradient(circle,rgba(59,76,202,.08),transparent 70%)}
+.hero::after{content:'';position:absolute;bottom:-180px;left:-120px;width:400px;height:400px;background:radial-gradient(circle,rgba(227,53,13,.06),transparent 70%)}
+.hero-inner{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}.hero-text{position:relative;z-index:2}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 16px 7px 12px;background:#fff;border:1px solid var(--line);border-radius:999px;font-size:.84rem;font-weight:600;font-family:var(--head);margin-bottom:22px;box-shadow:0 2px 8px rgba(17,26,50,.06)}.live-dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 1.6s infinite}@keyframes pulse{50%{opacity:.4}}
+.lead{font-size:1.12rem;color:var(--ink-2);max-width:540px;font-weight:500;margin-top:12px}
+.hero-cta{display:flex;gap:14px;margin:32px 0 26px;flex-wrap:wrap}
+.hero-meta{display:flex;gap:16px;flex-wrap:wrap;font-size:.88rem;color:var(--muted);font-weight:500}.hero-meta .sep{width:4px;height:4px;border-radius:50%;background:var(--muted-2);align-self:center}
 
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-.card-tile {
-  background: #fff;
-  border: 3px solid var(--ink);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: 0 6px 0 var(--ink);
-  transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  flex-direction: column;
-}
-.card-tile:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
-.card-tile-media {
-  aspect-ratio: 3/4;
-  background: linear-gradient(180deg, #FFE066 0%, #FFCB05 100%);
-  display: grid;
-  place-items: center;
-  position: relative;
-  overflow: hidden;
-}
-.card-tile-media::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 100%, rgba(255,255,255,0.5), transparent 60%);
-}
-.card-tile-media img {
-  width: 80%;
-  border-radius: 8px;
-  filter: drop-shadow(0 16px 30px rgba(20,30,70,0.3));
-  position: relative;
-  z-index: 1;
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.card-tile:hover .card-tile-media img { transform: scale(1.06) rotate(-2deg); }
-.card-tile-tag {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: var(--red);
-  color: #fff;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 700;
-  font-size: 0.74rem;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 2px solid var(--ink);
-  z-index: 2;
-}
-.card-tile-tag.psa { background: var(--sun); color: var(--ink); }
-.card-tile-tag.new { background: var(--blue); color: #fff; }
-.card-tile-tag.hot { background: var(--red); color: #fff; }
+.hero-visual{position:relative;height:520px;display:grid;place-items:center}
+.float-card{position:absolute;width:200px;border-radius:12px;box-shadow:var(--shadow-lg);transition:transform .5s cubic-bezier(.2,.8,.2,1);animation:bob 5s ease-in-out infinite}
+.fc1{top:40px;left:0;transform:rotate(-10deg);animation-delay:0s;z-index:1}.fc2{top:10px;left:50%;transform:translateX(-50%) rotate(2deg);animation-delay:.3s;z-index:3}.fc3{top:40px;right:0;transform:rotate(10deg);animation-delay:.6s;z-index:2}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -14px}}
+.info-badge{position:absolute;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);z-index:5;animation:bob 4.5s ease-in-out infinite;line-height:1.2;max-width:200px}.info-badge strong{display:block;font-family:var(--head);font-weight:700;font-size:.92rem;color:var(--ink)}.info-badge span{display:block;font-size:.78rem;color:var(--muted);margin-top:2px}
+.ib1{bottom:40px;left:10px;animation-delay:.5s}.ib1 strong{color:var(--green)}.ib2{top:60px;right:0;animation-delay:1s;background:var(--yellow);border-color:var(--yellow-d)}.ib2 span{color:var(--ink-2)}
+@media(max-width:1100px){.hero-inner{grid-template-columns:1fr;gap:40px}.hero-visual{order:2;height:460px}.float-card{width:170px}}
 
-.card-tile-body {
-  padding: 16px 18px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.card-tile-cat { font-size: 0.74rem; color: var(--muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.06em; }
-.card-tile-name { font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 1.05rem; line-height: 1.2; }
-.card-tile-set { font-size: 0.82rem; color: var(--muted); margin: 4px 0 12px; }
-.card-tile-foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding-top: 10px;
-  border-top: 2px dashed var(--line);
-}
-.card-tile-price { font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--ink); }
-.card-tile-buy {
-  background: var(--blue);
-  color: #fff;
-  border: 2px solid var(--ink);
-  padding: 7px 14px;
-  border-radius: 999px;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 700;
-  font-size: 0.82rem;
-  box-shadow: 0 3px 0 var(--ink);
-  transition: transform 0.1s, box-shadow 0.1s;
-}
-.card-tile-buy:hover { transform: translateY(-1px); box-shadow: 0 4px 0 var(--ink); }
-.card-tile-buy:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
+/* Trust bar */
+.trust-bar{background:var(--ink);color:#fff;padding:34px 0}.trust-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}.trust-item strong{display:block;font-family:var(--head);font-size:2rem;font-weight:800;letter-spacing:-.02em;color:#fff}.trust-item span{font-size:.86rem;color:rgba(255,255,255,.6)}
+@media(max-width:800px){.trust-inner{grid-template-columns:repeat(2,1fr)}}
 
-@media (max-width: 1000px) { .cards-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 720px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+/* Section */
+.section{padding:100px 0}.section.alt{background:rgba(255,255,255,.55)}.section-head{max-width:720px;margin-bottom:48px}.section-head.centered{max-width:800px;margin:0 auto 48px;text-align:center;display:flex;flex-direction:column;align-items:center}.section-head.row{max-width:none;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:36px}.section-head p{margin:4px 0 0;font-size:1.05rem}
 
-/* SELL CTA section */
-.sell-cta {
-  background:
-    radial-gradient(circle at 80% 20%, rgba(255, 203, 5, 0.15), transparent 50%),
-    radial-gradient(circle at 10% 90%, rgba(227, 53, 13, 0.18), transparent 50%),
-    var(--ink);
-  color: #fff;
-  position: relative;
-  overflow: hidden;
-}
-.sell-cta::before {
-  content: '✦';
-  position: absolute;
-  top: 10%;
-  right: 8%;
-  color: var(--sun);
-  font-size: 3rem;
-  animation: twinkle 3s infinite;
-}
-.sell-cta::after {
-  content: '✦';
-  position: absolute;
-  bottom: 15%;
-  left: 6%;
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 2rem;
-  animation: twinkle 3s infinite 1s;
-}
-.sell-cta h2 { color: #fff; }
-.sell-cta p { color: rgba(255, 255, 255, 0.8); font-size: 1.05rem; }
-.sell-inner {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 60px;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-}
-.bullets { list-style: none; padding: 0; margin: 22px 0 28px; }
-.bullets li {
-  padding: 10px 0;
-  color: rgba(255, 255, 255, 0.9);
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-.bullets li:last-child { border-bottom: 0; }
-.cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+/* Steps */
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:34px 28px;position:relative;border-top:4px solid var(--accent);transition:transform .2s,box-shadow .2s}.step:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.step-num{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--head);font-weight:800;font-size:1.1rem;margin-bottom:18px;box-shadow:0 4px 12px -3px color-mix(in srgb,var(--accent),transparent 50%)}
+.step h3{margin:0 0 10px}.step p{font-size:.95rem;margin-bottom:12px}
+.step-list{list-style:none;padding:0;margin:14px 0 0;border-top:1px solid var(--line);padding-top:14px}.step-list li{font-size:.86rem;color:var(--muted);padding:4px 0;padding-left:18px;position:relative}.step-list li::before{content:'';position:absolute;left:0;top:10px;width:8px;height:8px;border-radius:50%;background:var(--accent);opacity:.5}
+@media(max-width:900px){.steps-grid{grid-template-columns:1fr}}
 
-.sell-stats { display: grid; gap: 16px; }
-.stat-card {
-  background: #fff;
-  border: 3px solid var(--ink);
-  border-radius: var(--radius);
-  padding: 22px 24px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 6px 0 var(--ink);
-}
-.stat-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--bgcolor);
-  opacity: 0.25;
-}
-.stat-card.s-cyan { --bgcolor: var(--cyan); }
-.stat-card.s-yellow { --bgcolor: var(--sun); }
-.stat-card.s-pink { --bgcolor: var(--pink); }
-.stat-card > * { position: relative; }
-.stat-emoji {
-  font-size: 2.4rem;
-  display: inline-block;
-  filter: drop-shadow(0 4px 0 rgba(0,0,0,0.15));
-}
-.stat-card strong {
-  display: block;
-  font-family: 'Baloo 2', sans-serif;
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--ink);
-  letter-spacing: -0.02em;
-  margin: 6px 0 2px;
-}
-.stat-card > span {
-  display: block;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--ink);
-}
-.stat-card small {
-  display: block;
-  font-size: 0.82rem;
-  color: var(--ink-2);
-  margin-top: 2px;
-  font-weight: 500;
-}
-@media (max-width: 900px) { .sell-inner { grid-template-columns: 1fr; } }
+/* Seg */
+.seg{display:flex;gap:4px;background:var(--surface-2);padding:4px;border-radius:999px}.seg-btn{padding:8px 16px;border-radius:999px;font-family:var(--head);font-weight:600;font-size:.88rem;color:var(--muted);transition:all .15s}.seg-btn:hover{color:var(--ink)}.seg-btn.active{background:#fff;color:var(--ink);box-shadow:0 2px 6px rgba(17,26,50,.08)}
 
-/* BUY catalog */
-.buy { background: rgba(255,255,255,0.6); }
-.products {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-.products .card-tile { /* reuse styles */ }
-.link-arrow {
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 700;
-  color: var(--ink);
-  font-size: 1rem;
-}
-.link-arrow:hover { color: var(--blue); }
+/* Card tiles */
+.cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card-tile{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s,border-color .25s}.card-tile:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
+.card-tile-media{aspect-ratio:3/4;background:radial-gradient(ellipse at 50% 100%,rgba(59,76,202,.06),transparent 70%),var(--surface-2);display:grid;place-items:center;position:relative;overflow:hidden}
+.card-tile-media img{width:80%;border-radius:6px;filter:drop-shadow(0 14px 28px rgba(17,26,50,.2));transition:transform .4s cubic-bezier(.2,.8,.2,1)}.card-tile:hover .card-tile-media img{transform:scale(1.05) rotate(-1deg)}
+.card-tile-tag{position:absolute;top:12px;right:12px;font-family:var(--head);font-weight:700;font-size:.72rem;padding:5px 10px;border-radius:8px;z-index:2;letter-spacing:.02em;text-transform:uppercase}.card-tile-tag.psa{background:#fef3c7;color:#92400e}.card-tile-tag.new{background:#dbeafe;color:#1e40af}.card-tile-tag.hot{background:#fee2e2;color:#991b1b}
+.card-tile-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:4px}.card-tile-cat{font-size:.72rem;color:var(--muted-2);text-transform:uppercase;font-weight:600;letter-spacing:.06em}.card-tile-name{font-family:var(--head);font-weight:700;font-size:1rem;line-height:1.2}.card-tile-set{font-size:.82rem;color:var(--muted);margin:4px 0 12px}
+.card-tile-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:10px;border-top:1px solid var(--line)}.card-tile-price{font-family:var(--head);font-weight:800;font-size:1.15rem}.card-tile-buy{background:var(--blue);color:#fff;padding:8px 16px;border-radius:999px;font-family:var(--head);font-weight:700;font-size:.82rem;transition:background .15s,transform .1s;box-shadow:0 4px 10px -3px rgba(59,76,202,.35)}.card-tile-buy:hover{background:var(--blue-d)}.card-tile-buy:active{transform:scale(.96)}
+@media(max-width:1000px){.cards-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:720px){.cards-grid{grid-template-columns:repeat(2,1fr)}}
+.link-arrow{font-family:var(--head);font-weight:700;color:var(--blue);font-size:.95rem}
+
+/* Sell section */
+.sell-section{background:radial-gradient(circle at 80% 20%,rgba(255,203,5,.12),transparent 50%),radial-gradient(circle at 10% 90%,rgba(227,53,13,.1),transparent 50%),var(--ink);color:#fff;padding:100px 0}
+.sell-section h2{color:#fff}.sell-section p{color:rgba(255,255,255,.75);font-size:1.05rem}
+.sell-inner{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center}
+.check-list{list-style:none;padding:0;margin:22px 0 28px}.check-list li{padding:10px 0;color:rgba(255,255,255,.85);border-bottom:1px solid rgba(255,255,255,.08);padding-left:22px;position:relative;font-weight:500}.check-list li:last-child{border-bottom:0}.check-list li::before{content:'';position:absolute;left:0;top:14px;width:10px;height:10px;border-radius:50%;background:var(--green)}
+.sell-stats{display:grid;gap:14px}.stat-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:24px;backdrop-filter:blur(10px)}.stat-card strong{display:block;font-family:var(--head);font-size:2rem;font-weight:800;color:#fff;letter-spacing:-.02em}.stat-card>span{display:block;font-family:var(--head);font-weight:700;font-size:1rem;color:rgba(255,255,255,.9);margin-top:4px}.stat-card small{display:block;font-size:.82rem;color:rgba(255,255,255,.5);margin-top:4px}
+@media(max-width:900px){.sell-inner{grid-template-columns:1fr}}
 
 /* Reviews */
-.reviews { padding: 100px 0; background: rgba(255, 255, 255, 0.7); }
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  margin-top: 30px;
-}
-.review {
-  background: #fff;
-  border: 3px solid var(--ink);
-  border-radius: var(--radius);
-  padding: 26px;
-  box-shadow: 0 6px 0 var(--ink);
-  transition: transform 0.2s, box-shadow 0.2s;
-  position: relative;
-}
-.review:hover { transform: translateY(-3px); box-shadow: 0 9px 0 var(--ink); }
-.rv-tag {
-  display: inline-block;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 700;
-  font-size: 0.74rem;
-  padding: 4px 10px;
-  border-radius: 999px;
-  margin-bottom: 14px;
-  border: 2px solid var(--ink);
-}
-.rv-sell { background: #DCFCE7; color: #15803D; }
-.rv-buy { background: #DBEAFE; color: #1E40AF; }
-.review p {
-  color: var(--ink-2);
-  font-size: 0.96rem;
-  font-weight: 500;
-  margin: 0 0 18px;
-}
-.rv-author { display: flex; align-items: center; gap: 12px; }
-.avatar {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 2px solid var(--ink);
-  display: grid;
-  place-items: center;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 700;
-  color: var(--ink);
-  font-size: 1rem;
-}
-.rv-author strong {
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 700;
-  color: var(--ink);
-  font-size: 0.92rem;
-}
-@media (max-width: 900px) { .reviews-grid { grid-template-columns: 1fr; } }
+.reviews-section{padding:100px 0;background:#fff;border-top:1px solid var(--line)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+.review{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:transform .2s,box-shadow .2s}.review:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.rv-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.rv-tag{font-family:var(--head);font-weight:700;font-size:.74rem;padding:4px 10px;border-radius:999px}.rv-sell{background:#dcfce7;color:#166534}.rv-buy{background:#dbeafe;color:#1e40af}.stars{color:#f59e0b;font-size:.92rem;letter-spacing:2px}
+.review p{color:var(--ink-2);font-size:.95rem;font-weight:500;margin:0 0 18px}
+.rv-author{display:flex;align-items:center;gap:12px}.avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.95rem;color:var(--ink)}.rv-author strong{display:block;font-family:var(--head);font-weight:700;font-size:.9rem}.rv-author span{font-size:.78rem;color:var(--muted)}
+@media(max-width:900px){.reviews-grid{grid-template-columns:1fr}}
 
 /* Newsletter */
-.newsletter {
-  padding: 80px 0;
-  background:
-    radial-gradient(circle at 30% 20%, rgba(227, 53, 13, 0.4), transparent 50%),
-    radial-gradient(circle at 70% 80%, rgba(255, 203, 5, 0.4), transparent 50%),
-    var(--ink);
-  color: #fff;
-  position: relative;
-  overflow: hidden;
-  border-top: 4px solid var(--sun);
-  border-bottom: 4px solid var(--red);
-}
-.newsletter-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-}
-.newsletter h3 {
-  color: #fff;
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  margin: 6px 0 8px;
-}
-.newsletter p { color: rgba(255, 255, 255, 0.8); margin: 0; font-size: 1.05rem; }
-.newsletter-form {
-  display: flex;
-  gap: 10px;
-  background: #fff;
-  padding: 6px;
-  border-radius: 999px;
-  border: 3px solid var(--ink);
-  box-shadow: 0 6px 0 var(--ink);
-}
-.newsletter-form input {
-  flex: 1;
-  padding: 14px 22px;
-  border: 0;
-  background: transparent;
-  font-size: 0.95rem;
-  outline: none;
-  color: var(--ink);
-  font-family: 'Inter', sans-serif;
-}
-.newsletter-form input::placeholder { color: var(--muted); }
-@media (max-width: 800px) { .newsletter-inner { grid-template-columns: 1fr; } }
+.newsletter{padding:70px 0;background:linear-gradient(135deg,var(--red),var(--blue));color:#fff;position:relative;overflow:hidden}
+.newsletter::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 10% 20%,rgba(255,255,255,.1),transparent 40%),radial-gradient(circle at 90% 80%,rgba(255,255,255,.08),transparent 40%)}
+.newsletter-inner{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;position:relative}.newsletter h3{color:#fff;font-size:clamp(1.4rem,2.5vw,1.9rem);margin:0 0 6px}.newsletter p{color:rgba(255,255,255,.8);margin:0}
+.newsletter-form{display:flex;gap:10px;background:#fff;padding:6px;border-radius:999px;box-shadow:var(--shadow)}.newsletter-form input{flex:1;padding:14px 20px;border:0;border-radius:999px;font-size:.95rem;background:transparent;color:var(--ink);outline:none}.newsletter-form input::placeholder{color:var(--muted)}.newsletter-form .btn{box-shadow:none}
+@media(max-width:800px){.newsletter-inner{grid-template-columns:1fr}}
 
 /* Footer */
-.footer {
-  background: var(--ink);
-  color: rgba(255,255,255,0.7);
-  padding: 70px 0 24px;
-}
-.footer .logo { color: #fff; }
-.footer-inner {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr 1.1fr;
-  gap: 32px;
-  margin-bottom: 40px;
-}
-.footer-brand p { font-size: 0.9rem; max-width: 320px; margin: 14px 0; color: rgba(255,255,255,0.6); }
-.socials { display: flex; gap: 8px; }
-.socials a {
-  width: 38px; height: 38px;
-  display: grid;
-  place-items: center;
-  background: rgba(255,255,255,0.06);
-  border: 2px solid rgba(255,255,255,0.15);
-  border-radius: 12px;
-  font-family: 'Baloo 2', sans-serif;
-  font-size: 0.74rem;
-  font-weight: 700;
-  color: #fff;
-  transition: all 0.15s;
-}
-.socials a:hover { background: var(--sun); border-color: var(--sun); color: var(--ink); }
-.footer h4 { color: var(--sun); margin-bottom: 14px; }
-.footer ul { list-style: none; padding: 0; margin: 0; }
-.footer li { padding: 5px 0; font-size: 0.9rem; }
-.footer li a { color: rgba(255,255,255,0.7); transition: color 0.15s; }
-.footer li a:hover { color: #fff; }
-.copyright {
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 22px;
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.4);
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-.copyright .muted { color: rgba(255,255,255,0.35); }
-@media (max-width: 900px) { .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; } }
+.footer{background:var(--ink);color:rgba(255,255,255,.7);padding:70px 0 24px}.footer .logo{color:#fff}.footer-inner{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1.1fr;gap:32px;margin-bottom:40px}.footer-brand p{font-size:.88rem;max-width:320px;margin:14px 0;color:rgba(255,255,255,.6)}.footer h4{color:var(--yellow)}.footer ul{list-style:none;padding:0;margin:0}.footer li{padding:5px 0;font-size:.88rem}.footer li a{color:rgba(255,255,255,.6);transition:color .15s}.footer li a:hover{color:#fff}
+.socials{display:flex;gap:8px}.socials a{width:36px;height:36px;display:grid;place-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;font-size:.72rem;font-weight:700;color:#fff;transition:all .15s}.socials a:hover{background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
+.copyright{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;font-size:.8rem;color:rgba(255,255,255,.4);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+@media(max-width:900px){.footer-inner{grid-template-columns:1fr 1fr;gap:28px}}
 
 /* Toast */
-.toast {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%) translateY(100px);
-  background: var(--ink);
-  color: #fff;
-  padding: 12px 22px;
-  border: 2px solid var(--ink);
-  border-radius: 999px;
-  box-shadow: 0 6px 0 rgba(0,0,0,0.3);
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 600;
-  font-size: 0.92rem;
-  z-index: 100;
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.toast.show { transform: translateX(-50%) translateY(0); }
-.toast.sell { background: #15803D; border-color: #166534; }
-.toast.buy { background: var(--blue); border-color: var(--blue-dark); }
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--ink);color:#fff;padding:12px 22px;border-radius:999px;box-shadow:var(--shadow-lg);font-family:var(--head);font-weight:600;font-size:.9rem;z-index:100;transition:transform .35s cubic-bezier(.2,.8,.2,1)}.toast.show{transform:translateX(-50%) translateY(0)}
 
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-<div class="sky-bg" aria-hidden="true">
-  <div class="cloud cl1"></div>
-  <div class="cloud cl2"></div>
-  <div class="cloud cl3"></div>
-  <div class="cloud cl4"></div>
-  <span class="sparkle sp1">✦</span>
-  <span class="sparkle sp2">✦</span>
-  <span class="sparkle sp3">✧</span>
-  <span class="sparkle sp4">✦</span>
-</div>
+<header class="ticker-bar">
+  <div class="ticker-track">
+    <span class="t-item"><b>Charizard Base PSA 9</b> <em class="up">+4.2%</em> <span class="px">€2 549</span></span>
+    <span class="t-item"><b>Moonbreon Alt Art</b> <em class="up">+1.8%</em> <span class="px">€969</span></span>
+    <span class="t-item"><b>Pikachu V Full Art</b> <em class="dn">-0.6%</em> <span class="px">€79</span></span>
+    <span class="t-item"><b>Lugia Neo Genesis PSA 7</b> <em class="up">+6.1%</em> <span class="px">€655</span></span>
+    <span class="t-item"><b>Iono SIR PSA 10</b> <em class="up">+2.4%</em> <span class="px">€459</span></span>
+    <span class="t-item"><b>Rayquaza VMAX Alt</b> <em class="up">+3.0%</em> <span class="px">€421</span></span>
+    <span class="t-item"><b>Giratina VSTAR Alt</b> <em class="dn">-1.2%</em> <span class="px">€345</span></span>
+    <span class="t-item"><b>Charizard ex SIR</b> <em class="up">+5.5%</em> <span class="px">€94</span></span>
+    <span class="t-item"><b>Charizard Base PSA 9</b> <em class="up">+4.2%</em> <span class="px">€2 549</span></span>
+    <span class="t-item"><b>Moonbreon Alt Art</b> <em class="up">+1.8%</em> <span class="px">€969</span></span>
+    <span class="t-item"><b>Pikachu V Full Art</b> <em class="dn">-0.6%</em> <span class="px">€79</span></span>
+    <span class="t-item"><b>Lugia Neo Genesis PSA 7</b> <em class="up">+6.1%</em> <span class="px">€655</span></span>
+    <span class="t-item"><b>Iono SIR PSA 10</b> <em class="up">+2.4%</em> <span class="px">€459</span></span>
+    <span class="t-item"><b>Rayquaza VMAX Alt</b> <em class="up">+3.0%</em> <span class="px">€421</span></span>
+    <span class="t-item"><b>Giratina VSTAR Alt</b> <em class="dn">-1.2%</em> <span class="px">€345</span></span>
+    <span class="t-item"><b>Charizard ex SIR</b> <em class="up">+5.5%</em> <span class="px">€94</span></span>
+  </div>
+</header>
 
 <nav class="nav">
   <div class="container nav-inner">
     <a href="#" class="logo">
-      <span class="logo-ball">
-        <span class="logo-ball-top"></span>
-        <span class="logo-ball-bottom"></span>
-        <span class="logo-ball-center"></span>
-      </span>
+      <span class="logo-mark">C</span>
       <span class="logo-text">Card<em>EX</em></span>
     </a>
     <ul class="nav-links">
-      <li><a href="#sell">Predať</a></li>
-      <li><a href="#buy">Kúpiť</a></li>
-      <li><a href="#hot">Hot karty</a></li>
-      <li><a href="#how">Ako to ide</a></li>
+      <li><a href="#sell">Predaj</a></li>
+      <li><a href="#buy">Nákup</a></li>
+      <li><a href="#hot">Ceny</a></li>
+      <li><a href="#how">Ako to funguje</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="chip-btn">
-        <span class="chip-emoji">⚡</span>
-        <span>Prihlásiť</span>
-      </button>
+      <a href="#sell" class="btn btn-sell">Získať ponuku</a>
+      <a href="#buy" class="btn btn-buy">Katalóg</a>
     </div>
   </div>
 </nav>
@@ -1005,118 +157,102 @@ p { margin: 0 0 0.8em; color: var(--muted); }
 <section class="hero">
   <div class="container hero-inner">
     <div class="hero-text">
-      <span class="badge-bubble">
-        <span class="dot"></span>
-        Live · 1 287 obchodov dnes
-      </span>
-      <h1>
-        Loví karty.<br/>
-        <span class="hl-yellow">Vyhraj</span> zbierku.<br/>
-        <span class="hl-red">Predaj</span> ako boss.
-      </h1>
+      <span class="pill"><span class="live-dot"></span> Live trh — 1 287 obchodov dnes</span>
+      <h1>Najrýchlejší výkup a predaj <span class="hl-grad">zberateľských kariet</span></h1>
       <p class="lead">
-        Cardex je najrýchlejšia platforma na výkup a predaj Pokémon TCG kariet
-        v strednej Európe. Online ponuka za 60 sekúnd. Peniaze do 24 hodín.
+        Pevná ponuka za 60 sekúnd, výplata do 24 hodín.
+        Pokémon, Lorcana, Magic, One Piece — všetky karty s garanciou pravosti.
       </p>
       <div class="hero-cta">
-        <a class="big-btn big-btn-red" href="#sell">
-          <span class="big-btn-icon">💰</span>
-          <span class="big-btn-content">
-            <strong>PREDAJ KARTY</strong>
-            <small>peniaze do 24 h</small>
-          </span>
+        <a class="btn btn-sell btn-lg" href="#sell">
+          Predať karty
+          <span class="btn-sub">Peniaze na účte do 24 h</span>
         </a>
-        <a class="big-btn big-btn-blue" href="#buy">
-          <span class="big-btn-icon">🎴</span>
-          <span class="big-btn-content">
-            <strong>KÚP KARTY</strong>
-            <small>3 800+ skladom</small>
-          </span>
+        <a class="btn btn-buy btn-lg" href="#buy">
+          Kúpiť karty
+          <span class="btn-sub">3 800+ kariet skladom</span>
         </a>
       </div>
-      <div class="hero-trust">
-        <span class="trust-pill">⭐ 4.9 / 5 z 1 283 recenzií</span>
-        <span class="trust-pill">🔒 Garancia pravosti</span>
+      <div class="hero-meta">
+        <span>4.9 / 5 z 1 283 recenzií</span>
+        <span class="sep"></span>
+        <span>0 % poplatky pri výkupe</span>
+        <span class="sep"></span>
+        <span>Poistená preprava zdarma</span>
       </div>
     </div>
 
     <div class="hero-visual" aria-hidden="true">
-      <div class="poke-floor"></div>
       <img class="float-card fc1" src="https://images.pokemontcg.io/swsh45/18_hires.png" alt="" />
       <img class="float-card fc2" src="https://images.pokemontcg.io/swsh4/188_hires.png" alt="" />
       <img class="float-card fc3" src="https://images.pokemontcg.io/swsh7/215_hires.png" alt="" />
-      <span class="speech-bubble sb1">
+      <div class="info-badge ib1">
         <strong>+€2 549</strong>
-        <span>Charizard PSA 9 práve predaný</span>
-      </span>
-      <span class="speech-bubble sb2">
-        <strong>NOVÉ!</strong>
+        <span>Charizard PSA 9 — práve predaný</span>
+      </div>
+      <div class="info-badge ib2">
+        <strong>Nové</strong>
         <span>Surging Sparks už skladom</span>
-      </span>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="ticker-section">
-  <div class="ticker-track">
-    <span class="t-item">⚡ <b>Charizard Base PSA 9</b> <em>+4.2%</em> <span>€2 549</span></span>
-    <span class="t-item">🌙 <b>Moonbreon Alt</b> <em>+1.8%</em> <span>€969</span></span>
-    <span class="t-item">⚡ <b>Pikachu V Full Art</b> <em class="d">−0.6%</em> <span>€79</span></span>
-    <span class="t-item">🦅 <b>Lugia Neo PSA 7</b> <em>+6.1%</em> <span>€655</span></span>
-    <span class="t-item">⚡ <b>Iono SIR PSA 10</b> <em>+2.4%</em> <span>€459</span></span>
-    <span class="t-item">🐲 <b>Rayquaza VMAX</b> <em>+3.0%</em> <span>€421</span></span>
-    <span class="t-item">👻 <b>Giratina VSTAR</b> <em class="d">−1.2%</em> <span>€345</span></span>
-    <span class="t-item">🔥 <b>Charizard ex SIR</b> <em>+5.5%</em> <span>€94</span></span>
-    <!-- duplicate -->
-    <span class="t-item">⚡ <b>Charizard Base PSA 9</b> <em>+4.2%</em> <span>€2 549</span></span>
-    <span class="t-item">🌙 <b>Moonbreon Alt</b> <em>+1.8%</em> <span>€969</span></span>
-    <span class="t-item">⚡ <b>Pikachu V Full Art</b> <em class="d">−0.6%</em> <span>€79</span></span>
-    <span class="t-item">🦅 <b>Lugia Neo PSA 7</b> <em>+6.1%</em> <span>€655</span></span>
-    <span class="t-item">⚡ <b>Iono SIR PSA 10</b> <em>+2.4%</em> <span>€459</span></span>
-    <span class="t-item">🐲 <b>Rayquaza VMAX</b> <em>+3.0%</em> <span>€421</span></span>
-    <span class="t-item">👻 <b>Giratina VSTAR</b> <em class="d">−1.2%</em> <span>€345</span></span>
-    <span class="t-item">🔥 <b>Charizard ex SIR</b> <em>+5.5%</em> <span>€94</span></span>
+<section class="trust-bar">
+  <div class="container trust-inner">
+    <div class="trust-item"><strong>€4.8M</strong><span>Vykúpených kariet 2024</span></div>
+    <div class="trust-item"><strong>22 min</strong><span>Priemerný čas ponuky</span></div>
+    <div class="trust-item"><strong>97 %</strong><span>Akceptovaných ponúk</span></div>
+    <div class="trust-item"><strong>15 000+</strong><span>Spokojných zákazníkov</span></div>
   </div>
 </section>
 
-<section id="how" class="section how">
+<section id="how" class="section">
   <div class="container">
-    <div class="section-head">
-      <span class="kicker">Ako to ide</span>
-      <h2>Tri kroky k <span class="hl-yellow">hotovosti</span>.</h2>
-      <p>Žiadne aukcie, žiadne čakanie. Pevná ponuka, peniaze do 24 hodín.</p>
+    <div class="section-head centered">
+      <span class="kicker">Ako to funguje</span>
+      <h2>Tri kroky k výplate</h2>
+      <p>Žiadne aukcie, žiadne čakanie na kupca. Pevná ponuka, peniaze do 24 hodín.</p>
     </div>
-
-    <div class="how-grid">
-      <article class="step-card s-yellow">
-        <span class="step-num">01</span>
-        <span class="step-emoji">🎯</span>
-        <h3>Vyber kartu</h3>
-        <p>Pošli nám čo máš — vyhľadaj v katalógu, zadaj stav a hneď vidíš pevnú cenu. Žiadne fotky netreba.</p>
+    <div class="steps-grid">
+      <article class="step" style="--accent:var(--yellow)">
+        <span class="step-num">1</span>
+        <h3>Získajte ponuku</h3>
+        <p>Vyhľadajte kartu v katalógu, zadajte stav a dostanete pevnú cenu. Bez nutnosti fotografovať.</p>
+        <ul class="step-list">
+          <li>Prepojené na live ceny TCGplayer a Cardmarket</li>
+          <li>Garancia ceny 7 dní</li>
+        </ul>
       </article>
-      <article class="step-card s-red">
-        <span class="step-num">02</span>
-        <span class="step-emoji">📦</span>
-        <h3>Pošli balík</h3>
-        <p>Vytlač zadarmo predtlačený štítok, vlož do schránky. Trackovanie 1:1, poistené až do €5 000.</p>
+      <article class="step" style="--accent:var(--red)">
+        <span class="step-num">2</span>
+        <h3>Odošlite karty</h3>
+        <p>Nalepte bezplatný predtlačený štítok a vhoďte do schránky. Poistenie až do €5 000 v cene.</p>
+        <ul class="step-list">
+          <li>Slovenská pošta, GLS, Packeta</li>
+          <li>Sledovanie v reálnom čase</li>
+        </ul>
       </article>
-      <article class="step-card s-blue">
-        <span class="step-num">03</span>
-        <span class="step-emoji">💸</span>
-        <h3>Hotovosť</h3>
-        <p>Hneď po overení posielame peniaze. SEPA do 4 h, krypto do 30 min. Bez skrytých poplatkov.</p>
+      <article class="step" style="--accent:var(--blue)">
+        <span class="step-num">3</span>
+        <h3>Dostanete platbu</h3>
+        <p>Po overení karty odosielame peniaze na účet. SEPA do 4 hodín, krypto do 30 minút.</p>
+        <ul class="step-list">
+          <li>Bankový prevod, PayPal, USDT</li>
+          <li>Daňové potvrdenie pre účtovníctvo</li>
+        </ul>
       </article>
     </div>
   </div>
 </section>
 
-<section id="hot" class="section hot">
+<section id="hot" class="section alt">
   <div class="container">
     <div class="section-head row">
       <div>
-        <span class="kicker">Hot karty</span>
-        <h2>Tieto sa <span class="hl-red">trhajú</span>.</h2>
-        <p>Top karty tohto týždňa — ceny aktualizujeme každých 15 minút.</p>
+        <span class="kicker">Live trh</span>
+        <h2>Najžiadanejšie karty</h2>
+        <p>Aktuálne výkupné ceny — aktualizujeme každých 15 minút.</p>
       </div>
       <div class="seg" id="seg">
         <button class="seg-btn active" data-tcg="all">Všetko</button>
@@ -1125,106 +261,71 @@ p { margin: 0 0 0.8em; color: var(--muted); }
         <button class="seg-btn" data-tcg="psa">PSA</button>
       </div>
     </div>
-
     <div class="cards-grid" id="cards"></div>
   </div>
 </section>
 
-<section id="sell" class="section sell-cta">
+<section id="sell" class="section sell-section">
   <div class="container sell-inner">
-    <div class="sell-text">
-      <span class="kicker on-dark">Výkup zbierky</span>
-      <h2>Máš celú <span class="hl-yellow">kolekciu</span>?</h2>
+    <div>
+      <span class="kicker kicker-light">Výkup celej zbierky</span>
+      <h2>Chcete predať väčšiu kolekciu?</h2>
       <p>
-        Špecializovaný výkupný tím prevezme aj zbierky 1000+ kariet.
-        Prídeme po ne osobne v rámci SK, alebo pošleme zadarmo
+        Špecializovaný tím prevezme aj zbierky nad 1 000 kusov.
+        Prídeme osobne v rámci SR a ČR, alebo pošleme zadarmo
         kuriéra so zabezpečeným balením.
       </p>
-      <ul class="bullets">
-        <li>✓ Bezplatné ocenenie do 48 h</li>
-        <li>✓ Hotovosť alebo prevod na mieste</li>
-        <li>✓ Diskrétny pickup po SK a ČR</li>
-        <li>✓ Dedičstvo — vystavíme znalecký posudok</li>
+      <ul class="check-list">
+        <li>Bezplatné ocenenie do 48 hodín</li>
+        <li>Hotovosť alebo prevod na mieste</li>
+        <li>Diskrétny pickup po celom Slovensku a Česku</li>
+        <li>Dedičstvo a majetok — vystavíme znalecký posudok</li>
       </ul>
-      <div class="cta-row">
-        <a href="#" class="big-btn big-btn-yellow">
-          <span class="big-btn-icon">📞</span>
-          <span class="big-btn-content">
-            <strong>DOHODNÚŤ PICKUP</strong>
-            <small>do 48 h</small>
-          </span>
-        </a>
-      </div>
+      <a href="#" class="btn btn-sell btn-lg">Dohodnúť pickup</a>
     </div>
-
     <div class="sell-stats">
-      <div class="stat-card s-cyan">
-        <span class="stat-emoji">🏆</span>
-        <strong>€87 400</strong>
-        <span>Najväčšia zbierka 2025</span>
-        <small>3 412 kariet · Bratislava</small>
-      </div>
-      <div class="stat-card s-yellow">
-        <span class="stat-emoji">📈</span>
-        <strong>€1 240</strong>
-        <span>Priemerná ponuka</span>
-        <small>+12 % vs minulý mesiac</small>
-      </div>
-      <div class="stat-card s-pink">
-        <span class="stat-emoji">⚡</span>
-        <strong>22 min</strong>
-        <span>Priemerný čas ponuky</span>
-        <small>97 % akceptovaných</small>
-      </div>
+      <div class="stat-card"><strong>€87 400</strong><span>Najväčšia zbierka 2025</span><small>3 412 kariet — Bratislava</small></div>
+      <div class="stat-card"><strong>€1 240</strong><span>Priemerná ponuka</span><small>+12 % oproti minulému mesiacu</small></div>
+      <div class="stat-card"><strong>22 min</strong><span>Priemerný čas ponuky</span><small>97 % akceptovaných</small></div>
     </div>
   </div>
 </section>
 
-<section id="buy" class="section buy">
+<section id="buy" class="section">
   <div class="container">
     <div class="section-head row">
       <div>
         <span class="kicker">Katalóg</span>
-        <h2>Karty čakajú na <span class="hl-blue">teba</span>.</h2>
-        <p>Každá overená 2 expertmi. Vrátime dvojnásobok pri falzifikáte.</p>
+        <h2>Overené karty na predaj</h2>
+        <p>Každá karta overená dvomi expertmi. Pri falzifikáte vraciame dvojnásobok ceny.</p>
       </div>
       <a href="#" class="link-arrow">Celý katalóg →</a>
     </div>
-    <div class="products" id="products"></div>
+    <div class="cards-grid" id="products"></div>
   </div>
 </section>
 
-<section class="reviews">
+<section class="reviews-section">
   <div class="container">
     <div class="section-head centered">
-      <span class="kicker">Tréneri vravia</span>
-      <h2>4.9 / 5 ★ z <span class="hl-yellow">1 283</span> recenzií</h2>
+      <span class="kicker">Recenzie</span>
+      <h2>4.9 / 5 z 1 283 overených hodnotení</h2>
     </div>
-
     <div class="reviews-grid">
       <article class="review">
-        <span class="rv-tag rv-sell">Predaj · €4 280</span>
-        <p>"Predal som im starú zbierku — ponuku som dostal za 5 minút, peniaze za pol dňa. Lepšie ako Cardmarket aukcie."</p>
-        <div class="rv-author">
-          <span class="avatar" style="background:#FFE066">M</span>
-          <strong>Martin K. · Bratislava</strong>
-        </div>
+        <div class="rv-header"><span class="rv-tag rv-sell">Predaj</span><span class="stars">★★★★★</span></div>
+        <p>„Predal som im starú zbierku — ponuku som dostal za 5 minút, peniaze za pol dňa. Lepšie ako Cardmarket aukcie."</p>
+        <div class="rv-author"><span class="avatar" style="background:#dcfce7">M</span><div><strong>Martin K.</strong><span>Bratislava — výkup €4 280</span></div></div>
       </article>
       <article class="review">
-        <span class="rv-tag rv-buy">Nákup</span>
-        <p>"Kúpila som darček pre syna — Charizard ex v perfektnom stave, dorazilo do 24 h. Kvalita ako od najlepších."</p>
-        <div class="rv-author">
-          <span class="avatar" style="background:#A8D8FF">L</span>
-          <strong>Lucia D. · Praha</strong>
-        </div>
+        <div class="rv-header"><span class="rv-tag rv-buy">Nákup</span><span class="stars">★★★★★</span></div>
+        <p>„Kúpila som darček pre syna — Charizard ex v perfektnom stave, dorazil do 24 h v sleeve a toploaderi."</p>
+        <div class="rv-author"><span class="avatar" style="background:#dbeafe">L</span><div><strong>Lucia D.</strong><span>Praha — 2. objednávka</span></div></div>
       </article>
       <article class="review">
-        <span class="rv-tag rv-sell">Pickup zbierky</span>
-        <p>"Po smrti otca som zdedil 800 kariet. Cardex prišiel osobne, ocenil zadarmo a vyplatil v hotovosti."</p>
-        <div class="rv-author">
-          <span class="avatar" style="background:#FFB3D1">A</span>
-          <strong>Adam S. · Žilina</strong>
-        </div>
+        <div class="rv-header"><span class="rv-tag rv-sell">Výkup zbierky</span><span class="stars">★★★★★</span></div>
+        <p>„Po smrti otca som zdedil 800 kariet. Cardex prišiel osobne, ocenil zadarmo a vyplatil v hotovosti. Profesionálne."</p>
+        <div class="rv-author"><span class="avatar" style="background:#fef3c7">A</span><div><strong>Adam S.</strong><span>Žilina — zbierka 800 ks</span></div></div>
       </article>
     </div>
   </div>
@@ -1232,16 +333,10 @@ p { margin: 0 0 0.8em; color: var(--muted); }
 
 <section class="newsletter">
   <div class="container newsletter-inner">
-    <div>
-      <span class="kicker on-dark">Drop alerts</span>
-      <h3>Pošleme ti hot drops do mailu.</h3>
-      <p>Top 100 kariet, pohyby cien, raritné finds. Žiadny spam.</p>
-    </div>
+    <div><h3>Týždenný prehľad cien zadarmo do mailu</h3><p>Top 100 kariet s pohybmi cien, výkupnými kvótami a novinkami. Žiadny spam.</p></div>
     <form id="newsletter" class="newsletter-form">
       <input type="email" required placeholder="tvoj@email.sk" aria-label="Email" />
-      <button class="big-btn big-btn-yellow big-btn-sm" type="submit">
-        <strong>PRIHLÁSIŤ</strong>
-      </button>
+      <button class="btn btn-buy" type="submit">Prihlásiť sa</button>
     </form>
   </div>
 </section>
@@ -1249,136 +344,101 @@ p { margin: 0 0 0.8em; color: var(--muted); }
 <footer class="footer">
   <div class="container footer-inner">
     <div class="footer-brand">
-      <div class="logo">
-        <span class="logo-ball">
-          <span class="logo-ball-top"></span>
-          <span class="logo-ball-bottom"></span>
-          <span class="logo-ball-center"></span>
-        </span>
-        <span class="logo-text">Card<em>EX</em></span>
-      </div>
-      <p>Najrýchlejšia platforma na výkup a predaj Pokémon TCG kariet v strednej Európe.</p>
-      <div class="socials">
-        <a href="#" aria-label="Instagram">IG</a>
-        <a href="#" aria-label="Discord">DC</a>
-        <a href="#" aria-label="YouTube">YT</a>
-        <a href="#" aria-label="X">X</a>
-      </div>
+      <div class="logo"><span class="logo-mark">C</span><span class="logo-text">Card<em>EX</em></span></div>
+      <p>Najrýchlejšia platforma na výkup a predaj zberateľských kariet v strednej Európe.</p>
+      <div class="socials"><a href="#">IG</a><a href="#">DC</a><a href="#">YT</a><a href="#">X</a></div>
     </div>
-    <div>
-      <h4>Predaj</h4>
-      <ul><li><a href="#sell">Získať ponuku</a></li><li><a href="#">Výkup zbierky</a></li><li><a href="#">Cenník</a></li></ul>
-    </div>
-    <div>
-      <h4>Nákup</h4>
-      <ul><li><a href="#buy">Katalóg</a></li><li><a href="#">PSA Graded</a></li><li><a href="#">Sealed</a></li></ul>
-    </div>
-    <div>
-      <h4>Pomoc</h4>
-      <ul><li><a href="#">FAQ</a></li><li><a href="#">Doprava</a></li><li><a href="#">Kontakt</a></li></ul>
-    </div>
-    <div>
-      <h4>Kontakt</h4>
-      <ul><li>Gessayova 14, BA</li><li>hello@cardex.sk</li><li>+421 900 000 000</li></ul>
-    </div>
+    <div><h4>Predaj</h4><ul><li><a href="#">Získať ponuku</a></li><li><a href="#">Výkup zbierky</a></li><li><a href="#">Cenník</a></li></ul></div>
+    <div><h4>Nákup</h4><ul><li><a href="#">Katalóg</a></li><li><a href="#">PSA Graded</a></li><li><a href="#">Sealed</a></li></ul></div>
+    <div><h4>Pomoc</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Doprava</a></li><li><a href="#">Kontakt</a></li></ul></div>
+    <div><h4>Kontakt</h4><ul><li>Gessayova 14, Bratislava</li><li>hello@cardex.sk</li><li>+421 900 000 000</li></ul></div>
   </div>
-  <div class="container copyright">
-    <span>© <span id="year"></span> Cardex s.r.o.</span>
-    <span class="muted">Pokémon a súvisiace značky patria ich vlastníkom.</span>
-  </div>
+  <div class="container copyright"><span>© <span id="year"></span> Cardex s.r.o.</span><span>Pokémon a súvisiace značky patria ich vlastníkom.</span></div>
 </footer>
 
 <script>
 const cards = [
   { id: 1, name: 'Charizard Base Set', set: '1999 · Holo · PSA 9', cat: 'psa', price: 2549, img: 'https://images.pokemontcg.io/base1/4_hires.png', tag: { text: 'PSA 9', cls: 'psa' } },
-  { id: 2, name: 'Moonbreon', set: 'Evolving Skies · Alt Art', cat: 'modern', price: 969, img: 'https://images.pokemontcg.io/swsh7/215_hires.png', tag: { text: 'HOT', cls: 'hot' } },
+  { id: 2, name: 'Moonbreon — Umbreon VMAX', set: 'Evolving Skies · Alt Art', cat: 'modern', price: 969, img: 'https://images.pokemontcg.io/swsh7/215_hires.png', tag: { text: 'Hot', cls: 'hot' } },
   { id: 3, name: 'Pikachu V Full Art', set: 'Vivid Voltage', cat: 'modern', price: 79, img: 'https://images.pokemontcg.io/swsh45/18_hires.png' },
   { id: 4, name: 'Lugia Neo Genesis', set: '2000 · PSA 7', cat: 'psa', price: 655, img: 'https://images.pokemontcg.io/neo1/9_hires.png', tag: { text: 'PSA 7', cls: 'psa' } },
-  { id: 5, name: 'Iono SIR PSA 10', set: 'Paldea Evolved', cat: 'psa', price: 459, img: 'https://images.pokemontcg.io/sv2/269_hires.png', tag: { text: 'PSA 10', cls: 'psa' } },
-  { id: 6, name: 'Rayquaza VMAX', set: 'Evolving Skies · Alt', cat: 'modern', price: 421, img: 'https://images.pokemontcg.io/swsh7/218_hires.png', tag: { text: 'HOT', cls: 'hot' } },
+  { id: 5, name: 'Iono SIR', set: 'Paldea Evolved · PSA 10', cat: 'psa', price: 459, img: 'https://images.pokemontcg.io/sv2/269_hires.png', tag: { text: 'PSA 10', cls: 'psa' } },
+  { id: 6, name: 'Rayquaza VMAX', set: 'Evolving Skies · Alt', cat: 'modern', price: 421, img: 'https://images.pokemontcg.io/swsh7/218_hires.png', tag: { text: 'Hot', cls: 'hot' } },
   { id: 7, name: 'Giratina VSTAR', set: 'Lost Origin · Alt Art', cat: 'modern', price: 345, img: 'https://images.pokemontcg.io/swsh11/186_hires.png' },
-  { id: 8, name: 'Charizard ex SIR', set: 'Obsidian Flames', cat: 'modern', price: 94, img: 'https://images.pokemontcg.io/sv3/223_hires.png', tag: { text: 'NEW', cls: 'new' } },
+  { id: 8, name: 'Charizard ex SIR', set: 'Obsidian Flames', cat: 'modern', price: 94, img: 'https://images.pokemontcg.io/sv3/223_hires.png', tag: { text: 'New', cls: 'new' } },
   { id: 9, name: 'Blastoise Base Set', set: '1999 · Holo', cat: 'vintage', price: 299, img: 'https://images.pokemontcg.io/base1/2_hires.png' },
   { id: 10, name: 'Venusaur Base Set', set: '1999 · Holo', cat: 'vintage', price: 229, img: 'https://images.pokemontcg.io/base1/15_hires.png' },
   { id: 11, name: 'Gengar Fossil', set: '1999 · PSA 8', cat: 'vintage', price: 189, img: 'https://images.pokemontcg.io/base3/5_hires.png', tag: { text: 'PSA 8', cls: 'psa' } },
-  { id: 12, name: 'Mew ex 151', set: 'SV 151 · Ultra Rare', cat: 'modern', price: 69, img: 'https://images.pokemontcg.io/sv3pt5/193_hires.png', tag: { text: 'NEW', cls: 'new' } },
+  { id: 12, name: 'Mew ex', set: 'SV 151 · Ultra Rare', cat: 'modern', price: 69, img: 'https://images.pokemontcg.io/sv3pt5/193_hires.png', tag: { text: 'New', cls: 'new' } },
 ];
-
-const cardsEl = document.getElementById('cards');
-const segEl = document.getElementById('seg');
-const productsEl = document.getElementById('products');
-
-let currentTcg = 'all';
 
 const fmt = (n) => '€' + new Intl.NumberFormat('sk-SK', { maximumFractionDigits: 0 }).format(n);
 
-function renderCardTile(c) {
-  return `
-    <article class="card-tile">
-      <div class="card-tile-media">
-        ${c.tag ? `<span class="card-tile-tag ${c.tag.cls}">${c.tag.text}</span>` : ''}
-        <img src="${c.img}" alt="${c.name}" loading="lazy" />
+function tile(c) {
+  return `<article class="card-tile">
+    <div class="card-tile-media">
+      ${c.tag ? `<span class="card-tile-tag ${c.tag.cls}">${c.tag.text}</span>` : ''}
+      <img src="${c.img}" alt="${c.name}" loading="lazy" />
+    </div>
+    <div class="card-tile-body">
+      <span class="card-tile-cat">${c.cat === 'psa' ? 'PSA Graded' : c.cat === 'vintage' ? 'Vintage' : 'Modern'}</span>
+      <span class="card-tile-name">${c.name}</span>
+      <span class="card-tile-set">${c.set}</span>
+      <div class="card-tile-foot">
+        <span class="card-tile-price">${fmt(c.price)}</span>
+        <button class="card-tile-buy" data-id="${c.id}">Kúpiť</button>
       </div>
-      <div class="card-tile-body">
-        <span class="card-tile-cat">${c.cat === 'psa' ? 'PSA Graded' : c.cat === 'vintage' ? 'Vintage' : 'Modern'}</span>
-        <span class="card-tile-name">${c.name}</span>
-        <span class="card-tile-set">${c.set}</span>
-        <div class="card-tile-foot">
-          <span class="card-tile-price">${fmt(c.price)}</span>
-          <button class="card-tile-buy" data-id="${c.id}">Kúpiť</button>
-        </div>
-      </div>
-    </article>`;
+    </div>
+  </article>`;
 }
 
+let filter = 'all';
+const cardsEl = document.getElementById('cards');
+const productsEl = document.getElementById('products');
+const segEl = document.getElementById('seg');
+
 function renderHot() {
-  const list = currentTcg === 'all' ? cards.slice(0, 8) : cards.filter((c) => c.cat === currentTcg).slice(0, 8);
-  cardsEl.innerHTML = list.map(renderCardTile).join('');
+  const list = filter === 'all' ? cards.slice(0, 8) : cards.filter(c => c.cat === filter).slice(0, 8);
+  cardsEl.innerHTML = list.map(tile).join('');
 }
 
 function renderProducts() {
-  productsEl.innerHTML = cards.slice(4, 12).map(renderCardTile).join('');
+  productsEl.innerHTML = cards.slice(4, 12).map(tile).join('');
 }
 
-segEl.addEventListener('click', (e) => {
+segEl.addEventListener('click', e => {
   const btn = e.target.closest('.seg-btn');
   if (!btn) return;
-  document.querySelectorAll('.seg-btn').forEach((b) => b.classList.remove('active'));
+  segEl.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  currentTcg = btn.dataset.tcg;
+  filter = btn.dataset.tcg;
   renderHot();
 });
 
-document.body.addEventListener('click', (e) => {
+document.body.addEventListener('click', e => {
   const btn = e.target.closest('.card-tile-buy');
   if (!btn) return;
-  const card = cards.find((c) => c.id === Number(btn.dataset.id));
-  showToast(`Pridané do košíka — ${card.name}`, 'buy');
+  const card = cards.find(c => c.id === Number(btn.dataset.id));
+  toast('Pridané do košíka — ' + card.name);
 });
 
-document.getElementById('newsletter').addEventListener('submit', (e) => {
+document.getElementById('newsletter').addEventListener('submit', e => {
   e.preventDefault();
   const input = e.target.querySelector('input');
-  showToast(`Hot drops idú na ${input.value}`, 'sell');
+  toast('Prihlásené — ' + input.value);
   input.value = '';
 });
 
-function showToast(msg, type = '') {
-  let toast = document.querySelector('.toast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.className = 'toast';
-    document.body.appendChild(toast);
-  }
-  toast.className = 'toast' + (type ? ' ' + type : '');
-  toast.innerHTML = `✓ ${msg}`;
-  toast.classList.add('show');
-  clearTimeout(toast._t);
-  toast._t = setTimeout(() => toast.classList.remove('show'), 2400);
+function toast(msg) {
+  let el = document.querySelector('.toast');
+  if (!el) { el = document.createElement('div'); el.className = 'toast'; document.body.appendChild(el); }
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), 2400);
 }
 
 document.getElementById('year').textContent = new Date().getFullYear();
-
 renderHot();
 renderProducts();
 
