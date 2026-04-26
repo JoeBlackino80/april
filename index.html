@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Cardex — Výkup a predaj zberateľských kariet</title>
 <meta name="description" content="Cardex je najrýchlejšia platforma na výkup a predaj Pokémon, Lorcana a Magic kariet. Online ponuka za 60 sekúnd, výplata do 24 h." />
+
+<meta property="og:title" content="Cardex — Výkup a predaj zberateľských kariet" />
+<meta property="og:description" content="Najrýchlejšia platforma na výkup a predaj Pokémon, Lorcana a Magic kariet. Pevná ponuka za 60 sekúnd, výplata do 24 hodín." />
+<meta property="og:image" content="https://images.pokemontcg.io/base1/4_hires.png" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://cardex.sk" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%233b4cca'/><text x='50' y='72' text-anchor='middle' font-size='60' font-weight='800' fill='white' font-family='system-ui'>C</text></svg>" />
 <link rel="stylesheet" href="styles.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -39,7 +48,12 @@
       <span class="logo-mark">C</span>
       <span class="logo-text">Card<em>EX</em></span>
     </a>
-    <ul class="nav-links">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
       <li><a href="#sell">Predaj</a></li>
       <li><a href="#buy">Nákup</a></li>
       <li><a href="#hot">Ceny</a></li>
@@ -96,6 +110,59 @@
   </div>
 </section>
 
+<section class="quote-section">
+  <div class="container">
+    <div class="quote-card" id="quote-card">
+      <div class="quote-header">
+        <span class="kicker">Kolko ti zaplatime?</span>
+        <h3>Okamzita ponuka za tvoju kartu</h3>
+      </div>
+      <div class="quote-body">
+        <div class="quote-fields">
+          <div class="quote-field">
+            <label for="quote-card-select">Karta</label>
+            <select id="quote-card-select">
+              <option value="charizard" data-base="2549">Charizard Base PSA 9</option>
+              <option value="moonbreon" data-base="969">Moonbreon Alt Art</option>
+              <option value="rayquaza" data-base="421">Rayquaza VMAX Alt</option>
+              <option value="lugia" data-base="655">Lugia Neo Genesis PSA 7</option>
+              <option value="iono" data-base="459">Iono SIR PSA 10</option>
+              <option value="pikachu" data-base="79">Pikachu V Full Art</option>
+              <option value="giratina" data-base="345">Giratina VSTAR Alt</option>
+              <option value="charizard-ex" data-base="94">Charizard ex SIR</option>
+            </select>
+          </div>
+          <div class="quote-field">
+            <label for="quote-condition">Stav</label>
+            <select id="quote-condition">
+              <option value="1.0">Mint / Near Mint</option>
+              <option value="0.88">Excellent</option>
+              <option value="0.75">Light Played</option>
+              <option value="0.60">Played</option>
+              <option value="0.40">Heavy Played</option>
+            </select>
+          </div>
+          <div class="quote-field">
+            <label for="quote-qty">Pocet</label>
+            <input type="number" id="quote-qty" value="1" min="1" max="99" />
+          </div>
+        </div>
+        <div class="quote-result">
+          <div class="quote-offer">
+            <span class="quote-label">Nasa ponuka</span>
+            <span class="quote-price" id="quote-price">---</span>
+          </div>
+          <div class="quote-market">
+            <span class="quote-label">Trzna cena</span>
+            <span class="quote-market-price" id="quote-market">---</span>
+          </div>
+          <button class="btn btn-sell quote-cta" id="quote-accept">Akceptovat ponuku</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="trust-bar">
   <div class="container trust-inner">
     <div class="trust-item"><strong>€4.8M</strong><span>Vykúpených kariet 2024</span></div>
@@ -105,7 +172,7 @@
   </div>
 </section>
 
-<section id="how" class="section">
+<section id="how" class="section section-reveal has-floaters">
   <div class="container">
     <div class="section-head centered">
       <span class="kicker">Ako to funguje</span>
@@ -114,6 +181,7 @@
     </div>
     <div class="steps-grid">
       <article class="step" style="--accent:var(--yellow)">
+        <img class="step-decor-card" src="https://images.pokemontcg.io/swsh45/18_hires.png" alt="" aria-hidden="true" />
         <span class="step-num">1</span>
         <h3>Získajte ponuku</h3>
         <p>Vyhľadajte kartu v katalógu, zadajte stav a dostanete pevnú cenu. Bez nutnosti fotografovať.</p>
@@ -123,6 +191,7 @@
         </ul>
       </article>
       <article class="step" style="--accent:var(--red)">
+        <img class="step-decor-card" src="https://images.pokemontcg.io/base1/4_hires.png" alt="" aria-hidden="true" />
         <span class="step-num">2</span>
         <h3>Odošlite karty</h3>
         <p>Nalepte bezplatný predtlačený štítok a vhoďte do schránky. Poistenie až do €5 000 v cene.</p>
@@ -132,6 +201,7 @@
         </ul>
       </article>
       <article class="step" style="--accent:var(--blue)">
+        <img class="step-decor-card" src="https://images.pokemontcg.io/swsh7/215_hires.png" alt="" aria-hidden="true" />
         <span class="step-num">3</span>
         <h3>Dostanete platbu</h3>
         <p>Po overení karty odosielame peniaze na účet. SEPA do 4 hodín, krypto do 30 minút.</p>
@@ -144,7 +214,7 @@
   </div>
 </section>
 
-<section id="hot" class="section alt">
+<section id="hot" class="section alt section-reveal">
   <div class="container">
     <div class="section-head row">
       <div>
@@ -163,7 +233,7 @@
   </div>
 </section>
 
-<section id="sell" class="section sell-section">
+<section id="sell" class="section sell-section section-reveal">
   <div class="container sell-inner">
     <div>
       <span class="kicker kicker-light">Výkup celej zbierky</span>
@@ -189,7 +259,7 @@
   </div>
 </section>
 
-<section id="buy" class="section">
+<section id="buy" class="section section-reveal has-floaters">
   <div class="container">
     <div class="section-head row">
       <div>
@@ -203,7 +273,7 @@
   </div>
 </section>
 
-<section class="reviews-section">
+<section class="reviews-section section-reveal">
   <div class="container">
     <div class="section-head centered">
       <span class="kicker">Recenzie</span>
