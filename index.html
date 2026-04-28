@@ -483,14 +483,13 @@
     background:#fff;
     border:2px solid var(--ink);
     border-radius:18px;
-    padding:18px;
-    display:flex;flex-direction:column;justify-content:space-between;
+    padding:0;
+    overflow:hidden;
+    display:flex;flex-direction:column;
     transition:all .2s ease;
     cursor:pointer;
     box-shadow:3px 3px 0 var(--ink);
-    min-height:220px;
     position:relative;
-    overflow:hidden;
   }
   .product:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
   .product.cat-pack{background:#FFF8DC}
@@ -501,45 +500,66 @@
   .product.cat-boxset{background:#FFE0DC}
   .product.cat-upc{background:linear-gradient(135deg,#FFE070 0%,#FF8FA3 100%)}
 
-  .product-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
-  .product-icon{
-    width:42px;height:42px;
-    background:rgba(0,0,0,.06);
-    border-radius:10px;
+  .product-img-wrap{
+    position:relative;
+    aspect-ratio:1/1;
+    background:rgba(255,255,255,.5);
     display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;
+    overflow:hidden;
+    border-bottom:2px solid var(--ink);
   }
-  .product-icon svg{width:75%;height:75%}
+  .product-img-wrap img{
+    width:78%;height:auto;
+    object-fit:contain;
+    transition:transform .35s ease;
+    filter:drop-shadow(0 6px 12px rgba(0,0,0,.18));
+  }
+  .product:hover .product-img-wrap img{transform:scale(1.06) rotate(-2deg)}
+  .product-img-fallback{
+    width:60%;height:60%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .product-img-fallback svg{width:100%;height:100%}
+
   .product-badge{
+    position:absolute;top:10px;right:10px;
     font-size:10px;font-weight:700;
     letter-spacing:.1em;text-transform:uppercase;
     padding:5px 9px;border-radius:999px;
     background:var(--ink);color:#fff;
+    border:1.5px solid var(--ink);
+    z-index:2;
   }
   .product-badge.hot{background:var(--red);color:#fff}
   .product-badge.preorder{background:var(--blue);color:#fff}
   .product-badge.low{background:#E89B2D;color:#fff}
   .product-badge.sold{background:#888;color:#fff}
 
+  .product-info{
+    padding:14px 16px 16px;
+    display:flex;flex-direction:column;flex:1;
+  }
   .product-cat{
     font-size:10px;font-weight:600;
     letter-spacing:.14em;text-transform:uppercase;
     color:var(--ink-2);
-    margin-bottom:4px;
+    margin-bottom:5px;
   }
   .product-name{
     font-family:'Bricolage Grotesque',sans-serif;
-    font-size:17px;line-height:1.15;letter-spacing:-.01em;
+    font-size:16px;line-height:1.15;letter-spacing:-.01em;
     font-weight:700;
     color:var(--ink);
     word-break:break-word;
-    font-variation-settings:"wdth" 100,"opsz" 24;
+    font-variation-settings:"wdth" 100,"opsz" 22;
+    margin-bottom:auto;
+    min-height:36px;
   }
   .product-bottom{
     margin-top:14px;
     display:flex;justify-content:space-between;align-items:center;
     padding-top:12px;
-    border-top:1.5px dashed rgba(0,0,0,.15);
+    border-top:1.5px dashed rgba(0,0,0,.18);
   }
   .product-price{
     font-family:'Bricolage Grotesque',sans-serif;
@@ -1189,95 +1209,95 @@
   // ============ PRODUCTS ============
   const PRODUCTS = [
     // Booster Pack (16)
-    {c:"pack",n:"Ascended Heroes",p:"6,90",s:"hot"},
-    {c:"pack",n:"Destined Rivals",p:"6,90",s:"in"},
-    {c:"pack",n:"Prismatic Evolutions",p:"7,50",s:"hot"},
-    {c:"pack",n:"Phantasmal Flames",p:"6,90",s:"in"},
-    {c:"pack",n:"Mega Evolutions",p:"7,90",s:"hot"},
-    {c:"pack",n:"Perfect Order",p:"6,90",s:"in"},
-    {c:"pack",n:"151",p:"7,50",s:"low"},
-    {c:"pack",n:"Surging Sparks",p:"6,90",s:"in"},
-    {c:"pack",n:"Black Bolt",p:"7,50",s:"in"},
-    {c:"pack",n:"White Flare",p:"7,50",s:"in"},
-    {c:"pack",n:"Obsidian Flames",p:"5,90",s:"low"},
-    {c:"pack",n:"Journey Together",p:"6,90",s:"in"},
-    {c:"pack",n:"Paldea Evolved",p:"5,90",s:"in"},
-    {c:"pack",n:"Inferno X",p:"7,90",s:"pre"},
-    {c:"pack",n:"The Glory of Team",p:"7,90",s:"pre"},
-    {c:"pack",n:"Paldean Fates",p:"6,90",s:"low"},
+    {c:"pack",n:"Ascended Heroes",p:"6,90",s:"hot",i:"https://images.scrydex.com/pokemon/me2pt5-272/large"},
+    {c:"pack",n:"Destined Rivals",p:"6,90",s:"in",i:"https://images.pokemontcg.io/sv10/228_hires.png"},
+    {c:"pack",n:"Prismatic Evolutions",p:"7,50",s:"hot",i:"https://images.pokemontcg.io/sv8pt5/144_hires.png"},
+    {c:"pack",n:"Phantasmal Flames",p:"6,90",s:"in",i:"https://images.pokemontcg.io/me2/125_hires.png"},
+    {c:"pack",n:"Mega Evolutions",p:"7,90",s:"hot",i:"https://images.pokemontcg.io/me1/180_hires.png"},
+    {c:"pack",n:"Perfect Order",p:"6,90",s:"in",i:"https://images.scrydex.com/pokemon/me3-118/large"},
+    {c:"pack",n:"151",p:"7,50",s:"low",i:"https://images.pokemontcg.io/sv3pt5/198_hires.png"},
+    {c:"pack",n:"Surging Sparks",p:"6,90",s:"in",i:"https://images.pokemontcg.io/sv8/236_hires.png"},
+    {c:"pack",n:"Black Bolt",p:"7,50",s:"in",i:"https://images.pokemontcg.io/zsv10pt5/165_hires.png"},
+    {c:"pack",n:"White Flare",p:"7,50",s:"in",i:"https://images.pokemontcg.io/rsv10pt5/165_hires.png"},
+    {c:"pack",n:"Obsidian Flames",p:"5,90",s:"low",i:"https://images.pokemontcg.io/sv3/222_hires.png"},
+    {c:"pack",n:"Journey Together",p:"6,90",s:"in",i:"https://images.pokemontcg.io/sv9/182_hires.png"},
+    {c:"pack",n:"Paldea Evolved",p:"5,90",s:"in",i:"https://images.pokemontcg.io/sv2/257_hires.png"},
+    {c:"pack",n:"Inferno X",p:"7,90",s:"pre",i:"https://images.scrydex.com/pokemon/me3-118/large"},
+    {c:"pack",n:"The Glory of Team",p:"7,90",s:"pre",i:"https://images.scrydex.com/pokemon/me3-118/large"},
+    {c:"pack",n:"Paldean Fates",p:"6,90",s:"low",i:"https://images.pokemontcg.io/sv4pt5/232_hires.png"},
 
     // Booster Box (9)
-    {c:"box",n:"Perfect Order Booster Box",p:"165,00",s:"in"},
-    {c:"box",n:"Destined Rivals Booster Box",p:"175,00",s:"hot"},
-    {c:"box",n:"Phantasmal Flames Booster Box",p:"169,00",s:"in"},
-    {c:"box",n:"Surging Sparks Booster Box",p:"169,00",s:"hot"},
-    {c:"box",n:"Mega Evolution Booster Box",p:"189,00",s:"hot"},
-    {c:"box",n:"Chaos Rising Booster Box",p:"159,00",s:"in"},
-    {c:"box",n:"Mega Dream ex Booster Box",p:"189,00",s:"pre"},
-    {c:"box",n:"Inferno X Booster Box",p:"179,00",s:"pre"},
-    {c:"box",n:"The Glory of Team Booster Box",p:"179,00",s:"pre"},
+    {c:"box",n:"Perfect Order Booster Box",p:"165,00",s:"in",i:"https://images.scrydex.com/pokemon/me3-118/large"},
+    {c:"box",n:"Destined Rivals Booster Box",p:"175,00",s:"hot",i:"https://images.pokemontcg.io/sv10/228_hires.png"},
+    {c:"box",n:"Phantasmal Flames Booster Box",p:"169,00",s:"in",i:"https://images.pokemontcg.io/me2/125_hires.png"},
+    {c:"box",n:"Surging Sparks Booster Box",p:"169,00",s:"hot",i:"https://images.pokemontcg.io/sv8/236_hires.png"},
+    {c:"box",n:"Mega Evolution Booster Box",p:"189,00",s:"hot",i:"https://images.pokemontcg.io/me1/180_hires.png"},
+    {c:"box",n:"Chaos Rising Booster Box",p:"159,00",s:"in",i:"https://images.pokemontcg.io/sv7/167_hires.png"},
+    {c:"box",n:"Mega Dream ex Booster Box",p:"189,00",s:"pre",i:"https://images.pokemontcg.io/me2/125_hires.png"},
+    {c:"box",n:"Inferno X Booster Box",p:"179,00",s:"pre",i:"https://images.scrydex.com/pokemon/me3-118/large"},
+    {c:"box",n:"The Glory of Team Booster Box",p:"179,00",s:"pre",i:"https://images.scrydex.com/pokemon/me3-118/large"},
 
     // Booster Bundle (12)
-    {c:"bundle",n:"Ascended Heroes Booster Bundle",p:"32,00",s:"hot"},
-    {c:"bundle",n:"Destined Rivals Booster Bundle",p:"32,00",s:"in"},
-    {c:"bundle",n:"Prismatic Evolutions Booster Bundle",p:"34,00",s:"low"},
-    {c:"bundle",n:"Phantasmal Flames Booster Bundle",p:"32,00",s:"in"},
-    {c:"bundle",n:"Mega Evolutions Booster Bundle",p:"34,00",s:"hot"},
-    {c:"bundle",n:"Perfect Order Booster Bundle",p:"32,00",s:"in"},
-    {c:"bundle",n:"151 Booster Bundle",p:"34,00",s:"low"},
-    {c:"bundle",n:"Surging Sparks Booster Bundle",p:"32,00",s:"in"},
-    {c:"bundle",n:"Black Bolt Booster Bundle",p:"34,00",s:"in"},
-    {c:"bundle",n:"White Flare Booster Bundle",p:"34,00",s:"in"},
-    {c:"bundle",n:"Chaos Rising Booster Bundle",p:"29,00",s:"in"},
-    {c:"bundle",n:"Paldean Fates Booster Bundle",p:"29,00",s:"sold"},
+    {c:"bundle",n:"Ascended Heroes Booster Bundle",p:"32,00",s:"hot",i:"https://images.scrydex.com/pokemon/me2pt5-272/large"},
+    {c:"bundle",n:"Destined Rivals Booster Bundle",p:"32,00",s:"in",i:"https://images.pokemontcg.io/sv10/228_hires.png"},
+    {c:"bundle",n:"Prismatic Evolutions Booster Bundle",p:"34,00",s:"low",i:"https://images.pokemontcg.io/sv8pt5/144_hires.png"},
+    {c:"bundle",n:"Phantasmal Flames Booster Bundle",p:"32,00",s:"in",i:"https://images.pokemontcg.io/me2/125_hires.png"},
+    {c:"bundle",n:"Mega Evolutions Booster Bundle",p:"34,00",s:"hot",i:"https://images.pokemontcg.io/me1/180_hires.png"},
+    {c:"bundle",n:"Perfect Order Booster Bundle",p:"32,00",s:"in",i:"https://images.scrydex.com/pokemon/me3-118/large"},
+    {c:"bundle",n:"151 Booster Bundle",p:"34,00",s:"low",i:"https://images.pokemontcg.io/sv3pt5/198_hires.png"},
+    {c:"bundle",n:"Surging Sparks Booster Bundle",p:"32,00",s:"in",i:"https://images.pokemontcg.io/sv8/236_hires.png"},
+    {c:"bundle",n:"Black Bolt Booster Bundle",p:"34,00",s:"in",i:"https://images.pokemontcg.io/zsv10pt5/165_hires.png"},
+    {c:"bundle",n:"White Flare Booster Bundle",p:"34,00",s:"in",i:"https://images.pokemontcg.io/rsv10pt5/165_hires.png"},
+    {c:"bundle",n:"Chaos Rising Booster Bundle",p:"29,00",s:"in",i:"https://images.pokemontcg.io/sv7/167_hires.png"},
+    {c:"bundle",n:"Paldean Fates Booster Bundle",p:"29,00",s:"sold",i:"https://images.pokemontcg.io/sv4pt5/232_hires.png"},
 
     // ETB (16)
-    {c:"etb",n:"Ascended Heroes ETB",p:"58,00",s:"hot"},
-    {c:"etb",n:"Destined Rivals ETB",p:"58,00",s:"hot"},
-    {c:"etb",n:"Prismatic Evolutions ETB",p:"64,00",s:"low"},
-    {c:"etb",n:"Phantasmal Flames ETB",p:"58,00",s:"in"},
-    {c:"etb",n:"Mega Evolutions ETB",p:"62,00",s:"hot"},
-    {c:"etb",n:"Perfect Order ETB",p:"58,00",s:"in"},
-    {c:"etb",n:"151 ETB",p:"64,00",s:"low"},
-    {c:"etb",n:"Surging Sparks ETB",p:"58,00",s:"in"},
-    {c:"etb",n:"Black Bolt ETB",p:"62,00",s:"in"},
-    {c:"etb",n:"White Flare ETB",p:"62,00",s:"in"},
-    {c:"etb",n:"Obsidian Flames ETB",p:"54,00",s:"low"},
-    {c:"etb",n:"Journey Together ETB",p:"58,00",s:"in"},
-    {c:"etb",n:"Paldea Evolved ETB",p:"54,00",s:"sold"},
-    {c:"etb",n:"Chaos Rising ETB",p:"58,00",s:"in"},
-    {c:"etb",n:"Shining Fates ETB",p:"79,00",s:"low"},
-    {c:"etb",n:"Crown Zenith ETB",p:"79,00",s:"low"},
+    {c:"etb",n:"Ascended Heroes ETB",p:"58,00",s:"hot",i:"https://images.scrydex.com/pokemon/me2pt5-272/large"},
+    {c:"etb",n:"Destined Rivals ETB",p:"58,00",s:"hot",i:"https://images.pokemontcg.io/sv10/228_hires.png"},
+    {c:"etb",n:"Prismatic Evolutions ETB",p:"64,00",s:"low",i:"https://images.pokemontcg.io/sv8pt5/144_hires.png"},
+    {c:"etb",n:"Phantasmal Flames ETB",p:"58,00",s:"in",i:"https://images.pokemontcg.io/me2/125_hires.png"},
+    {c:"etb",n:"Mega Evolutions ETB",p:"62,00",s:"hot",i:"https://images.pokemontcg.io/me1/180_hires.png"},
+    {c:"etb",n:"Perfect Order ETB",p:"58,00",s:"in",i:"https://images.scrydex.com/pokemon/me3-118/large"},
+    {c:"etb",n:"151 ETB",p:"64,00",s:"low",i:"https://images.pokemontcg.io/sv3pt5/198_hires.png"},
+    {c:"etb",n:"Surging Sparks ETB",p:"58,00",s:"in",i:"https://images.pokemontcg.io/sv8/236_hires.png"},
+    {c:"etb",n:"Black Bolt ETB",p:"62,00",s:"in",i:"https://images.pokemontcg.io/zsv10pt5/165_hires.png"},
+    {c:"etb",n:"White Flare ETB",p:"62,00",s:"in",i:"https://images.pokemontcg.io/rsv10pt5/165_hires.png"},
+    {c:"etb",n:"Obsidian Flames ETB",p:"54,00",s:"low",i:"https://images.pokemontcg.io/sv3/222_hires.png"},
+    {c:"etb",n:"Journey Together ETB",p:"58,00",s:"in",i:"https://images.pokemontcg.io/sv9/182_hires.png"},
+    {c:"etb",n:"Paldea Evolved ETB",p:"54,00",s:"sold",i:"https://images.pokemontcg.io/sv2/257_hires.png"},
+    {c:"etb",n:"Chaos Rising ETB",p:"58,00",s:"in",i:"https://images.pokemontcg.io/sv7/167_hires.png"},
+    {c:"etb",n:"Shining Fates ETB",p:"79,00",s:"low",i:"https://images.pokemontcg.io/swsh45/1_hires.png"},
+    {c:"etb",n:"Crown Zenith ETB",p:"79,00",s:"low",i:"https://images.pokemontcg.io/swsh12pt5/160_hires.png"},
 
     // Blisters (8)
-    {c:"blister",n:"Erika's Tangela 2-Pack Blister",p:"15,00",s:"in"},
-    {c:"blister",n:"Larry's Komala 2-Pack Blister",p:"15,00",s:"in"},
-    {c:"blister",n:"Charmander Tech Sticker Collection",p:"18,00",s:"hot"},
-    {c:"blister",n:"Gastly Tech Sticker Collection",p:"18,00",s:"in"},
-    {c:"blister",n:"Chikorita 3-Pack Blister",p:"19,00",s:"in"},
-    {c:"blister",n:"Weavile 3-Pack Blister",p:"19,00",s:"in"},
-    {c:"blister",n:"Sneasel 3-Pack Blister",p:"19,00",s:"low"},
-    {c:"blister",n:"Psyduck 3-Pack Blister",p:"19,00",s:"hot"},
+    {c:"blister",n:"Erika's Tangela 2-Pack Blister",p:"15,00",s:"in",i:"https://images.pokemontcg.io/sv3pt5/198_hires.png"},
+    {c:"blister",n:"Larry's Komala 2-Pack Blister",p:"15,00",s:"in",i:"https://images.pokemontcg.io/sv9/129_hires.png"},
+    {c:"blister",n:"Charmander Tech Sticker Collection",p:"18,00",s:"hot",i:"https://images.pokemontcg.io/sv3pt5/168_hires.png"},
+    {c:"blister",n:"Gastly Tech Sticker Collection",p:"18,00",s:"in",i:"https://images.pokemontcg.io/sv3pt5/92_hires.png"},
+    {c:"blister",n:"Chikorita 3-Pack Blister",p:"19,00",s:"in",i:"https://images.scrydex.com/pokemon/me3-118/large"},
+    {c:"blister",n:"Weavile 3-Pack Blister",p:"19,00",s:"in",i:"https://images.pokemontcg.io/sv2/257_hires.png"},
+    {c:"blister",n:"Sneasel 3-Pack Blister",p:"19,00",s:"low",i:"https://images.pokemontcg.io/sv2/133_hires.png"},
+    {c:"blister",n:"Psyduck 3-Pack Blister",p:"19,00",s:"hot",i:"https://images.pokemontcg.io/me1/180_hires.png"},
 
     // Box Sets (8)
-    {c:"boxset",n:"First Partners Deluxe Pin Collection",p:"42,00",s:"in"},
-    {c:"boxset",n:"Mega Lucario Premium Poster Collection",p:"49,00",s:"hot"},
-    {c:"boxset",n:"Mega Gardevoir Premium Poster Collection",p:"49,00",s:"hot"},
-    {c:"boxset",n:"First Partner Illustration Collection S1",p:"39,00",s:"in"},
-    {c:"boxset",n:"Pokémon Day 2026 Collection",p:"45,00",s:"hot"},
-    {c:"boxset",n:"Unova Victini Illustration Collection",p:"55,00",s:"pre"},
-    {c:"boxset",n:"Unova Poster Collection",p:"49,00",s:"pre"},
-    {c:"boxset",n:"Mega Meganium ex Box",p:"42,00",s:"in"},
-    {c:"boxset",n:"Mega Feraligatr ex Box",p:"42,00",s:"in"},
-    {c:"boxset",n:"Mega Emboar ex Box",p:"42,00",s:"in"},
-    {c:"boxset",n:"Mega Kangaskhan ex Box",p:"45,00",s:"low"},
-    {c:"boxset",n:"Team Rocket's Mewtwo ex Box",p:"49,00",s:"hot"},
+    {c:"boxset",n:"First Partners Deluxe Pin Collection",p:"42,00",s:"in",i:"https://images.scrydex.com/pokemon/me2pt5-272/large"},
+    {c:"boxset",n:"Mega Lucario Premium Poster Collection",p:"49,00",s:"hot",i:"https://images.pokemontcg.io/svp/17_hires.png"},
+    {c:"boxset",n:"Mega Gardevoir Premium Poster Collection",p:"49,00",s:"hot",i:"https://images.pokemontcg.io/me1/60_hires.png"},
+    {c:"boxset",n:"First Partner Illustration Collection S1",p:"39,00",s:"in",i:"https://images.pokemontcg.io/swsh12pt5/1_hires.png"},
+    {c:"boxset",n:"Pokémon Day 2026 Collection",p:"45,00",s:"hot",i:"https://images.scrydex.com/pokemon/me2pt5-272/large"},
+    {c:"boxset",n:"Unova Victini Illustration Collection",p:"55,00",s:"pre",i:"https://images.pokemontcg.io/zsv10pt5/171_hires.png"},
+    {c:"boxset",n:"Unova Poster Collection",p:"49,00",s:"pre",i:"https://images.pokemontcg.io/zsv10pt5/165_hires.png"},
+    {c:"boxset",n:"Mega Meganium ex Box",p:"42,00",s:"in",i:"https://images.scrydex.com/pokemon/me2pt5-272/large"},
+    {c:"boxset",n:"Mega Feraligatr ex Box",p:"42,00",s:"in",i:"https://images.scrydex.com/pokemon/me2pt5-272/large"},
+    {c:"boxset",n:"Mega Emboar ex Box",p:"42,00",s:"in",i:"https://images.scrydex.com/pokemon/me2pt5-31/large"},
+    {c:"boxset",n:"Mega Kangaskhan ex Box",p:"45,00",s:"low",i:"https://images.pokemontcg.io/sv3pt5/190_hires.png"},
+    {c:"boxset",n:"Team Rocket's Mewtwo ex Box",p:"49,00",s:"hot",i:"https://images.pokemontcg.io/sv9/182_hires.png"},
 
     // UPC (4)
-    {c:"upc",n:"Mega Charizard X ex Ultra-Premium Collection",p:"159,00",s:"hot"},
-    {c:"upc",n:"151 Ultra-Premium Collection",p:"149,00",s:"low"},
-    {c:"upc",n:"Sword & Shield Ultra-Premium Collection",p:"139,00",s:"in"},
-    {c:"upc",n:"Terapagos ex Ultra-Premium Collection",p:"129,00",s:"in"}
+    {c:"upc",n:"Mega Charizard X ex Ultra-Premium Collection",p:"159,00",s:"hot",i:"https://images.pokemontcg.io/sv3pt5/199_hires.png"},
+    {c:"upc",n:"151 Ultra-Premium Collection",p:"149,00",s:"low",i:"https://images.pokemontcg.io/sv3pt5/199_hires.png"},
+    {c:"upc",n:"Sword & Shield Ultra-Premium Collection",p:"139,00",s:"in",i:"https://images.pokemontcg.io/swsh1/1_hires.png"},
+    {c:"upc",n:"Terapagos ex Ultra-Premium Collection",p:"129,00",s:"in",i:"https://images.pokemontcg.io/sv7/170_hires.png"}
   ];
 
   const CAT_LABEL = {
@@ -1306,17 +1326,20 @@
 
     grid.innerHTML = filtered.map(p => `
       <article class="product cat-${p.c}">
-        <div>
-          <div class="product-top">
-            <div class="product-icon"><svg viewBox="0 0 100 100"><use href="#${CAT_ICON[p.c]}"/></svg></div>
-            <span class="product-badge ${statusClass[p.s]}">${statusLabel[p.s]}</span>
+        <div class="product-img-wrap">
+          ${p.i ? `<img src="${p.i}" alt="${p.n}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : ''}
+          <div class="product-img-fallback" ${p.i ? 'style="display:none"' : ''}>
+            <svg viewBox="0 0 100 100"><use href="#${CAT_ICON[p.c]}"/></svg>
           </div>
+          <span class="product-badge ${statusClass[p.s]}">${statusLabel[p.s]}</span>
+        </div>
+        <div class="product-info">
           <div class="product-cat">${CAT_LABEL[p.c]}</div>
           <h3 class="product-name">${p.n}</h3>
-        </div>
-        <div class="product-bottom">
-          <span class="product-price">${p.p} €</span>
-          <div class="product-cart">→</div>
+          <div class="product-bottom">
+            <span class="product-price">${p.p} €</span>
+            <div class="product-cart">→</div>
+          </div>
         </div>
       </article>
     `).join("");
