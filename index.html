@@ -434,6 +434,131 @@
 
   .reveal{opacity:0;transform:translateY(20px);transition:all .7s ease}
   .reveal.in{opacity:1;transform:none}
+
+  /* ============ UPC full-width feat ============ */
+  .cat.feat{grid-column:span 3 !important}
+  @media (max-width:980px){.cat.feat{grid-column:span 2 !important}}
+  @media (max-width:600px){.cat.feat{grid-column:span 1 !important}}
+
+  /* ============ FILTER BAR ============ */
+  .filter-bar{
+    display:flex;flex-wrap:wrap;gap:10px;
+    margin-bottom:40px;
+    position:sticky;top:80px;z-index:50;
+    background:rgba(250,245,230,.95);
+    backdrop-filter:blur(8px);
+    padding:14px 0;
+    margin-left:-32px;margin-right:-32px;
+    padding-left:32px;padding-right:32px;
+    border-bottom:1.5px solid rgba(0,0,0,.06);
+  }
+  .filter-btn{
+    font-family:'DM Sans',sans-serif;
+    font-size:13px;font-weight:600;
+    padding:10px 16px;border-radius:999px;
+    border:2px solid var(--ink);background:transparent;color:var(--ink);
+    cursor:pointer;transition:all .2s ease;
+    display:inline-flex;align-items:center;gap:6px;
+    box-shadow:2px 2px 0 var(--ink);
+  }
+  .filter-btn:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
+  .filter-btn.active{background:var(--ink);color:var(--yellow)}
+  .filter-btn.active .count{background:var(--yellow);color:var(--ink)}
+  .filter-btn .count{
+    font-style:normal;font-size:11px;
+    padding:2px 7px;border-radius:999px;
+    background:rgba(0,0,0,.1);
+    font-weight:700;
+  }
+
+  /* ============ PRODUCT GRID ============ */
+  .products-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  }
+  @media (max-width:1100px){.products-grid{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:760px){.products-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:480px){.products-grid{grid-template-columns:1fr}}
+
+  .product{
+    background:#fff;
+    border:2px solid var(--ink);
+    border-radius:18px;
+    padding:18px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    transition:all .2s ease;
+    cursor:pointer;
+    box-shadow:3px 3px 0 var(--ink);
+    min-height:220px;
+    position:relative;
+    overflow:hidden;
+  }
+  .product:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .product.cat-pack{background:#FFF8DC}
+  .product.cat-box{background:#E0EBFF}
+  .product.cat-bundle{background:var(--mint)}
+  .product.cat-etb{background:var(--peach)}
+  .product.cat-blister{background:var(--pink)}
+  .product.cat-boxset{background:#FFE0DC}
+  .product.cat-upc{background:linear-gradient(135deg,#FFE070 0%,#FF8FA3 100%)}
+
+  .product-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+  .product-icon{
+    width:42px;height:42px;
+    background:rgba(0,0,0,.06);
+    border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .product-icon svg{width:75%;height:75%}
+  .product-badge{
+    font-size:10px;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;
+    padding:5px 9px;border-radius:999px;
+    background:var(--ink);color:#fff;
+  }
+  .product-badge.hot{background:var(--red);color:#fff}
+  .product-badge.preorder{background:var(--blue);color:#fff}
+  .product-badge.low{background:#E89B2D;color:#fff}
+  .product-badge.sold{background:#888;color:#fff}
+
+  .product-cat{
+    font-size:10px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-2);
+    margin-bottom:4px;
+  }
+  .product-name{
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-size:17px;line-height:1.15;letter-spacing:-.01em;
+    font-weight:700;
+    color:var(--ink);
+    word-break:break-word;
+    font-variation-settings:"wdth" 100,"opsz" 24;
+  }
+  .product-bottom{
+    margin-top:14px;
+    display:flex;justify-content:space-between;align-items:center;
+    padding-top:12px;
+    border-top:1.5px dashed rgba(0,0,0,.15);
+  }
+  .product-price{
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-size:18px;font-weight:700;letter-spacing:-.01em;
+  }
+  .product-cart{
+    width:32px;height:32px;border-radius:50%;
+    background:var(--ink);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:16px;flex-shrink:0;
+    transition:transform .2s;
+  }
+  .product:hover .product-cart{transform:rotate(-45deg)}
+
+  .products-empty{
+    grid-column:1 / -1;
+    text-align:center;padding:60px 20px;
+    color:var(--ink-2);font-size:16px;
+  }
 </style>
 </head>
 <body>
@@ -692,13 +817,13 @@
       </article>
 
       <article class="cat c-red">
-        <span class="cat-num">06 / Tins</span>
-        <div class="cat-icon"><svg viewBox="0 0 100 100"><use href="#i-tin"/></svg></div>
+        <span class="cat-num">06 / Box Sets</span>
+        <div class="cat-icon"><svg viewBox="0 0 100 100"><use href="#i-boxset"/></svg></div>
         <div>
-          <h3 class="cat-name">tins</h3>
-          <p class="cat-desc" data-i18n="cat6_desc">Plechové boxy s exkluzívnymi foil kartami a packami.</p>
+          <h3 class="cat-name">box sets</h3>
+          <p class="cat-desc" data-i18n="cat8_desc">Limitované kolekcie a špeciálne edície s ručne vyberanými promo kartami.</p>
         </div>
-        <div class="cat-foot"><span><span data-i18n="from">od</span> 22 €</span><div class="cat-arrow">→</div></div>
+        <div class="cat-foot"><span><span data-i18n="from">od</span> 39 €</span><div class="cat-arrow">→</div></div>
       </article>
 
       <article class="cat feat">
@@ -713,17 +838,31 @@
         </div>
         <div class="cat-icon"><svg viewBox="0 0 100 100"><use href="#i-upc"/></svg></div>
       </article>
-
-      <article class="cat c-mint">
-        <span class="cat-num">08 / Box Sets</span>
-        <div class="cat-icon"><svg viewBox="0 0 100 100"><use href="#i-boxset"/></svg></div>
-        <div>
-          <h3 class="cat-name">box sets</h3>
-          <p class="cat-desc" data-i18n="cat8_desc">Limitované kolekcie a špeciálne edície s ručne vyberanými promo kartami.</p>
-        </div>
-        <div class="cat-foot"><span><span data-i18n="from">od</span> 39 €</span><div class="cat-arrow">→</div></div>
-      </article>
     </div>
+  </div>
+</section>
+
+<!-- ========== PRODUKTY (KATALÓG) ========== -->
+<section id="produkty" style="padding-top:60px">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num"><span data-i18n="prod_num">04 — Katalóg</span></span>
+      <h2 class="sec-title" data-i18n-html="prod_title">77 produktov<br><em>skladom</em>.</h2>
+      <a href="#" class="sec-link" data-i18n="prod_link">Všetky →</a>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all"><span data-i18n="f_all">Všetko</span> <em class="count">77</em></button>
+      <button class="filter-btn" data-filter="pack">Booster Pack <em class="count">16</em></button>
+      <button class="filter-btn" data-filter="box">Booster Box <em class="count">9</em></button>
+      <button class="filter-btn" data-filter="bundle">Booster Bundle <em class="count">12</em></button>
+      <button class="filter-btn" data-filter="etb">ETB <em class="count">16</em></button>
+      <button class="filter-btn" data-filter="blister"><span data-i18n="f_blister">Blistre</span> <em class="count">8</em></button>
+      <button class="filter-btn" data-filter="boxset">Box Sets <em class="count">12</em></button>
+      <button class="filter-btn" data-filter="upc">UPC <em class="count">4</em></button>
+    </div>
+
+    <div class="products-grid" id="productsGrid"></div>
   </div>
 </section>
 
@@ -908,7 +1047,10 @@
       foot_buyback:"Výkup zbierok", foot_valuation:"Ocenenie zdarma", foot_consign:"Konsignácia",
       foot_rights:"© 2026 POKÉBOX S.R.O. — Všetky práva vyhradené",
       foot_legal:"GDPR · Obchodné podmienky · Reklamácie",
-      mq_restock:"Restock", mq_preorder:"Pre-order"
+      mq_restock:"Restock", mq_preorder:"Pre-order",
+      prod_num:"04 — Katalóg", prod_title:'77 produktov<br><em>skladom</em>.', prod_link:"Všetky →",
+      f_all:"Všetko", f_blister:"Blistre",
+      st_in:"Skladom", st_pre:"Pre-order", st_low:"Dochádza", st_sold:"Vypredané", st_hot:"Hot"
     },
     en:{
       nav_categories:"Categories", nav_buyback:"Buyback", nav_news:"News", nav_contact:"Contact",
@@ -949,7 +1091,10 @@
       foot_buyback:"Collection buyback", foot_valuation:"Free valuation", foot_consign:"Consignment",
       foot_rights:"© 2026 POKÉBOX LTD. — All rights reserved",
       foot_legal:"GDPR · Terms of service · Returns",
-      mq_restock:"Restock", mq_preorder:"Pre-order"
+      mq_restock:"Restock", mq_preorder:"Pre-order",
+      prod_num:"04 — Catalog", prod_title:'77 products<br><em>in stock</em>.', prod_link:"View all →",
+      f_all:"All", f_blister:"Blisters",
+      st_in:"In stock", st_pre:"Pre-order", st_low:"Low stock", st_sold:"Sold out", st_hot:"Hot"
     },
     de:{
       nav_categories:"Kategorien", nav_buyback:"Ankauf", nav_news:"News", nav_contact:"Kontakt",
@@ -990,7 +1135,10 @@
       foot_buyback:"Sammlungsankauf", foot_valuation:"Kostenlose Bewertung", foot_consign:"Kommission",
       foot_rights:"© 2026 POKÉBOX GmbH — Alle Rechte vorbehalten",
       foot_legal:"DSGVO · AGB · Rücksendungen",
-      mq_restock:"Wieder da", mq_preorder:"Vorbestellung"
+      mq_restock:"Wieder da", mq_preorder:"Vorbestellung",
+      prod_num:"04 — Katalog", prod_title:'77 Produkte<br><em>lagernd</em>.', prod_link:"Alle ansehen →",
+      f_all:"Alle", f_blister:"Blister",
+      st_in:"Lagernd", st_pre:"Vorbestellung", st_low:"Fast aus", st_sold:"Ausverkauft", st_hot:"Hot"
     },
     es:{
       nav_categories:"Categorías", nav_buyback:"Compra", nav_news:"Novedades", nav_contact:"Contacto",
@@ -1031,9 +1179,157 @@
       foot_buyback:"Compra de colecciones", foot_valuation:"Tasación gratis", foot_consign:"Consignación",
       foot_rights:"© 2026 POKÉBOX S.L. — Todos los derechos reservados",
       foot_legal:"RGPD · Términos · Devoluciones",
-      mq_restock:"Reposición", mq_preorder:"Reserva"
+      mq_restock:"Reposición", mq_preorder:"Reserva",
+      prod_num:"04 — Catálogo", prod_title:'77 productos<br><em>en stock</em>.', prod_link:"Ver todos →",
+      f_all:"Todo", f_blister:"Blísters",
+      st_in:"En stock", st_pre:"Reserva", st_low:"Pocas", st_sold:"Agotado", st_hot:"Hot"
     }
   };
+
+  // ============ PRODUCTS ============
+  const PRODUCTS = [
+    // Booster Pack (16)
+    {c:"pack",n:"Ascended Heroes",p:"6,90",s:"hot"},
+    {c:"pack",n:"Destined Rivals",p:"6,90",s:"in"},
+    {c:"pack",n:"Prismatic Evolutions",p:"7,50",s:"hot"},
+    {c:"pack",n:"Phantasmal Flames",p:"6,90",s:"in"},
+    {c:"pack",n:"Mega Evolutions",p:"7,90",s:"hot"},
+    {c:"pack",n:"Perfect Order",p:"6,90",s:"in"},
+    {c:"pack",n:"151",p:"7,50",s:"low"},
+    {c:"pack",n:"Surging Sparks",p:"6,90",s:"in"},
+    {c:"pack",n:"Black Bolt",p:"7,50",s:"in"},
+    {c:"pack",n:"White Flare",p:"7,50",s:"in"},
+    {c:"pack",n:"Obsidian Flames",p:"5,90",s:"low"},
+    {c:"pack",n:"Journey Together",p:"6,90",s:"in"},
+    {c:"pack",n:"Paldea Evolved",p:"5,90",s:"in"},
+    {c:"pack",n:"Inferno X",p:"7,90",s:"pre"},
+    {c:"pack",n:"The Glory of Team",p:"7,90",s:"pre"},
+    {c:"pack",n:"Paldean Fates",p:"6,90",s:"low"},
+
+    // Booster Box (9)
+    {c:"box",n:"Perfect Order Booster Box",p:"165,00",s:"in"},
+    {c:"box",n:"Destined Rivals Booster Box",p:"175,00",s:"hot"},
+    {c:"box",n:"Phantasmal Flames Booster Box",p:"169,00",s:"in"},
+    {c:"box",n:"Surging Sparks Booster Box",p:"169,00",s:"hot"},
+    {c:"box",n:"Mega Evolution Booster Box",p:"189,00",s:"hot"},
+    {c:"box",n:"Chaos Rising Booster Box",p:"159,00",s:"in"},
+    {c:"box",n:"Mega Dream ex Booster Box",p:"189,00",s:"pre"},
+    {c:"box",n:"Inferno X Booster Box",p:"179,00",s:"pre"},
+    {c:"box",n:"The Glory of Team Booster Box",p:"179,00",s:"pre"},
+
+    // Booster Bundle (12)
+    {c:"bundle",n:"Ascended Heroes Booster Bundle",p:"32,00",s:"hot"},
+    {c:"bundle",n:"Destined Rivals Booster Bundle",p:"32,00",s:"in"},
+    {c:"bundle",n:"Prismatic Evolutions Booster Bundle",p:"34,00",s:"low"},
+    {c:"bundle",n:"Phantasmal Flames Booster Bundle",p:"32,00",s:"in"},
+    {c:"bundle",n:"Mega Evolutions Booster Bundle",p:"34,00",s:"hot"},
+    {c:"bundle",n:"Perfect Order Booster Bundle",p:"32,00",s:"in"},
+    {c:"bundle",n:"151 Booster Bundle",p:"34,00",s:"low"},
+    {c:"bundle",n:"Surging Sparks Booster Bundle",p:"32,00",s:"in"},
+    {c:"bundle",n:"Black Bolt Booster Bundle",p:"34,00",s:"in"},
+    {c:"bundle",n:"White Flare Booster Bundle",p:"34,00",s:"in"},
+    {c:"bundle",n:"Chaos Rising Booster Bundle",p:"29,00",s:"in"},
+    {c:"bundle",n:"Paldean Fates Booster Bundle",p:"29,00",s:"sold"},
+
+    // ETB (16)
+    {c:"etb",n:"Ascended Heroes ETB",p:"58,00",s:"hot"},
+    {c:"etb",n:"Destined Rivals ETB",p:"58,00",s:"hot"},
+    {c:"etb",n:"Prismatic Evolutions ETB",p:"64,00",s:"low"},
+    {c:"etb",n:"Phantasmal Flames ETB",p:"58,00",s:"in"},
+    {c:"etb",n:"Mega Evolutions ETB",p:"62,00",s:"hot"},
+    {c:"etb",n:"Perfect Order ETB",p:"58,00",s:"in"},
+    {c:"etb",n:"151 ETB",p:"64,00",s:"low"},
+    {c:"etb",n:"Surging Sparks ETB",p:"58,00",s:"in"},
+    {c:"etb",n:"Black Bolt ETB",p:"62,00",s:"in"},
+    {c:"etb",n:"White Flare ETB",p:"62,00",s:"in"},
+    {c:"etb",n:"Obsidian Flames ETB",p:"54,00",s:"low"},
+    {c:"etb",n:"Journey Together ETB",p:"58,00",s:"in"},
+    {c:"etb",n:"Paldea Evolved ETB",p:"54,00",s:"sold"},
+    {c:"etb",n:"Chaos Rising ETB",p:"58,00",s:"in"},
+    {c:"etb",n:"Shining Fates ETB",p:"79,00",s:"low"},
+    {c:"etb",n:"Crown Zenith ETB",p:"79,00",s:"low"},
+
+    // Blisters (8)
+    {c:"blister",n:"Erika's Tangela 2-Pack Blister",p:"15,00",s:"in"},
+    {c:"blister",n:"Larry's Komala 2-Pack Blister",p:"15,00",s:"in"},
+    {c:"blister",n:"Charmander Tech Sticker Collection",p:"18,00",s:"hot"},
+    {c:"blister",n:"Gastly Tech Sticker Collection",p:"18,00",s:"in"},
+    {c:"blister",n:"Chikorita 3-Pack Blister",p:"19,00",s:"in"},
+    {c:"blister",n:"Weavile 3-Pack Blister",p:"19,00",s:"in"},
+    {c:"blister",n:"Sneasel 3-Pack Blister",p:"19,00",s:"low"},
+    {c:"blister",n:"Psyduck 3-Pack Blister",p:"19,00",s:"hot"},
+
+    // Box Sets (8)
+    {c:"boxset",n:"First Partners Deluxe Pin Collection",p:"42,00",s:"in"},
+    {c:"boxset",n:"Mega Lucario Premium Poster Collection",p:"49,00",s:"hot"},
+    {c:"boxset",n:"Mega Gardevoir Premium Poster Collection",p:"49,00",s:"hot"},
+    {c:"boxset",n:"First Partner Illustration Collection S1",p:"39,00",s:"in"},
+    {c:"boxset",n:"Pokémon Day 2026 Collection",p:"45,00",s:"hot"},
+    {c:"boxset",n:"Unova Victini Illustration Collection",p:"55,00",s:"pre"},
+    {c:"boxset",n:"Unova Poster Collection",p:"49,00",s:"pre"},
+    {c:"boxset",n:"Mega Meganium ex Box",p:"42,00",s:"in"},
+    {c:"boxset",n:"Mega Feraligatr ex Box",p:"42,00",s:"in"},
+    {c:"boxset",n:"Mega Emboar ex Box",p:"42,00",s:"in"},
+    {c:"boxset",n:"Mega Kangaskhan ex Box",p:"45,00",s:"low"},
+    {c:"boxset",n:"Team Rocket's Mewtwo ex Box",p:"49,00",s:"hot"},
+
+    // UPC (4)
+    {c:"upc",n:"Mega Charizard X ex Ultra-Premium Collection",p:"159,00",s:"hot"},
+    {c:"upc",n:"151 Ultra-Premium Collection",p:"149,00",s:"low"},
+    {c:"upc",n:"Sword & Shield Ultra-Premium Collection",p:"139,00",s:"in"},
+    {c:"upc",n:"Terapagos ex Ultra-Premium Collection",p:"129,00",s:"in"}
+  ];
+
+  const CAT_LABEL = {
+    pack:"Booster Pack", box:"Booster Box", bundle:"Booster Bundle",
+    etb:"Elite Trainer Box", blister:"Blister", boxset:"Box Set", upc:"Ultra Premium"
+  };
+  const CAT_ICON = {
+    pack:"i-pack", box:"i-box", bundle:"i-bundle", etb:"i-etb",
+    blister:"i-blister", boxset:"i-boxset", upc:"i-upc"
+  };
+
+  let currentFilter = "all";
+  function renderProducts(lang){
+    const t = T[lang];
+    const grid = document.getElementById("productsGrid");
+    if(!grid) return;
+    const filtered = currentFilter === "all" ? PRODUCTS : PRODUCTS.filter(p => p.c === currentFilter);
+
+    if(filtered.length === 0){
+      grid.innerHTML = '<div class="products-empty">—</div>';
+      return;
+    }
+
+    const statusLabel = {in:t.st_in, pre:t.st_pre, low:t.st_low, sold:t.st_sold, hot:t.st_hot};
+    const statusClass = {in:"", pre:"preorder", low:"low", sold:"sold", hot:"hot"};
+
+    grid.innerHTML = filtered.map(p => `
+      <article class="product cat-${p.c}">
+        <div>
+          <div class="product-top">
+            <div class="product-icon"><svg viewBox="0 0 100 100"><use href="#${CAT_ICON[p.c]}"/></svg></div>
+            <span class="product-badge ${statusClass[p.s]}">${statusLabel[p.s]}</span>
+          </div>
+          <div class="product-cat">${CAT_LABEL[p.c]}</div>
+          <h3 class="product-name">${p.n}</h3>
+        </div>
+        <div class="product-bottom">
+          <span class="product-price">${p.p} €</span>
+          <div class="product-cart">→</div>
+        </div>
+      </article>
+    `).join("");
+  }
+
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentFilter = btn.dataset.filter;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.toggle("active", b === btn));
+      const lang = document.documentElement.lang || "sk";
+      renderProducts(lang);
+    });
+  });
 
   function buildMarquee(lang){
     const t = T[lang];
@@ -1069,6 +1365,7 @@
       b.classList.toggle("active", b.dataset.lang === lang);
     });
     buildMarquee(lang);
+    renderProducts(lang);
     try{ localStorage.setItem("pokebox_lang", lang); }catch(e){}
   }
 
