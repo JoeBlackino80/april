@@ -291,10 +291,18 @@
     background:rgba(0,0,0,.08);align-self:flex-start;
   }
   .cat-icon{
-    width:96px;height:96px;margin:18px 0;
+    width:96px;height:130px;margin:18px 0;
     display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
   }
   .cat-icon svg{width:100%;height:100%}
+  .cat-icon img{
+    width:auto;height:100%;
+    object-fit:contain;
+    filter:drop-shadow(0 4px 10px rgba(0,0,0,.25));
+    transition:transform .35s ease;
+  }
+  .cat:hover .cat-icon img{transform:scale(1.06) rotate(-3deg)}
   .cat-name{
     font-family:'Bricolage Grotesque',sans-serif;
     font-size:34px;line-height:1;letter-spacing:-.02em;
@@ -323,7 +331,7 @@
     padding:48px;gap:40px;
   }
   .cat.feat .cat-content{flex:1}
-  .cat.feat .cat-icon{width:160px;height:160px;margin:0;flex-shrink:0}
+  .cat.feat .cat-icon{width:180px;height:240px;margin:0;flex-shrink:0}
   .cat.feat .cat-name{font-size:48px;margin-bottom:14px}
   .cat.feat .cat-desc{font-size:16px;max-width:420px;color:var(--ink)}
   .cat.feat::before{
@@ -788,7 +796,7 @@
     <div class="cats">
       <article class="cat c-yellow">
         <span class="cat-num">01 / Booster Pack</span>
-        <div class="cat-icon"><svg viewBox="0 0 100 100"><use href="#i-pack"/></svg></div>
+        <div class="cat-icon"><img src="https://images.pokemontcg.io/sv3pt5/199_hires.png" alt="" loading="lazy"></div>
         <div>
           <h3 class="cat-name">booster pack</h3>
           <p class="cat-desc" data-i18n="cat1_desc">10 kariet v zapečatenom balíčku. Klasický štart do TCG sveta.</p>
@@ -798,7 +806,7 @@
 
       <article class="cat c-blue">
         <span class="cat-num">02 / Booster Box</span>
-        <div class="cat-icon"><svg viewBox="0 0 100 100"><use href="#i-box"/></svg></div>
+        <div class="cat-icon"><img src="https://images.pokemontcg.io/sv8/236_hires.png" alt="" loading="lazy"></div>
         <div>
           <h3 class="cat-name">booster box</h3>
           <p class="cat-desc" data-i18n="cat2_desc">36 packov v jednej krabici. Maximálna šanca na chase karty.</p>
@@ -808,7 +816,7 @@
 
       <article class="cat c-mint">
         <span class="cat-num">03 / Booster Bundle</span>
-        <div class="cat-icon"><svg viewBox="0 0 100 100"><use href="#i-bundle"/></svg></div>
+        <div class="cat-icon"><img src="https://images.pokemontcg.io/sv8pt5/144_hires.png" alt="" loading="lazy"></div>
         <div>
           <h3 class="cat-name">booster bundle</h3>
           <p class="cat-desc" data-i18n="cat3_desc">6 packov + promo karta. Skvelý darček aj pre začiatočníka.</p>
@@ -818,7 +826,7 @@
 
       <article class="cat c-peach">
         <span class="cat-num">04 / Elite Trainer Box</span>
-        <div class="cat-icon"><svg viewBox="0 0 100 100"><use href="#i-etb"/></svg></div>
+        <div class="cat-icon"><img src="https://images.pokemontcg.io/sv10/228_hires.png" alt="" loading="lazy"></div>
         <div>
           <h3 class="cat-name">elite trainer box</h3>
           <p class="cat-desc" data-i18n="cat4_desc">8–10 packov, kocky, sleeves a štýlový box. Top predajca.</p>
@@ -828,7 +836,7 @@
 
       <article class="cat c-pink">
         <span class="cat-num">05 / Blisters</span>
-        <div class="cat-icon"><svg viewBox="0 0 100 100"><use href="#i-blister"/></svg></div>
+        <div class="cat-icon"><img src="https://images.pokemontcg.io/sv9/129_hires.png" alt="" loading="lazy"></div>
         <div>
           <h3 class="cat-name">blisters</h3>
           <p class="cat-desc" data-i18n="cat5_desc">3-pack blistre s exkluzívnou promo kartou. Ideálne na vyskúšanie.</p>
@@ -838,7 +846,7 @@
 
       <article class="cat c-red">
         <span class="cat-num">06 / Box Sets</span>
-        <div class="cat-icon"><svg viewBox="0 0 100 100"><use href="#i-boxset"/></svg></div>
+        <div class="cat-icon"><img src="https://images.pokemontcg.io/me1/180_hires.png" alt="" loading="lazy"></div>
         <div>
           <h3 class="cat-name">box sets</h3>
           <p class="cat-desc" data-i18n="cat8_desc">Limitované kolekcie a špeciálne edície s ručne vyberanými promo kartami.</p>
@@ -856,7 +864,7 @@
             <div class="cat-arrow">→</div>
           </div>
         </div>
-        <div class="cat-icon"><svg viewBox="0 0 100 100"><use href="#i-upc"/></svg></div>
+        <div class="cat-icon"><img src="https://images.pokemontcg.io/sv3pt5/199_hires.png" alt="" loading="lazy"></div>
       </article>
     </div>
   </div>
